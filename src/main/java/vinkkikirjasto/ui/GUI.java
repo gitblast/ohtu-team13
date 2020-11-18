@@ -35,6 +35,8 @@ public class GUI extends Application {
             System.out.println(toinenLista.get(i));
         }
         Label label = new Label("Hello world!");
+        // set id for example test
+        label.setId("hello-world-label");
         
         root.setCenter(label);
         
