@@ -2,10 +2,12 @@ package Database;
 
 import java.sql.*;
 import java.util.ArrayList;
+import Domain.*;
 
 public class db {
     private Connection connection;
-    private ArrayList<String> lista;
+    private ArrayList<Book> bookList;
+    private ArrayList<Url> urlList;
     
     public db(String database) throws Exception {
         connection = DriverManager.getConnection(database);
@@ -64,8 +66,8 @@ public class db {
         }
     }
     
-    public ArrayList<String> getAllURLs() {
-        lista = new ArrayList<String>();
+    public ArrayList<Url> getAllURLs() {
+        urlList = new ArrayList<Url>();
         String query = "SELECT otsikko, url from Url;";
         
         try(Statement statement = connection.createStatement()) {
@@ -74,17 +76,19 @@ public class db {
             while (rs.next()) {
                 String otsikko = rs.getString(("otsikko"));
                 String url = rs.getString("url");
-                lista.add(otsikko);
-                lista.add(url);
+                Url lisattava = new Url();
+                lisattava.setOtsikko(otsikko);
+                lisattava.setUrl(url);
+                urlList.add(lisattava);
             }
         } catch (SQLException error) {
             System.out.println(error.getMessage());
         }
-        return lista;
+        return urlList;
     }
     
-    public ArrayList<String> getAllBooks() {
-        lista = new ArrayList<String>();
+    public ArrayList<Book> getAllBooks() {
+        bookList = new ArrayList<Book>();
         String query = "SELECT kirjoittaja, otsikko FROM books;";
         
         try (Statement statement = connection.createStatement()) {
@@ -93,12 +97,12 @@ public class db {
             while (rs.next()) {
                 String kirjoittaja = rs.getString("kirjoittaja");
                 String otsikko = rs.getString("otsikko");
-                lista.add(kirjoittaja);
-                lista.add(otsikko);
+                Book lisattava = new Book(kirjoittaja, otsikko);
+                bookList.add(lisattava);
             }       
         } catch (SQLException error) {
             System.out.println(error.getMessage());
         }        
-        return lista;
+        return bookList;
     }
 }

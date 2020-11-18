@@ -7,17 +7,22 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import Domain.*;
 import Database.db;
 import java.util.ArrayList;
 
 public class GUI extends Application {
-    ArrayList<String> lista;
-    ArrayList<String> toinenLista;
+    ArrayList<Book> lista;
+    ArrayList<Url> toinenLista;
     
     @Override
     public void init() throws Exception {
         String url = "jdbc:sqlite:lukuvinkit.db";
         db database = new db(url);
+        database.createBook();
+        database.createURL();
+        lista = database.getAllBooks();
+        toinenLista = database.getAllURLs();
     }
     
     
