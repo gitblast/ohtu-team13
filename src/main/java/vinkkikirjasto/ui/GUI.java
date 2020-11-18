@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class GUI extends Application {
     ArrayList<String> lista;
     ArrayList<String> toinenLista;
+    
     @Override
     public void init() throws Exception {
         String url = "jdbc:sqlite:lukuvinkit.db";
