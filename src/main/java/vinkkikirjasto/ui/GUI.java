@@ -14,6 +14,8 @@ public class GUI extends Application {
         BorderPane root = new BorderPane();
         
         Label label = new Label("Hello world!");
+        // set id for example test
+        label.setId("hello-world-label");
         
         root.setCenter(label);
         
