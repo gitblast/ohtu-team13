@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-import Database.db;
 
 public class AddURLScene {
 

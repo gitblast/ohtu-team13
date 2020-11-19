@@ -1,0 +1,55 @@
+package Database;
+
+import Domain.Url;
+import Dao.UrlDao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+public class SqlDbUrlDao implements UrlDao {
+    private DbConnection db;
+    private Connection connection;
+    private ArrayList<Url> urlList;
+
+    public SqlDbUrlDao() throws Exception {
+        this.db = new DbConnection();
+        this.connection = db.getConnection();
+    }
+
+    public void createURL() {
+        String query = "INSERT INTO Url (otsikko, url) values (?, ?);";
+        try (Statement statement = connection.createStatement()) {
+            PreparedStatement prepared = connection.prepareStatement(query);
+            prepared.setString(1, "Juttuja juttuja");
+            prepared.setString(2, "www.google.fi");
+            prepared.executeUpdate();
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+        }
+    }
+    
+    public ArrayList<Url> getAllURLs() {
+        urlList = new ArrayList<Url>();
+        String query = "SELECT otsikko, url from Url;";
+        
+        try(Statement statement = connection.createStatement()) {
+            PreparedStatement prepared = connection.prepareStatement(query);
+            ResultSet rs = prepared.executeQuery();
+            while (rs.next()) {
+                String otsikko = rs.getString(("otsikko"));
+                String url = rs.getString("url");
+                Url lisattava = new Url();
+                lisattava.setOtsikko(otsikko);
+                lisattava.setUrl(url);
+                urlList.add(lisattava);
+            }
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+        }
+        return urlList;
+    }
+
+}

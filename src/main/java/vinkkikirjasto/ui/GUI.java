@@ -1,5 +1,8 @@
 package vinkkikirjasto.ui;
 
+import Database.SqlDbBookDao;
+import Database.SqlDbUrlDao;
+import Service.VinkkiService;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
@@ -8,7 +11,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import Domain.*;
-import Database.db;
 import java.util.ArrayList;
 import Scenes.AddBookScene;
 import Scenes.AddURLScene;
@@ -27,12 +29,11 @@ public class GUI extends Application {
 
     @Override
     public void init() throws Exception {
-        String url = "jdbc:sqlite:lukuvinkit.db";
-        db database = new db(url);
-        database.createBook();
-        database.createURL();
-        lista = database.getAllBooks();
-        toinenLista = database.getAllURLs();
+        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(), new SqlDbUrlDao());
+        vinkkiService.addBook();
+        vinkkiService.addURL();
+        lista = vinkkiService.listBooks();
+        toinenLista = vinkkiService.listURLs();
         addBookScene = new AddBookScene();
         addURLScene = new AddURLScene();
     }
