@@ -10,10 +10,19 @@ import javafx.stage.Stage;
 import Domain.*;
 import Database.db;
 import java.util.ArrayList;
+import Scenes.AddBookScene;
+import Scenes.AddURLScene;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 public class GUI extends Application {
     ArrayList<Book> lista;
     ArrayList<Url> toinenLista;
+    AddBookScene addBookScene;
+    AddURLScene addURLScene;
     
     @Override
     public void init() throws Exception {
@@ -23,6 +32,8 @@ public class GUI extends Application {
         database.createURL();
         lista = database.getAllBooks();
         toinenLista = database.getAllURLs();
+        addBookScene = new AddBookScene();
+        addURLScene = new AddURLScene();
     }
     
     
@@ -35,10 +46,29 @@ public class GUI extends Application {
         
         root.setCenter(label);
         
-        Scene scene = new Scene(root, 600, 400);
+        Button switchToAddBookScene = new Button("Lisää uusi kirja");
+        Button switchToAddURLScene = new Button("Lisaa URL");
+        
+        VBox buttons = new VBox(10);
+        VBox.setVgrow(switchToAddBookScene, Priority.ALWAYS);
+        VBox.setVgrow(switchToAddURLScene, Priority.ALWAYS);
+        
+        switchToAddBookScene.setOnAction(e -> {
+            primaryStage.setScene(addBookScene.createScene());
+        });
+        
+        switchToAddURLScene.setOnAction(e -> {
+            primaryStage.setScene(addURLScene.createScene());
+        });
+        
+        buttons.getChildren().addAll(switchToAddBookScene, switchToAddURLScene);
+        
+        root.setLeft(buttons);
+        
+        Scene defaultScene = new Scene(root, 600, 400);
         
         primaryStage.setTitle("Vinkit");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(defaultScene);
         primaryStage.show();
     }
 
