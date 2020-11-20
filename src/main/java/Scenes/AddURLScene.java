@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-
 public class AddURLScene {
 
     Button returnButton;
@@ -41,7 +40,12 @@ public class AddURLScene {
         kommentti.setPromptText("Kommentti");
 
         returnButton.setOnAction(e -> {
-            chooseAddScene.returnHere();
+            try {
+                chooseAddScene.returnHere();
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
 
         submitButton.setOnAction(e -> {

@@ -1,5 +1,8 @@
 package Scenes;
 
+import Database.SqlDbBookDao;
+import Database.SqlDbUrlDao;
+import Service.VinkkiService;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,12 +23,13 @@ public class ChooseAddScene {
         addURLScene = new AddURLScene(this);
     }
 
-    public Scene createScene() {
-
+    public Scene createScene() throws Exception {
+        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(), new SqlDbUrlDao());
+        int kirjojenmaara = vinkkiService.listBooks().size();
         BorderPane root = new BorderPane();
-        Label label = new Label("Hello world!");
+        Label label = new Label("Kirjoja tietokannassa: " + kirjojenmaara);
         // set id for example test
-        label.setId("hello-world-label");
+        label.setId("kirjojenmaara_label");
 
         root.setCenter(label);
 
@@ -51,7 +55,7 @@ public class ChooseAddScene {
         return chooseAddScene;
     }
 
-    public void returnHere() {
+    public void returnHere() throws Exception {
         primaryStage.setScene(createScene());
         primaryStage.show();
     }

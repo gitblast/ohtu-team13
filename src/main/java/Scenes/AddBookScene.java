@@ -1,35 +1,39 @@
 package Scenes;
 
+import Database.SqlDbBookDao;
+import Database.SqlDbUrlDao;
+import Service.VinkkiService;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-
 public class AddBookScene {
-
 
     Button returnButton;
     TextField kirjoittaja;
-    TextField otsikko;
-    TextField tyyppi;
+    TextField nimeke;
+    TextField julkaisuvuosi;
+    TextField sivumaara;
     TextField ISBN;
     TextField tagit;
-    TextField releatedCourses;
+    Label errorMessage;
     Button submitButton;
     ChooseAddScene chooseAddScene;
 
     public AddBookScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
-        
+
         this.returnButton = new Button("Takaisin");
         this.kirjoittaja = new TextField();
-        this.otsikko = new TextField();
-        this.tyyppi = new TextField();
+        this.nimeke = new TextField();
+        this.julkaisuvuosi = new TextField();
+        this.sivumaara = new TextField();
         this.ISBN = new TextField();
         this.tagit = new TextField();
-        this.releatedCourses = new TextField();
+        this.errorMessage = new Label();
         this.submitButton = new Button("Lisää uusi kirja");
     }
 
@@ -37,30 +41,79 @@ public class AddBookScene {
         VBox addBookVBox = new VBox();
         addBookVBox.setPadding(new Insets(70, 20, 20, 20));
 
-        kirjoittaja.setPromptText("Kirjoittaja");
-        otsikko.setPromptText("Otsikko");
-        tyyppi.setPromptText("Tyyppi");
+        kirjoittaja.setPromptText("Kirjailija");
+        nimeke.setPromptText("Kirjan nimi");
+        julkaisuvuosi.setPromptText("Julkaisuvuosi");
+        sivumaara.setPromptText("Sivumäärä");
         ISBN.setPromptText("ISBN");
         tagit.setPromptText("Tagit");
-        releatedCourses.setPromptText("Releated Courses");
 
         returnButton.setOnAction(e -> {
-            chooseAddScene.returnHere();
+            try {
+                chooseAddScene.returnHere();
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
 
         submitButton.setOnAction(e -> {
-            lisaaKirja();
+            try {
+                boolean onnistuu = true;
+                int jvuosi = convertToInteger(julkaisuvuosi.getText());
+                int smaara = convertToInteger(sivumaara.getText());
+                if (jvuosi == -9999 || smaara == -9999) {
+                    errorMessage.setText("Syötä julkaisuvuosi ja sivumäärä oikein");
+                    onnistuu = false;
+                }
+                String kirjailija = checkString(kirjoittaja.getText());
+                String nimi = checkString(nimeke.getText());
+                if (kirjailija == null || nimi == null) {
+                    errorMessage.setText("Syötä kirjailija ja kirjan nimi");
+                    onnistuu = false;
+                }
+                if (onnistuu) {
+                    lisaaKirja(kirjailija, nimi, jvuosi, smaara);
+                    chooseAddScene.returnHere();
+                }
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         });
 
-        addBookVBox.getChildren().addAll(returnButton, kirjoittaja, otsikko, tyyppi, ISBN, tagit, releatedCourses, submitButton);
+        addBookVBox.getChildren().addAll(returnButton, kirjoittaja, nimeke,julkaisuvuosi, sivumaara, ISBN, tagit, errorMessage, submitButton);
 
         Scene addBookScene = new Scene(addBookVBox, 600, 400);
 
         return addBookScene;
     }
 
-    public void lisaaKirja() {
+    public void lisaaKirja(String kirjoittaja, String nimeke, int julkaisuvuosi, int sivumaara) throws Exception {
+        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(), new SqlDbUrlDao());
+        vinkkiService.addBook(kirjoittaja, nimeke, julkaisuvuosi, sivumaara);
+    }
 
+    private int convertToInteger(String s) {
+        s = s.trim();
+        int value;
+        if (s.length() == 0) {
+            value = -9999;
+        } else {
+            try{
+                value = Integer.valueOf(s);
+            } catch(NumberFormatException e) {
+                value = -9999;
+            }
+        }
+        return value;
+    }
+
+    private String checkString(String s) {
+        s.trim();
+        if (s.isEmpty()) {
+            return null;
+        }
+        return s;
     }
 
     public TextField getKirjoittajaText() {
@@ -68,19 +121,15 @@ public class AddBookScene {
     }
 
     public TextField getOtsikkoText() {
-        return this.otsikko;
+        return this.nimeke;
     }
 
-    public TextField getTyyppiText() {
-        return this.tyyppi;
+    public TextField getjulkaisuvuosiText() {
+        return this.julkaisuvuosi;
     }
 
     public TextField getISBNText() {
         return this.ISBN;
-    }
-
-    public TextField getreleatedCoursesText() {
-        return this.releatedCourses;
     }
 
     public TextField getTagitText() {

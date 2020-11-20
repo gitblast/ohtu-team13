@@ -28,7 +28,7 @@ public class GUI extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
         chooseAddScene = new ChooseAddScene(primaryStage);
         Scene defaultScene = chooseAddScene.createScene();
 
