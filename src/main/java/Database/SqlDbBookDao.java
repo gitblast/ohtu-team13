@@ -15,10 +15,17 @@ public class SqlDbBookDao implements BookDao {
     private Connection connection;
     private ArrayList<Book> bookList;
 
-    public SqlDbBookDao() throws Exception {
-        this.db = new DbConnection();
+    public SqlDbBookDao(String dbFile) throws Exception {
+        this.db = new DbConnection(dbFile);
         this.connection = db.getConnection();
     }
+
+    public SqlDbBookDao() throws Exception {
+        this.db = new DbConnection("jdbc:sqlite:lukuvinkit.db");
+        this.connection = db.getConnection();        
+    }
+    
+    
     
     @Override
     public void createBook(String kirjoittaja, String nimeke, Integer julkaisuvuosi, Integer sivumaara) {

@@ -14,9 +14,14 @@ public class SqlDbUrlDao implements UrlDao {
     private Connection connection;
     private ArrayList<Url> urlList;
 
-    public SqlDbUrlDao() throws Exception {
-        this.db = new DbConnection();
+    public SqlDbUrlDao(String dbFile) throws Exception {
+        this.db = new DbConnection(dbFile);
         this.connection = db.getConnection();
+    }
+
+    public SqlDbUrlDao() throws Exception {
+        this.db = new DbConnection("jdbc:sqlite:lukuvinkit.db");
+        this.connection = db.getConnection();        
     }
 
     @Override
