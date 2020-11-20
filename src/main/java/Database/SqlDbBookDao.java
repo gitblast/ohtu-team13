@@ -19,33 +19,36 @@ public class SqlDbBookDao implements BookDao {
         this.db = new DbConnection();
         this.connection = db.getConnection();
     }
-
     
-    
-    public void createBook() {
-        String query = "INSERT INTO books (kirjoittaja, otsikko) values (?, ?);";       
+    @Override
+    public void createBook(String kirjoittaja, String nimeke, Integer julkaisuvuosi, Integer sivumaara) {
+        String query = "INSERT INTO books (kirjoittaja, nimeke, julkaisuvuosi, sivumaara) values (?, ?, ?, ?);";       
         try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);
-            prepared.setString(1, "testi");
-            prepared.setString(2, "Aihe testeista");
+            prepared.setString(1, kirjoittaja);
+            prepared.setString(2, nimeke);
+            prepared.setInt(3, julkaisuvuosi);
+            prepared.setInt(4, sivumaara);
             prepared.executeUpdate();
         } catch (SQLException error) {
             System.out.println(error.getMessage());
         }
     }
     
-    
+    @Override
     public ArrayList<Book> getAllBooks() {
         bookList = new ArrayList<Book>();
-        String query = "SELECT kirjoittaja, otsikko FROM books;";
+        String query = "SELECT kirjoittaja, nimeke, julkaisuvuosi, sivumaara FROM books;";
         
         try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);
             ResultSet rs = prepared.executeQuery();
             while (rs.next()) {
                 String kirjoittaja = rs.getString("kirjoittaja");
-                String otsikko = rs.getString("otsikko");
-                Book lisattava = new Book(kirjoittaja, otsikko);
+                String nimeke = rs.getString("nimeke");
+                Integer julkaisuvuosi = rs.getInt("julkaisuvuosi");
+                Integer sivumaara = rs.getInt("sivumaara");
+                Book lisattava = new Book(kirjoittaja, nimeke, julkaisuvuosi, sivumaara, null, null, null);
                 bookList.add(lisattava);
             }       
         } catch (SQLException error) {
@@ -53,5 +56,5 @@ public class SqlDbBookDao implements BookDao {
         }        
         return bookList;
     }
-    
+
 }

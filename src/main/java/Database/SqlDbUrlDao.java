@@ -19,18 +19,20 @@ public class SqlDbUrlDao implements UrlDao {
         this.connection = db.getConnection();
     }
 
-    public void createURL() {
+    @Override
+    public void createURL(String otsikko, String url) {
         String query = "INSERT INTO Url (otsikko, url) values (?, ?);";
         try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);
-            prepared.setString(1, "Juttuja juttuja");
-            prepared.setString(2, "www.google.fi");
+            prepared.setString(1, otsikko);
+            prepared.setString(2, url);
             prepared.executeUpdate();
         } catch (SQLException error) {
             System.out.println(error.getMessage());
         }
     }
     
+    @Override
     public ArrayList<Url> getAllURLs() {
         urlList = new ArrayList<Url>();
         String query = "SELECT otsikko, url from Url;";
@@ -41,9 +43,7 @@ public class SqlDbUrlDao implements UrlDao {
             while (rs.next()) {
                 String otsikko = rs.getString(("otsikko"));
                 String url = rs.getString("url");
-                Url lisattava = new Url();
-                lisattava.setOtsikko(otsikko);
-                lisattava.setUrl(url);
+                Url lisattava = new Url(otsikko, url);
                 urlList.add(lisattava);
             }
         } catch (SQLException error) {
