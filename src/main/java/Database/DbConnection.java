@@ -6,16 +6,19 @@ import java.sql.SQLException;
 
 public class DbConnection {
     private Connection connection;
+    private String dbFile;
     
-    public DbConnection() {
-        connection = null;
+    public DbConnection(String dbFile) {
+        this.connection = null;
+        this.dbFile = dbFile;
     }
     
     private void connect() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:lukuvinkit.db");
+        connection = DriverManager.getConnection(dbFile);
         createDbIfNotExists();
     }
-
+    
+    
     
     public Connection getConnection() throws Exception {
         if (this.connection == null) {
