@@ -42,7 +42,7 @@ public class SqlDbUrlDao implements UrlDao {
         urlList = new ArrayList<Url>();
         String query = "SELECT otsikko, url from Url;";
         
-        try(Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);
             ResultSet rs = prepared.executeQuery();
             while (rs.next()) {

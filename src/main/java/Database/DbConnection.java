@@ -12,20 +12,18 @@ public class DbConnection {
         this.connection = null;
         this.dbFile = dbFile;
     }
-    
+
     private void connect() throws SQLException {
         connection = DriverManager.getConnection(dbFile);
         createDbIfNotExists();
     }
-    
-    
-    
+
     public Connection getConnection() throws Exception {
         if (this.connection == null) {
             this.connect();
         }
         return this.connection;
-    }    
+    }
 
     private void createDbIfNotExists() {
         String createBookTableQuery = "CREATE TABLE IF NOT EXISTS Books "
@@ -49,7 +47,7 @@ public class DbConnection {
         try {
             connection.createStatement().execute(createBookTableQuery); 
             connection.createStatement().execute(createUrlTableQuery);
-        } catch(SQLException error) {
+        } catch (SQLException error) {
             System.out.println(error.getMessage());
         }
     }

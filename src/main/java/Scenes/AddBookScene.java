@@ -108,9 +108,9 @@ public class AddBookScene {
         if (s.length() == 0) {
             value = -9999;
         } else {
-            try{
+            try {
                 value = Integer.valueOf(s);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 value = -9999;
             }
         }
