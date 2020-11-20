@@ -1,5 +1,7 @@
 package Domain;
 
+import java.util.Objects;
+
 public class Url {
     private String otsikko;
     private String url;
@@ -96,4 +98,26 @@ public class Url {
     public void setKommentti(String kommentti) {
         this.kommentti = kommentti;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Url other = (Url) obj;
+        if (!Objects.equals(this.otsikko, other.otsikko)) {
+            return false;
+        }
+        if (!Objects.equals(this.url, other.url)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

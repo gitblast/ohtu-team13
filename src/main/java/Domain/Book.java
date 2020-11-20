@@ -1,6 +1,7 @@
 package Domain;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Book {
     private String kirjoittaja;
@@ -22,6 +23,13 @@ public class Book {
         this.ISBN = ISBN;
         this.tagit = tagit;
         this.releatedCourses = releatedCourses;
+    }
+
+    public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi, Integer sivumaara) {
+        this.kirjoittaja = kirjoittaja;
+        this.nimeke = nimeke;
+        this.julkaisuvuosi = julkaisuvuosi;
+        this.sivumaara = sivumaara;
     }
 
     public String getKirjoittaja() {
@@ -78,6 +86,33 @@ public class Book {
 
     public void setReleatedCourses(String releatedCourses) {
         this.releatedCourses = releatedCourses;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Book other = (Book) obj;
+        if (!Objects.equals(this.kirjoittaja, other.kirjoittaja)) {
+            return false;
+        }
+        if (!Objects.equals(this.nimeke, other.nimeke)) {
+            return false;
+        }
+        if (!Objects.equals(this.julkaisuvuosi, other.julkaisuvuosi)) {
+            return false;
+        }
+        if (!Objects.equals(this.sivumaara, other.sivumaara)) {
+            return false;
+        }
+        return true;
     }
    
 }
