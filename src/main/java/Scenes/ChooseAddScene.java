@@ -28,13 +28,16 @@ public class ChooseAddScene {
         int kirjojenmaara = vinkkiService.listBooks().size();
         BorderPane root = new BorderPane();
         Label label = new Label("Kirjoja tietokannassa: " + kirjojenmaara);
-        // set id for example test
+        
         label.setId("kirjojenmaara_label");
-
+        // set id for example test
+        Label helloworld = new Label("Hello world!");
+        helloworld.setId("hello-world-label");
         root.setCenter(label);
+        root.setBottom(helloworld);
 
         Button switchToAddBookScene = new Button("Lisää uusi kirja");
-        Button switchToAddURLScene = new Button("Lisaa URL");
+        Button switchToAddURLScene = new Button("Lisää URL");
 
         VBox buttons = new VBox(10);
         VBox.setVgrow(switchToAddBookScene, Priority.ALWAYS);
