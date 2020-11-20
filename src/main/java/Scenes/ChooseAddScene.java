@@ -1,10 +1,8 @@
 package Scenes;
 
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -16,13 +14,14 @@ public class ChooseAddScene {
     AddURLScene addURLScene;
     Stage primaryStage;
     
-    public ChooseAddScene() {
-        addBookScene = new AddBookScene();
-        addURLScene = new AddURLScene();
+    public ChooseAddScene(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        addBookScene = new AddBookScene(this);
+        addURLScene = new AddURLScene(this);
     }
 
-    public Scene createScene(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public Scene createScene() {
+
         BorderPane root = new BorderPane();
         Label label = new Label("Hello world!");
         // set id for example test
@@ -53,6 +52,7 @@ public class ChooseAddScene {
     }
 
     public void returnHere() {
-        
+        primaryStage.setScene(createScene());
+        primaryStage.show();
     }
 }
