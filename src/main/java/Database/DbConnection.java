@@ -1,8 +1,8 @@
 package Database;
 
-import java.sql.*;
-import java.util.ArrayList;
-import Domain.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DbConnection {
     private Connection connection;
@@ -28,8 +28,9 @@ public class DbConnection {
         String createBookTableQuery = "CREATE TABLE IF NOT EXISTS Books "
                 + "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "kirjoittaja varchar,"
-                + "otsikko varchar,"
-                + "tyyppi varchar,"
+                + "nimeke varchar,"
+                + "julkaisuvuosi varchar,"
+                + "sivumaara INTEGER,"
                 + "ISBN varchar,"
                 + "tagit varchar,"
                 + "relatedCourses varchar)"; 

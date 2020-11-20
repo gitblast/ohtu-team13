@@ -21,6 +21,10 @@ Testien ajaminen:
 
 `./gradlew test`
 
+Checkstylen ajaminen:
+
+`./gradlew checkstyleMain`
+
 Jar generointi (kohteeseen build/libs/Vinkkikirjasto-all.jar):
 
 `./gradlew shadowJar`

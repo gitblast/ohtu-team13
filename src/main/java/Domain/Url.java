@@ -22,6 +22,11 @@ public class Url {
         this.kommentti = kommentti;
     }
 
+    public Url(String otsikko, String url) {
+        this.otsikko = otsikko;
+        this.url = url;
+    }
+
     /**
      * @return the otsikko
      */
