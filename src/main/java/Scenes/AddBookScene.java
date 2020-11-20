@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 
 public class AddBookScene {
 
+
+    Button returnButton;
     TextField kirjoittaja;
     TextField otsikko;
     TextField tyyppi;
@@ -19,6 +21,8 @@ public class AddBookScene {
     Button submitButton;
 
     public AddBookScene() {
+
+        this.returnButton = new Button("Takaisin");
         this.kirjoittaja = new TextField();
         this.otsikko = new TextField();
         this.tyyppi = new TextField();
@@ -29,7 +33,6 @@ public class AddBookScene {
     }
 
     public Scene createScene() {
-        BorderPane addBookPane = new BorderPane();
         VBox addBookVBox = new VBox();
         addBookVBox.setPadding(new Insets(70, 20, 20, 20));
 
@@ -40,11 +43,15 @@ public class AddBookScene {
         tagit.setPromptText("Tagit");
         releatedCourses.setPromptText("Releated Courses");
 
+        returnButton.setOnAction(e -> {
+
+        });
+
         submitButton.setOnAction(e -> {
             lisaaKirja();
         });
 
-        addBookVBox.getChildren().addAll(kirjoittaja, otsikko, tyyppi, ISBN, tagit, releatedCourses, submitButton);
+        addBookVBox.getChildren().addAll(returnButton, kirjoittaja, otsikko, tyyppi, ISBN, tagit, releatedCourses, submitButton);
 
         Scene addBookScene = new Scene(addBookVBox, 600, 400);
 
