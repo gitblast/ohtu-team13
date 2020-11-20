@@ -15,12 +15,12 @@ public class VinkkiService {
         this.urlDao = urlDao;
     }
     
-    public void addBook() {
-        this.bookDao.createBook();
+    public void addBook(String kirjoittaja, String nimeke, Integer julkaisuvuosi, Integer sivumaara) {
+        this.bookDao.createBook(kirjoittaja, nimeke, julkaisuvuosi, sivumaara);
     }
     
-    public void addURL() {
-        this.urlDao.createURL(); 
+    public void addURL(String otsikko, String url) {
+        this.urlDao.createURL(otsikko, url); 
     }
     
     public ArrayList<Book> listBooks() {
