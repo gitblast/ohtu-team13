@@ -4,20 +4,24 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 
 public class AddURLScene {
 
+    Button returnButton;
     TextField otsikko;
     TextField tyyppi;
     TextField kommentti;
     TextField URL;
     TextField releatedCourses;
     Button submitButton;
+    ChooseAddScene chooseAddScene;
 
-    public AddURLScene() {
+    public AddURLScene(ChooseAddScene chooseAddScene) {
+        this.chooseAddScene = chooseAddScene;
+
+        this.returnButton = new Button("Takaisin");
         this.otsikko = new TextField();
         this.tyyppi = new TextField();
         this.URL = new TextField();
@@ -27,9 +31,8 @@ public class AddURLScene {
     }
 
     public Scene createScene() {
-        BorderPane addBookPane = new BorderPane();
-        VBox addBookVBox = new VBox();
-        addBookVBox.setPadding(new Insets(70, 20, 20, 20));
+        VBox addURLVBox = new VBox();
+        addURLVBox.setPadding(new Insets(70, 20, 20, 20));
 
         otsikko.setPromptText("Otsikko");
         URL.setPromptText("URL");
@@ -37,15 +40,19 @@ public class AddURLScene {
         tyyppi.setPromptText("Tyyppi");
         kommentti.setPromptText("Kommentti");
 
+        returnButton.setOnAction(e -> {
+            chooseAddScene.returnHere();
+        });
+
         submitButton.setOnAction(e -> {
             lisaaURL();
         });
 
-        addBookVBox.getChildren().addAll(otsikko, URL, tyyppi, releatedCourses, kommentti, submitButton);
+        addURLVBox.getChildren().addAll(returnButton, otsikko, URL, tyyppi, releatedCourses, kommentti, submitButton);
 
-        Scene addBookScene = new Scene(addBookVBox, 600, 400);
+        Scene addURLScene = new Scene(addURLVBox, 600, 400);
 
-        return addBookScene;
+        return addURLScene;
     }
 
     public void lisaaURL() {

@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 
@@ -19,9 +18,11 @@ public class AddBookScene {
     TextField tagit;
     TextField releatedCourses;
     Button submitButton;
+    ChooseAddScene chooseAddScene;
 
-    public AddBookScene() {
-
+    public AddBookScene(ChooseAddScene chooseAddScene) {
+        this.chooseAddScene = chooseAddScene;
+        
         this.returnButton = new Button("Takaisin");
         this.kirjoittaja = new TextField();
         this.otsikko = new TextField();
@@ -44,7 +45,7 @@ public class AddBookScene {
         releatedCourses.setPromptText("Releated Courses");
 
         returnButton.setOnAction(e -> {
-
+            chooseAddScene.returnHere();
         });
 
         submitButton.setOnAction(e -> {

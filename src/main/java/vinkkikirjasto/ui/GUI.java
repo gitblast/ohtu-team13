@@ -22,16 +22,15 @@ public class GUI extends Application {
     @Override
     public void init() throws Exception {
         VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(), new SqlDbUrlDao());
-        vinkkiService.addBook();
-        vinkkiService.addURL();
         lista = vinkkiService.listBooks();
         toinenLista = vinkkiService.listURLs();
-        chooseAddScene = new ChooseAddScene();
+        
     }
 
     @Override
     public void start(Stage primaryStage) {
-        Scene defaultScene = chooseAddScene.createScene(primaryStage);
+        chooseAddScene = new ChooseAddScene(primaryStage);
+        Scene defaultScene = chooseAddScene.createScene();
 
         primaryStage.setTitle("Vinkit");
         primaryStage.setScene(defaultScene);
