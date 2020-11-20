@@ -15,7 +15,9 @@ public class Book {
     public Book() {
     }
 
-    public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi, Integer sivumaara, String ISBN, ArrayList<String> tagit, String releatedCourses) {
+    public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi,
+                    Integer sivumaara, String ISBN, ArrayList<String> tagit,
+                    String releatedCourses) {
         this.kirjoittaja = kirjoittaja;
         this.nimeke = nimeke;
         this.julkaisuvuosi = julkaisuvuosi;
@@ -25,7 +27,8 @@ public class Book {
         this.releatedCourses = releatedCourses;
     }
 
-    public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi, Integer sivumaara) {
+    public Book(String kirjoittaja, String nimeke,
+                    Integer julkaisuvuosi, Integer sivumaara) {
         this.kirjoittaja = kirjoittaja;
         this.nimeke = nimeke;
         this.julkaisuvuosi = julkaisuvuosi;

@@ -24,7 +24,8 @@ public class ChooseAddScene {
     }
 
     public Scene createScene() throws Exception {
-        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(), new SqlDbUrlDao());
+        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(),
+                        new SqlDbUrlDao());
         int kirjojenmaara = vinkkiService.listBooks().size();
         BorderPane root = new BorderPane();
         Label label = new Label("Kirjoja tietokannassa: " + kirjojenmaara);

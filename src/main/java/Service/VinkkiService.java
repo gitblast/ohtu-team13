@@ -16,10 +16,12 @@ public class VinkkiService {
     }
     
     public void addBook(Book book) {
-        this.bookDao.createBook(book.getKirjoittaja(), book.getNimeke(), book.getJulkaisuvuosi(), book.getSivumaara());
+        this.bookDao.createBook(book.getKirjoittaja(), book.getNimeke(),
+                        book.getJulkaisuvuosi(), book.getSivumaara());
     }
     
-    public void addBook(String kirjoittaja, String nimeke, Integer julkaisuvuosi, Integer sivumaara) {
+    public void addBook(String kirjoittaja, String nimeke,
+                    Integer julkaisuvuosi, Integer sivumaara) {
         this.bookDao.createBook(kirjoittaja, nimeke, julkaisuvuosi, sivumaara);
     }
     

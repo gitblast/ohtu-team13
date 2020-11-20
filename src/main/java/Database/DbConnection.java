@@ -47,8 +47,8 @@ public class DbConnection {
                 + "releatedCourses varchar)";
         
         try {
-           connection.createStatement().execute(createBookTableQuery); 
-           connection.createStatement().execute(createUrlTableQuery);
+            connection.createStatement().execute(createBookTableQuery); 
+            connection.createStatement().execute(createUrlTableQuery);
         } catch(SQLException error) {
             System.out.println(error.getMessage());
         }

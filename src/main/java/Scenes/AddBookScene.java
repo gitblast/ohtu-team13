@@ -63,7 +63,8 @@ public class AddBookScene {
                 int jvuosi = convertToInteger(julkaisuvuosi.getText());
                 int smaara = convertToInteger(sivumaara.getText());
                 if (jvuosi == -9999 || smaara == -9999) {
-                    errorMessage.setText("Syötä julkaisuvuosi ja sivumäärä oikein");
+                    errorMessage.setText("Syötä julkaisuvuosi "
+                                    + "ja sivumäärä oikein");
                     onnistuu = false;
                 }
                 String kirjailija = checkString(kirjoittaja.getText());
@@ -81,15 +82,19 @@ public class AddBookScene {
             }
         });
 
-        addBookVBox.getChildren().addAll(returnButton, kirjoittaja, nimeke,julkaisuvuosi, sivumaara, ISBN, tagit, errorMessage, submitButton);
+        addBookVBox.getChildren().addAll(returnButton, kirjoittaja, nimeke,
+                        julkaisuvuosi, sivumaara, ISBN,
+                        tagit, errorMessage, submitButton);
 
         Scene addBookScene = new Scene(addBookVBox, 600, 400);
 
         return addBookScene;
     }
 
-    public void lisaaKirja(String kirjoittaja, String nimeke, int julkaisuvuosi, int sivumaara) throws Exception {
-        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(), new SqlDbUrlDao());
+    public void lisaaKirja(String kirjoittaja, String nimeke,
+                    int julkaisuvuosi, int sivumaara) throws Exception {
+        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(),
+                        new SqlDbUrlDao());
         vinkkiService.addBook(kirjoittaja, nimeke, julkaisuvuosi, sivumaara);
     }
 

@@ -52,7 +52,8 @@ public class AddURLScene {
             lisaaURL();
         });
 
-        addURLVBox.getChildren().addAll(returnButton, otsikko, URL, tyyppi, releatedCourses, kommentti, submitButton);
+        addURLVBox.getChildren().addAll(returnButton, otsikko, URL, tyyppi,
+                        releatedCourses, kommentti, submitButton);
 
         Scene addURLScene = new Scene(addURLVBox, 600, 400);
 

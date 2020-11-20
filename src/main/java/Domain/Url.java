@@ -16,7 +16,8 @@ public class Url {
         this.url = url;
     }
     
-    public Url(String otsikko, String url, String releatedCourses, String tyyppi, String kommentti) {
+    public Url(String otsikko, String url, String releatedCourses,
+                    String tyyppi, String kommentti) {
         this.otsikko = otsikko;
         this.url = url;
         this.releatedCourses = releatedCourses;

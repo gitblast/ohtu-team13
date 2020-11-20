@@ -8,7 +8,8 @@ import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import Domain.*;
+import Domain.Url;
+import Domain.Book;
 import java.util.ArrayList;
 import Scenes.ChooseAddScene;
 
@@ -21,7 +22,8 @@ public class GUI extends Application {
 
     @Override
     public void init() throws Exception {
-        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(), new SqlDbUrlDao());
+        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(),
+                                                        new SqlDbUrlDao());
         lista = vinkkiService.listBooks();
         toinenLista = vinkkiService.listURLs();
         

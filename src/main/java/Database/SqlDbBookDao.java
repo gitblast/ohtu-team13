@@ -22,14 +22,14 @@ public class SqlDbBookDao implements BookDao {
 
     public SqlDbBookDao() throws Exception {
         this.db = new DbConnection("jdbc:sqlite:lukuvinkit.db");
-        this.connection = db.getConnection();        
+        this.connection = db.getConnection();
     }
-    
-    
-    
+
     @Override
-    public void createBook(String kirjoittaja, String nimeke, Integer julkaisuvuosi, Integer sivumaara) {
-        String query = "INSERT INTO books (kirjoittaja, nimeke, julkaisuvuosi, sivumaara) values (?, ?, ?, ?);";       
+    public void createBook(String kirjoittaja, String nimeke,
+                    Integer julkaisuvuosi, Integer sivumaara) {
+        String query = "INSERT INTO books (kirjoittaja, nimeke, julkaisuvuosi, "
+                        + "sivumaara) VALUES (?, ?, ?, ?);";
         try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);
             prepared.setString(1, kirjoittaja);
@@ -45,8 +45,8 @@ public class SqlDbBookDao implements BookDao {
     @Override
     public ArrayList<Book> getAllBooks() {
         bookList = new ArrayList<Book>();
-        String query = "SELECT kirjoittaja, nimeke, julkaisuvuosi, sivumaara FROM books;";
-        
+        String query = "SELECT kirjoittaja, nimeke, julkaisuvuosi, sivumaara "
+                        + "FROM books;";
         try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);
             ResultSet rs = prepared.executeQuery();
@@ -55,12 +55,14 @@ public class SqlDbBookDao implements BookDao {
                 String nimeke = rs.getString("nimeke");
                 Integer julkaisuvuosi = rs.getInt("julkaisuvuosi");
                 Integer sivumaara = rs.getInt("sivumaara");
-                Book lisattava = new Book(kirjoittaja, nimeke, julkaisuvuosi, sivumaara, null, null, null);
+                Book lisattava = new Book(kirjoittaja, nimeke, julkaisuvuosi,
+                                sivumaara, null, null, null);
+
                 bookList.add(lisattava);
-            }       
+            }
         } catch (SQLException error) {
             System.out.println(error.getMessage());
-        }        
+        }
         return bookList;
     }
 
