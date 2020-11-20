@@ -9,7 +9,7 @@
         <module name="Indentation" />
         <module name="LeftCurly" />
         <module name="RedundantImport" />
-        <module name="RightCurly" >/
+        <module name="RightCurly" />
         <module name="UnusedImports" />
     </module>
 </module>
