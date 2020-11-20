@@ -52,7 +52,6 @@ public class AddBookScene {
             try {
                 chooseAddScene.returnHere();
             } catch (Exception e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         });
@@ -75,6 +74,11 @@ public class AddBookScene {
                 }
                 if (onnistuu) {
                     lisaaKirja(kirjailija, nimi, jvuosi, smaara);
+                    kirjoittaja.setText("");
+                    nimeke.setText("");
+                    julkaisuvuosi.setText("");
+                    sivumaara.setText("");
+                    errorMessage.setText("");
                     chooseAddScene.returnHere();
                 }
             } catch (Exception e1) {
