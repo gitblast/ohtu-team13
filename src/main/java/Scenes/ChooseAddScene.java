@@ -57,10 +57,12 @@ public class ChooseAddScene {
         });
 
         switchToListBooksScene.setOnAction(e -> {
-            primaryStage.setScene(listBooksScene.createScene(vinkkiService.listBooks()));
+            primaryStage.setScene(listBooksScene.createScene(
+                vinkkiService.listBooks()));
         });
 
-        buttons.getChildren().addAll(switchToAddBookScene, switchToAddURLScene, switchToListBooksScene);
+        buttons.getChildren().addAll(switchToAddBookScene,
+            switchToAddURLScene, switchToListBooksScene);
 
         root.setLeft(buttons);
         Scene chooseAddScene = new Scene(root, 600, 400);

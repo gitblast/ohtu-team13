@@ -30,12 +30,15 @@ public class ListBooksScene {
         HBox box = new HBox(0);
         Label labelKirjoittaja  = new Label(book.getKirjoittaja());
         Label labelNimeke  = new Label(book.getNimeke());
-        Label labelJulkaisuvuosi  = new Label(String.valueOf(book.getJulkaisuvuosi()));
+        Label labelJulkaisuvuosi  = 
+            new Label(String.valueOf(book.getJulkaisuvuosi()));
         Label labelSivumaara  = new Label(String.valueOf(book.getSivumaara()));
         Label labelISBN  = new Label(book.getISBN());
         Label labelReleatedCourses  = new Label(book.getReleatedCourses());
         box.setPadding(new Insets(5, 5, 5, 5));
-        box.getChildren().addAll(labelKirjoittaja, labelNimeke, labelJulkaisuvuosi, labelSivumaara, labelISBN, labelReleatedCourses);
+        box.getChildren().addAll(labelKirjoittaja, labelNimeke,
+            labelJulkaisuvuosi, labelSivumaara,
+            labelISBN, labelReleatedCourses);
 
         return box;
     }

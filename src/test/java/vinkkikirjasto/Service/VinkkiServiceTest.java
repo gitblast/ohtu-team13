@@ -7,7 +7,7 @@ import Database.SqlDbUrlDao;
 import Domain.Book;
 import Domain.Url;
 import Service.VinkkiService;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -33,20 +33,25 @@ public class VinkkiServiceTest {
     
     @Test
     public void bookCanBeAddedWithParams() {
-        vinkkiService.addBook("Robert Martin", "Clean Code: A Handbook of Agile Software Craftsmanship", 1970, 200);
+        vinkkiService.addBook("Robert Martin",
+            "Clean Code: A Handbook of Agile Software Craftsmanship",
+            1970, 200);
         Book book = vinkkiService.listBooks().get(0);
         assertEquals("Robert Martin", book.getKirjoittaja());
-        assertEquals("Clean Code: A Handbook of Agile Software Craftsmanship", book.getNimeke());
-        assertTrue(book.getJulkaisuvuosi()==1970);
-        assertTrue(book.getSivumaara()==200);
+        assertEquals("Clean Code: A Handbook of Agile Software Craftsmanship",
+            book.getNimeke());
+        assertTrue(book.getJulkaisuvuosi() == 1970);
+        assertTrue(book.getSivumaara() == 200);
     }
     
     @Test
     public void urlCanBeAddedWithParams() {
-        vinkkiService.addURL("Miniprojektin speksi", "https://ohjelmistotuotanto-hy.github.io/miniprojekti/");
+        vinkkiService.addURL("Miniprojektin speksi",
+            "https://ohjelmistotuotanto-hy.github.io/miniprojekti/");
         Url url = vinkkiService.listURLs().get(0);
         assertEquals("Miniprojektin speksi", url.getOtsikko());
-        assertEquals("https://ohjelmistotuotanto-hy.github.io/miniprojekti/", url.getUrl());
+        assertEquals("https://ohjelmistotuotanto-hy.github.io/miniprojekti/",
+            url.getUrl());
     }
     
     @Test
