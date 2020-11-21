@@ -16,11 +16,13 @@ public class ChooseAddScene {
     AddBookScene addBookScene;
     AddURLScene addURLScene;
     Stage primaryStage;
+    ListBooksScene listBooksScene;
     
     public ChooseAddScene(Stage primaryStage) {
         this.primaryStage = primaryStage;
         addBookScene = new AddBookScene(this);
         addURLScene = new AddURLScene(this);
+        listBooksScene = new ListBooksScene(this);
     }
 
     public Scene createScene() throws Exception {
@@ -39,10 +41,12 @@ public class ChooseAddScene {
 
         Button switchToAddBookScene = new Button("Lisää uusi kirja");
         Button switchToAddURLScene = new Button("Lisää URL");
+        Button switchToListBooksScene = new Button("Listaa kirjat");
 
         VBox buttons = new VBox(10);
         VBox.setVgrow(switchToAddBookScene, Priority.ALWAYS);
         VBox.setVgrow(switchToAddURLScene, Priority.ALWAYS);
+        VBox.setVgrow(switchToListBooksScene, Priority.ALWAYS);
 
         switchToAddBookScene.setOnAction(e -> {
             primaryStage.setScene(addBookScene.createScene());
@@ -52,7 +56,11 @@ public class ChooseAddScene {
             primaryStage.setScene(addURLScene.createScene());
         });
 
-        buttons.getChildren().addAll(switchToAddBookScene, switchToAddURLScene);
+        switchToListBooksScene.setOnAction(e -> {
+            primaryStage.setScene(listBooksScene.createScene(vinkkiService.listBooks()));
+        });
+
+        buttons.getChildren().addAll(switchToAddBookScene, switchToAddURLScene, switchToListBooksScene);
 
         root.setLeft(buttons);
         Scene chooseAddScene = new Scene(root, 600, 400);
