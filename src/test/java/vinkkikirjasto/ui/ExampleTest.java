@@ -2,7 +2,7 @@ package vinkkikirjasto.ui;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.junit.*;
+import org.junit.Test;
 import static org.testfx.api.FxAssert.verifyThat;
 import org.testfx.framework.junit.ApplicationTest;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
