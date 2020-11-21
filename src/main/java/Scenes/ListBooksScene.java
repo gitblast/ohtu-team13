@@ -1,19 +1,17 @@
 package Scenes;
 
 import Domain.Book;
-import Service.VinkkiService;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+// import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import javafx.scene.Node;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListBooksScene {
@@ -36,7 +34,7 @@ public class ListBooksScene {
         Label labelSivumaara  = new Label(String.valueOf(book.getSivumaara()));
         Label labelISBN  = new Label(book.getISBN());
         Label labelReleatedCourses  = new Label(book.getReleatedCourses());
-        box.setPadding(new Insets(5,5,5,5));
+        box.setPadding(new Insets(5, 5, 5, 5));
         box.getChildren().addAll(labelKirjoittaja, labelNimeke, labelJulkaisuvuosi, labelSivumaara, labelISBN, labelReleatedCourses);
 
         return box;
@@ -45,7 +43,7 @@ public class ListBooksScene {
     public void redrawBooksNodes() {
         bookNodes.getChildren().clear();     
         if (books != null) {
-            books.forEach(book->{
+            books.forEach(book -> {
                 bookNodes.getChildren().add(createBookNode(book));
             });  
         }
