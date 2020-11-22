@@ -44,6 +44,7 @@ public class AddURLScene {
     public Scene createScene() {
         VBox addURLVBox = new VBox();
         addURLVBox.setPadding(new Insets(80, 50, 50, 100));
+        addURLVBox.setSpacing(5);
 
         otsikko.setPromptText("Otsikko");
         URL.setPromptText("URL");

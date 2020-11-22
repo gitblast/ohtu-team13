@@ -6,7 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 // import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
+// import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
@@ -38,6 +38,7 @@ public class ListBooksScene {
         Label labelISBN  = new Label(book.getISBN());
         Label labelReleatedCourses  = new Label(book.getReleatedCourses());
         box.setPadding(new Insets(5, 5, 5, 5));
+        box.setSpacing(5);
         box.getChildren().addAll(labelKirjoittaja, labelNimeke,
             labelJulkaisuvuosi, labelSivumaara,
             labelISBN, labelReleatedCourses);
@@ -67,7 +68,6 @@ public class ListBooksScene {
         this.books = books;
         bookNodes = new VBox();
         
-        BorderPane listBooksPane = new BorderPane();
         VBox listBooksVBox = new VBox();
         listBooksVBox.setPadding(new Insets(70, 20, 20, 20));
         

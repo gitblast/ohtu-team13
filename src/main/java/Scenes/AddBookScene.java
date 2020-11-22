@@ -47,6 +47,7 @@ public class AddBookScene {
         VBox addBookVBox = new VBox();
         //addBookVBox.setPadding(new Insets(70, 20, 20, 20));
         addBookVBox.setPadding(new Insets(80, 50, 50, 100));
+        addBookVBox.setSpacing(5);
 
         kirjoittaja.setPromptText("Kirjailija");
         nimeke.setPromptText("Kirjan nimi");

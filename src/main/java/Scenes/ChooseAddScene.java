@@ -17,12 +17,14 @@ public class ChooseAddScene {
     AddURLScene addURLScene;
     Stage primaryStage;
     ListBooksScene listBooksScene;
+    ListUrlsScene listUrlsScene;
     
     public ChooseAddScene(Stage primaryStage) {
         this.primaryStage = primaryStage;
         addBookScene = new AddBookScene(this);
         addURLScene = new AddURLScene(this);
         listBooksScene = new ListBooksScene(this);
+        listUrlsScene = new ListUrlsScene(this);
     }
 
     public Scene createScene() throws Exception {
@@ -30,7 +32,6 @@ public class ChooseAddScene {
                         new SqlDbUrlDao());
         int kirjojenmaara = vinkkiService.listBooks().size();
         int urlienmaara = vinkkiService.listURLs().size();
-        //BorderPane root = new BorderPane();
         Label label = new Label("Kirjoja tietokannassa: " + kirjojenmaara
             + "\nUrleja tietokannassa: " + urlienmaara);
         
@@ -38,19 +39,20 @@ public class ChooseAddScene {
         // set id for example test
         Label helloworld = new Label("Hello world!");
         helloworld.setId("hello-world-label");
-        //root.setCenter(label);
-        //root.setBottom(helloworld);
 
-        Button switchToAddBookScene = new Button("Lisää uusi kirja");
+        Button switchToAddBookScene = new Button("Lisää kirja");
         Button switchToAddURLScene = new Button("Lisää URL");
-        Button switchToListBooksScene = new Button("Listaa kirjat");
+        Button switchToListBooksScene = new Button("Tallennetut kirjat");
+        Button switchToListUrlsScene = new Button("Tallennetut URLit");
 
         VBox elements = new VBox(10);
         elements.setPadding(new Insets(100, 0, 50, 200));
-        //new Insets(top, right, bottom, left)
+        elements.setSpacing(5);
+
         VBox.setVgrow(switchToAddBookScene, Priority.ALWAYS);
         VBox.setVgrow(switchToAddURLScene, Priority.ALWAYS);
         VBox.setVgrow(switchToListBooksScene, Priority.ALWAYS);
+        VBox.setVgrow(switchToListUrlsScene, Priority.ALWAYS);
 
         switchToAddBookScene.setOnAction(e -> {
             primaryStage.setScene(addBookScene.createScene());
@@ -65,10 +67,15 @@ public class ChooseAddScene {
                 vinkkiService.listBooks()));
         });
 
-        elements.getChildren().addAll(label, switchToAddBookScene,
-            switchToAddURLScene, switchToListBooksScene, helloworld);
+        switchToListUrlsScene.setOnAction(e -> {
+            primaryStage.setScene(listUrlsScene.createScene(
+                vinkkiService.listURLs()));
+        });
 
-        //root.setRight(elements);
+        elements.getChildren().addAll(label, switchToAddBookScene,
+            switchToAddURLScene, switchToListBooksScene, 
+            switchToListUrlsScene, helloworld);
+
         Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;
     }
