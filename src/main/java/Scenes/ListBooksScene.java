@@ -38,7 +38,7 @@ public class ListBooksScene {
         Label labelISBN  = new Label(book.getISBN());
         Label labelReleatedCourses  = new Label(book.getReleatedCourses());
         box.setPadding(new Insets(5, 5, 5, 5));
-        box.setSpacing(5);
+        box.setSpacing(10);
         box.getChildren().addAll(labelKirjoittaja, labelNimeke,
             labelJulkaisuvuosi, labelSivumaara,
             labelISBN, labelReleatedCourses);
@@ -70,8 +70,18 @@ public class ListBooksScene {
         
         VBox listBooksVBox = new VBox();
         listBooksVBox.setPadding(new Insets(70, 20, 20, 20));
-        
-        listBooksVBox.getChildren().addAll(returnButton, bookNodes);
+        listBooksVBox.setSpacing(5);
+
+        HBox otsikot = new HBox();
+        otsikot.setSpacing(5);
+        Label kirjailijaOtsikko = new Label("Kirjailija");
+        Label nimiOtsikko = new Label("Nimi");
+        Label vuosiOtsikko = new Label("Julkaisuvuosi");
+        Label sivumaaraOtsikko = new Label("Sivumäärä");
+        otsikot.getChildren().addAll(kirjailijaOtsikko,
+            nimiOtsikko, vuosiOtsikko, sivumaaraOtsikko);
+
+        listBooksVBox.getChildren().addAll(returnButton, otsikot, bookNodes);
         
         Scene listBooksScene = new Scene(listBooksVBox, 600, 400);
         
