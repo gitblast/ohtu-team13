@@ -14,6 +14,8 @@ import javafx.scene.Node;
 
 import java.util.List;
 
+// Myöhemmin muutetaan ListScene-vanhemman perijäksi
+// jotta koodi olisi vähemmän toisteista
 public class ListBooksScene {
 
     Button returnButton;

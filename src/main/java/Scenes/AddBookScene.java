@@ -2,6 +2,7 @@ package Scenes;
 
 import Database.SqlDbBookDao;
 import Database.SqlDbUrlDao;
+import Domain.Book;
 import Service.VinkkiService;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,6 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+// Muutetaan AddScene-vanhemman perijäksi myöhemmin
+// vähentämään toisteisuutta scenejen välillä
+//
+// Joitakin attribuutteja kommentoitu pois,
+// koska niitä ei voi vielä lisätä tietokantaan
 public class AddBookScene {
 
     Button returnButton;
@@ -17,8 +23,8 @@ public class AddBookScene {
     TextField nimeke;
     TextField julkaisuvuosi;
     TextField sivumaara;
-    TextField ISBN;
-    TextField tagit;
+    //TextField ISBN;
+    //TextField tagit;
     Label errorMessage;
     Button submitButton;
     ChooseAddScene chooseAddScene;
@@ -31,22 +37,23 @@ public class AddBookScene {
         this.nimeke = new TextField();
         this.julkaisuvuosi = new TextField();
         this.sivumaara = new TextField();
-        this.ISBN = new TextField();
-        this.tagit = new TextField();
+        //this.ISBN = new TextField();
+        //this.tagit = new TextField();
         this.errorMessage = new Label();
         this.submitButton = new Button("Lisää uusi kirja");
     }
 
     public Scene createScene() {
         VBox addBookVBox = new VBox();
-        addBookVBox.setPadding(new Insets(70, 20, 20, 20));
+        //addBookVBox.setPadding(new Insets(70, 20, 20, 20));
+        addBookVBox.setPadding(new Insets(80, 50, 50, 100));
 
         kirjoittaja.setPromptText("Kirjailija");
         nimeke.setPromptText("Kirjan nimi");
         julkaisuvuosi.setPromptText("Julkaisuvuosi");
         sivumaara.setPromptText("Sivumäärä");
-        ISBN.setPromptText("ISBN");
-        tagit.setPromptText("Tagit");
+        //ISBN.setPromptText("ISBN");
+        //tagit.setPromptText("Tagit");
 
         returnButton.setOnAction(e -> {
             try {
@@ -73,7 +80,8 @@ public class AddBookScene {
                     onnistuu = false;
                 }
                 if (onnistuu) {
-                    lisaaKirja(kirjailija, nimi, jvuosi, smaara);
+                    Book kirja = new Book(kirjailija, nimi, jvuosi, smaara);
+                    lisaaKirja(kirja);
                     kirjoittaja.setText("");
                     nimeke.setText("");
                     julkaisuvuosi.setText("");
@@ -87,19 +95,18 @@ public class AddBookScene {
         });
 
         addBookVBox.getChildren().addAll(returnButton, kirjoittaja, nimeke,
-                        julkaisuvuosi, sivumaara, ISBN,
-                        tagit, errorMessage, submitButton);
+                        julkaisuvuosi, sivumaara,
+                        errorMessage, submitButton);
 
         Scene addBookScene = new Scene(addBookVBox, 600, 400);
 
         return addBookScene;
     }
 
-    public void lisaaKirja(String kirjoittaja, String nimeke,
-                    int julkaisuvuosi, int sivumaara) throws Exception {
-        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(),
-                        new SqlDbUrlDao());
-        vinkkiService.addBook(kirjoittaja, nimeke, julkaisuvuosi, sivumaara);
+    public void lisaaKirja(Book kirja) throws Exception {
+        VinkkiService vs = new VinkkiService(new SqlDbBookDao(),
+                                        new SqlDbUrlDao());
+        vs.addBook(kirja);
     }
 
     private int convertToInteger(String s) {
@@ -135,13 +142,5 @@ public class AddBookScene {
 
     public TextField getjulkaisuvuosiText() {
         return this.julkaisuvuosi;
-    }
-
-    public TextField getISBNText() {
-        return this.ISBN;
-    }
-
-    public TextField getTagitText() {
-        return this.tagit;
     }
 }

@@ -3,10 +3,10 @@ package Scenes;
 import Database.SqlDbBookDao;
 import Database.SqlDbUrlDao;
 import Service.VinkkiService;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,21 +29,25 @@ public class ChooseAddScene {
         VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(),
                         new SqlDbUrlDao());
         int kirjojenmaara = vinkkiService.listBooks().size();
-        BorderPane root = new BorderPane();
-        Label label = new Label("Kirjoja tietokannassa: " + kirjojenmaara);
+        int urlienmaara = vinkkiService.listURLs().size();
+        //BorderPane root = new BorderPane();
+        Label label = new Label("Kirjoja tietokannassa: " + kirjojenmaara
+            + "\nUrleja tietokannassa: " + urlienmaara);
         
-        label.setId("kirjojenmaara_label");
+        label.setId("maara_label");
         // set id for example test
         Label helloworld = new Label("Hello world!");
         helloworld.setId("hello-world-label");
-        root.setCenter(label);
-        root.setBottom(helloworld);
+        //root.setCenter(label);
+        //root.setBottom(helloworld);
 
         Button switchToAddBookScene = new Button("Lisää uusi kirja");
         Button switchToAddURLScene = new Button("Lisää URL");
         Button switchToListBooksScene = new Button("Listaa kirjat");
 
-        VBox buttons = new VBox(10);
+        VBox elements = new VBox(10);
+        elements.setPadding(new Insets(100, 0, 50, 200));
+        //new Insets(top, right, bottom, left)
         VBox.setVgrow(switchToAddBookScene, Priority.ALWAYS);
         VBox.setVgrow(switchToAddURLScene, Priority.ALWAYS);
         VBox.setVgrow(switchToListBooksScene, Priority.ALWAYS);
@@ -61,11 +65,11 @@ public class ChooseAddScene {
                 vinkkiService.listBooks()));
         });
 
-        buttons.getChildren().addAll(switchToAddBookScene,
-            switchToAddURLScene, switchToListBooksScene);
+        elements.getChildren().addAll(label, switchToAddBookScene,
+            switchToAddURLScene, switchToListBooksScene, helloworld);
 
-        root.setLeft(buttons);
-        Scene chooseAddScene = new Scene(root, 600, 400);
+        //root.setRight(elements);
+        Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;
     }
 
