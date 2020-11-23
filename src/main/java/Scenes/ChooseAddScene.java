@@ -40,8 +40,8 @@ public class ChooseAddScene {
         Label helloworld = new Label("Hello world!");
         helloworld.setId("hello-world-label");
 
-        Button switchToAddBookScene = new Button("Lis√§√§ kirja");
-        Button switchToAddURLScene = new Button("Lis√§√§ URL");
+        Button switchToAddBookScene = new Button("Lis‰‰ kirja");
+        Button switchToAddURLScene = new Button("Lis‰‰ URL");
         Button switchToListBooksScene = new Button("Tallennetut kirjat");
         Button switchToListUrlsScene = new Button("Tallennetut URLit");
 
