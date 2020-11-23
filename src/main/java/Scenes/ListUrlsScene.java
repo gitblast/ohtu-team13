@@ -15,6 +15,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.Node;
 
 import java.util.List;
+import javafx.scene.control.ScrollPane;
 
 // Myöhemmin muutetaan ListScene-vanhemman perijäksi
 // jotta koodi olisi vähemmän toisteista
@@ -79,13 +80,15 @@ public class ListUrlsScene {
         this.urls = urls;
         urlNodes = new VBox();
         
+        ScrollPane scrollPane = new ScrollPane();
         VBox listUrlsVBox = new VBox();
-        listUrlsVBox.setPadding(new Insets(70, 20, 20, 20));
+        scrollPane.setContent(listUrlsVBox);
+        listUrlsVBox.setPadding(new Insets(10, 20, 20, 20));
         listUrlsVBox.setSpacing(5);
         
         listUrlsVBox.getChildren().addAll(copiedLabel, returnButton, urlNodes);
         
-        Scene listUrlsScene = new Scene(listUrlsVBox, 600, 400);
+        Scene listUrlsScene = new Scene(scrollPane, 600, 400);
         
         redrawUrlsNodes();
         

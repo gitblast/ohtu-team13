@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.Node;
 
 import java.util.List;
+import javafx.scene.control.ScrollPane;
 
 // Myöhemmin muutetaan ListScene-vanhemman perijäksi
 // jotta koodi olisi vähemmän toisteista
@@ -68,10 +69,12 @@ public class ListBooksScene {
         this.books = books;
         bookNodes = new VBox();
         
+        ScrollPane scrollPane = new ScrollPane();
         VBox listBooksVBox = new VBox();
-        listBooksVBox.setPadding(new Insets(70, 20, 20, 20));
+        listBooksVBox.setPadding(new Insets(30, 20, 20, 20));
         listBooksVBox.setSpacing(5);
 
+        scrollPane.setContent(listBooksVBox);
         HBox otsikot = new HBox();
         otsikot.setSpacing(5);
         Label kirjailijaOtsikko = new Label("Kirjailija");
@@ -83,7 +86,7 @@ public class ListBooksScene {
 
         listBooksVBox.getChildren().addAll(returnButton, otsikot, bookNodes);
         
-        Scene listBooksScene = new Scene(listBooksVBox, 600, 400);
+        Scene listBooksScene = new Scene(scrollPane, 600, 400);
         
         redrawBooksNodes();
         
