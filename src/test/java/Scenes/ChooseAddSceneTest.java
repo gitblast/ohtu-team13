@@ -1,6 +1,5 @@
-package vinkkikirjasto.ui;
+package Scenes;
 
-import Scenes.ChooseAddScene;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Test;
