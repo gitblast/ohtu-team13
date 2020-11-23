@@ -1,18 +1,14 @@
 package vinkkikirjasto.cucumber;
 
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-import java.util.ArrayList;
-import java.util.List;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import Dao.BookDao;
 import Dao.UrlDao;
 import Database.SqlDbBookDao;
 import Database.SqlDbUrlDao;
-import Domain.Book;
 import Domain.Url;
 import Service.VinkkiService;
 
