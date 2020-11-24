@@ -57,4 +57,25 @@ public class SqlDbUrlDao implements UrlDao {
         return urlList;
     }
 
+    @Override
+    public ArrayList<Url> findByOtsikko(String searchTerm) {
+        urlList = new ArrayList<Url>();
+        String query = "SELECT otsikko, url FROM Url WHERE otsikko=?;";
+        
+        try (Statement statement = connection.createStatement()) {
+            PreparedStatement prepared = connection.prepareStatement(query);
+            prepared.setString(1, searchTerm);
+            ResultSet rs = prepared.executeQuery();
+            while (rs.next()) {
+                String otsikko = rs.getString(("otsikko"));
+                String url = rs.getString("url");
+                Url lisattava = new Url(otsikko, url);
+                urlList.add(lisattava);
+            }
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+        }
+        return urlList;
+    }
+
 }

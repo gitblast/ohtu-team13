@@ -120,5 +120,10 @@ public class Url {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Url{" + "otsikko=" + otsikko + ", url=" + url + '}';
+    }
     
 }

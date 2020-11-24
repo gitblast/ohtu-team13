@@ -17,12 +17,17 @@ public class VinkkiService {
     
     public void addBook(Book book) {
         this.bookDao.createBook(book.getKirjoittaja(), book.getNimeke(),
-                        book.getJulkaisuvuosi(), book.getSivumaara());
+                        book.getJulkaisuvuosi(), book.getSivumaara(), book.getISBN());
     }
     
     public void addBook(String kirjoittaja, String nimeke,
                     Integer julkaisuvuosi, Integer sivumaara) {
-        this.bookDao.createBook(kirjoittaja, nimeke, julkaisuvuosi, sivumaara);
+        this.addBook(kirjoittaja, nimeke, julkaisuvuosi, sivumaara, null);
+    }
+    
+    public void addBook(String kirjoittaja, String nimeke,
+                    Integer julkaisuvuosi, Integer sivumaara, String ISBN) {
+        this.bookDao.createBook(kirjoittaja, nimeke, julkaisuvuosi, sivumaara, ISBN);
     }
     
     public void addURL(Url url) {
@@ -36,8 +41,24 @@ public class VinkkiService {
     public ArrayList<Book> listBooks() {
         return this.bookDao.getAllBooks();
     }
+    
+    public Book searchBookByISBN(String ISBN) {
+        return this.bookDao.findByISBN(ISBN);
+    }
+    
+    public ArrayList<Book> searchBookByAuthor(String author) {
+        return this.bookDao.findByKirjoittaja(author);
+    }
+    
+    public ArrayList<Book> searchBookByName(String name) {
+        return  this.bookDao.findByNimeke(name);
+    }
         
     public ArrayList<Url> listURLs() {
         return this.urlDao.getAllURLs();
+    }
+    
+    public ArrayList<Url> searchUrlByName(String name) {
+        return this.urlDao.findByOtsikko(name);
     }
 }

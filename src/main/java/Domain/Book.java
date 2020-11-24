@@ -35,6 +35,14 @@ public class Book {
         this.sivumaara = sivumaara;
     }
 
+    public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi, Integer sivumaara, String ISBN) {
+        this.kirjoittaja = kirjoittaja;
+        this.nimeke = nimeke;
+        this.julkaisuvuosi = julkaisuvuosi;
+        this.sivumaara = sivumaara;
+        this.ISBN = ISBN;
+    }
+
     public String getKirjoittaja() {
         return kirjoittaja;
     }
@@ -116,6 +124,11 @@ public class Book {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" + "kirjoittaja=" + kirjoittaja + ", nimeke=" + nimeke + ", julkaisuvuosi=" + julkaisuvuosi + ", sivumaara=" + sivumaara + ", ISBN=" + ISBN + '}';
     }
    
 }
