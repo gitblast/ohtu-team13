@@ -66,7 +66,7 @@ public class ListUrlsScene {
         }
     } 
 
-    public Scene createScene(List urls) {
+    public Scene createScene(List<Url> urls) {
 
         returnButton.setOnAction(e -> {
             try {
