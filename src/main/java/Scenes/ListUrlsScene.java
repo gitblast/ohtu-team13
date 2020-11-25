@@ -35,7 +35,7 @@ public class ListUrlsScene extends ListingScene {
             final ClipboardContent content = new ClipboardContent();
             content.putString(copyText);
             clipboard.setContent(content);
-            info.setText("URL kopioitu leikepöydälle!");
+            info.setText("URL copied to clipboard!");
         });
 
         nodes.add(labelOtsikko);
@@ -50,7 +50,7 @@ public class ListUrlsScene extends ListingScene {
         HBox otsikot = new HBox();
         otsikot.setSpacing(5);
 
-        Label otsikko = new Label("Otsikko");
+        Label otsikko = new Label("Header");
         Label url = new Label("URL");
         otsikot.getChildren().addAll(otsikko, url);
 

@@ -67,22 +67,22 @@ public class ListBooksScene extends ListingScene {
         HBox otsikot = new HBox();
         otsikot.setSpacing(5);
         
-        Label kirjailijaOtsikko = new Label("Kirjailija");
+        Label kirjailijaOtsikko = new Label("Author");
         kirjailijaOtsikko.setStyle(cssLayoutBorder01);
         kirjailijaOtsikko.setMaxWidth(200);
         kirjailijaOtsikko.setMinWidth(200);
 
-        Label nimiOtsikko = new Label("Nimi");
+        Label nimiOtsikko = new Label("Title");
         nimiOtsikko.setStyle(cssLayoutBorder01);
         nimiOtsikko.setMaxWidth(200);
         nimiOtsikko.setMinWidth(200);
 
-        Label vuosiOtsikko = new Label("Julkaisuvuosi");
+        Label vuosiOtsikko = new Label("Published");
         vuosiOtsikko.setStyle(cssLayoutBorder01);
         vuosiOtsikko.setMaxWidth(50);
         vuosiOtsikko.setMinWidth(50);
 
-        Label sivumaaraOtsikko = new Label("Sivumäärä");
+        Label sivumaaraOtsikko = new Label("Page count");
         sivumaaraOtsikko.setStyle(cssLayoutBorder01);
         sivumaaraOtsikko.setMaxWidth(50);
         sivumaaraOtsikko.setMinWidth(50);     

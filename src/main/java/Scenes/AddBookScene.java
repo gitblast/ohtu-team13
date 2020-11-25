@@ -33,7 +33,7 @@ public class AddBookScene {
     public AddBookScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
 
-        this.returnButton = new Button("Back");
+        this.returnButton = new Button("Return");
         this.kirjoittaja = new TextField();
         this.nimeke = new TextField();
         this.julkaisuvuosi = new TextField();
@@ -65,7 +65,7 @@ public class AddBookScene {
         kirjoittaja.setPromptText("Author");
         nimeke.setPromptText("Title");
         julkaisuvuosi.setPromptText("Published");
-        sivumaara.setPromptText("Pages");
+        sivumaara.setPromptText("Page count");
         //ISBN.setPromptText("ISBN");
         //tagit.setPromptText("Tagit");
 

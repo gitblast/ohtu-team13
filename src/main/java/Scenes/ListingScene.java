@@ -24,7 +24,7 @@ public abstract class ListingScene {
     
     public ListingScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
-        this.returnButton = new Button("Takaisin");
+        this.returnButton = new Button("Return");
         this.info = new Label();
     }
 

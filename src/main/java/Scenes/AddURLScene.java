@@ -32,7 +32,7 @@ public class AddURLScene {
     public AddURLScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
 
-        this.returnButton = new Button("Back");
+        this.returnButton = new Button("Return");
         this.otsikko = new TextField();
         //this.tyyppi = new TextField();
         this.URL = new TextField();
