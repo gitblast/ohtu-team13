@@ -5,7 +5,6 @@ import Domain.Bookmark;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,20 +15,16 @@ public class ListBooksScene extends ListingScene {
         super(chooseAddScene);
     }
 
-    public Scene createBookScene(List<Book> books) {
-        return super.createScene(new ArrayList<>(books));
-    }
-
     @Override
     protected List<Node> createBookmarkContent(Bookmark book) {
         List<Node> nodes = new ArrayList<>();
 
-        Label labelKirjoittaja = new Label(((Book) book).getKirjoittaja());
-        Label labelNimeke = new Label(((Book) book).getNimeke());
-        Label labelJulkaisuvuosi = new Label(String.valueOf(((Book) book).getJulkaisuvuosi()));
-        Label labelSivumaara = new Label(String.valueOf(((Book) book).getSivumaara()));
-        Label labelISBN = new Label(((Book) book).getISBN());
-        Label labelReleatedCourses = new Label(((Book) book).getRelatedCourses());
+        Label labelKirjoittaja = new Label(((Book)book).getKirjoittaja());
+        Label labelNimeke = new Label(((Book)book).getNimeke());
+        Label labelJulkaisuvuosi = new Label(String.valueOf(((Book)book).getJulkaisuvuosi()));
+        Label labelSivumaara = new Label(String.valueOf(((Book)book).getSivumaara()));
+        Label labelISBN = new Label(((Book)book).getISBN());
+        Label labelReleatedCourses = new Label(((Book)book).getRelatedCourses());
 
         nodes.add(labelKirjoittaja);
         nodes.add(labelNimeke);
@@ -45,6 +40,7 @@ public class ListBooksScene extends ListingScene {
     protected HBox otsikot() {
         HBox otsikot = new HBox();
         otsikot.setSpacing(5);
+        
         Label kirjailijaOtsikko = new Label("Kirjailija");
         Label nimiOtsikko = new Label("Nimi");
         Label vuosiOtsikko = new Label("Julkaisuvuosi");

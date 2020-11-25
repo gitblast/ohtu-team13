@@ -3,6 +3,7 @@ package Scenes;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.Node;
@@ -19,10 +20,12 @@ public abstract class ListingScene {
     private VBox nodes;
     private List<Bookmark> bookmarks;
     ChooseAddScene chooseAddScene;
+    Label info;
     
     public ListingScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
         this.returnButton = new Button("Takaisin");
+        this.info = new Label();
     }
 
     protected abstract List<Node> createBookmarkContent(Bookmark bookmark);
@@ -47,6 +50,7 @@ public abstract class ListingScene {
     protected void returnButtonFunction() {
         returnButton.setOnAction(e -> {
             try {
+                info.setText("");
                 chooseAddScene.returnHere();
             } catch (Exception e1) {
                 e1.printStackTrace();
@@ -69,7 +73,7 @@ public abstract class ListingScene {
 
         scrollPane.setContent(listingVBox);
         
-        listingVBox.getChildren().addAll(returnButton, otsikot(), nodes);
+        listingVBox.getChildren().addAll(info, returnButton, otsikot(), nodes);
         
         Scene listingScene = new Scene(scrollPane, 600, 400);
         

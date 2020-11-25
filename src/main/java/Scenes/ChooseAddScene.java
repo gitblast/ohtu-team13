@@ -75,7 +75,7 @@ public class ChooseAddScene {
 
         switchToListUrlsScene.setOnAction(e -> {
             primaryStage.setScene(listUrlsScene.createScene(
-                    vinkkiService.listURLs()));
+                    new ArrayList<>(vinkkiService.listURLs())));
         });
 
         elements.getChildren().addAll(label, switchToAddBookScene,
