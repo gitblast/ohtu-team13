@@ -52,7 +52,8 @@ public class SqlDbBookDao implements BookDao {
     @Override
     public ArrayList<Book> getAllBooks() {
         bookList = new ArrayList<Book>();
-        String query = "SELECT kirjoittaja, nimeke, julkaisuvuosi, sivumaara, ISBN "
+        String query = "SELECT kirjoittaja, nimeke, "
+                        + "julkaisuvuosi, sivumaara, ISBN "
                         + "FROM books;";
         try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);
@@ -77,13 +78,16 @@ public class SqlDbBookDao implements BookDao {
     @Override
     public Book findByISBN(String ISBN) {
         Book book = null;
-        String query = "SELECT kirjoittaja, nimeke, julkaisuvuosi, sivumaara, ISBN "
+        String query = "SELECT kirjoittaja, nimeke, "
+                        + "julkaisuvuosi, sivumaara, ISBN "
                         + "FROM books WHERE ISBN=?;";
         try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);
             prepared.setString(1, ISBN);
             ResultSet rs = prepared.executeQuery();
-            book = new Book(rs.getString("kirjoittaja"), rs.getString("nimeke"), rs.getInt("julkaisuvuosi"), rs.getInt("sivumaara"), rs.getString("ISBN"));
+            book = new Book(rs.getString("kirjoittaja"), rs.getString("nimeke"),
+                            rs.getInt("julkaisuvuosi"), rs.getInt("sivumaara"),
+                            rs.getString("ISBN"));
         } catch (SQLException error) {
             System.out.println(error.getMessage());
         }
@@ -93,7 +97,8 @@ public class SqlDbBookDao implements BookDao {
     @Override
     public ArrayList<Book> findByKirjoittaja(String searchTerm) {
         bookList = new ArrayList<Book>();
-        String query = "SELECT kirjoittaja, nimeke, julkaisuvuosi, sivumaara, ISBN "
+        String query = "SELECT kirjoittaja, nimeke, "
+                        + "julkaisuvuosi, sivumaara, ISBN "
                         + "FROM books WHERE kirjoittaja=?;";
         try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);
@@ -119,7 +124,8 @@ public class SqlDbBookDao implements BookDao {
     @Override
     public ArrayList<Book> findByNimeke(String searchTerm) {
         bookList = new ArrayList<Book>();
-        String query = "SELECT kirjoittaja, nimeke, julkaisuvuosi, sivumaara, ISBN "
+        String query = "SELECT kirjoittaja, nimeke, "
+                        + "julkaisuvuosi, sivumaara, ISBN "
                         + "FROM books WHERE kirjoittaja=?;";
         try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);

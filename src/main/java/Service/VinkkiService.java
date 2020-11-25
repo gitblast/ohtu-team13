@@ -17,7 +17,8 @@ public class VinkkiService {
     
     public void addBook(Book book) {
         this.bookDao.createBook(book.getKirjoittaja(), book.getNimeke(),
-                        book.getJulkaisuvuosi(), book.getSivumaara(), book.getISBN());
+                        book.getJulkaisuvuosi(), book.getSivumaara(),
+                        book.getISBN());
     }
     
     public void addBook(String kirjoittaja, String nimeke,
@@ -27,7 +28,8 @@ public class VinkkiService {
     
     public void addBook(String kirjoittaja, String nimeke,
                     Integer julkaisuvuosi, Integer sivumaara, String ISBN) {
-        this.bookDao.createBook(kirjoittaja, nimeke, julkaisuvuosi, sivumaara, ISBN);
+        this.bookDao.createBook(kirjoittaja, nimeke,
+                        julkaisuvuosi, sivumaara, ISBN);
     }
     
     public void addURL(Url url) {

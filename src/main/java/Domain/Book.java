@@ -35,7 +35,8 @@ public class Book {
         this.sivumaara = sivumaara;
     }
 
-    public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi, Integer sivumaara, String ISBN) {
+    public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi,
+                Integer sivumaara, String ISBN) {
         this.kirjoittaja = kirjoittaja;
         this.nimeke = nimeke;
         this.julkaisuvuosi = julkaisuvuosi;
@@ -128,7 +129,9 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" + "kirjoittaja=" + kirjoittaja + ", nimeke=" + nimeke + ", julkaisuvuosi=" + julkaisuvuosi + ", sivumaara=" + sivumaara + ", ISBN=" + ISBN + '}';
+        return "Book{" + "kirjoittaja=" + kirjoittaja + ", nimeke=" + nimeke
+                + ", julkaisuvuosi=" + julkaisuvuosi + ", sivumaara="
+                + sivumaara + ", ISBN=" + ISBN + '}';
     }
    
 }
