@@ -35,6 +35,7 @@ public class ListBooksScene {
         this.chooseAddScene = chooseAddScene;
         this.returnButton = new Button("Takaisin");
     }
+    
     public Node createBookNode(Book book) {
         HBox box = new HBox(0);
         Label labelKirjoittaja  = new Label(book.getKirjoittaja());
@@ -64,15 +65,15 @@ public class ListBooksScene {
         labelISBN.setMinWidth(50);
 
         Label labelReleatedCourses  = new Label(book.getReleatedCourses());
-        box.setPadding(new Insets(5, 5, 5, 5));
-        box.setSpacing(10);
         box.setPadding(new Insets(0));
         box.setSpacing(0);
         box.getChildren().addAll(labelKirjoittaja, labelNimeke,
             labelJulkaisuvuosi, labelSivumaara,
             labelISBN, labelReleatedCourses);
+        
         return box;
     }
+    
     public void redrawBooksNodes() {
         bookNodes.getChildren().clear();     
         if (books != null) {
@@ -81,7 +82,9 @@ public class ListBooksScene {
             });  
         }
     } 
+    
     public Scene createScene(List books) {
+        
         returnButton.setOnAction(e -> {
             try {
                 chooseAddScene.returnHere();
@@ -89,6 +92,7 @@ public class ListBooksScene {
                 e1.printStackTrace();
             }
         });
+        
         this.books = books;
         bookNodes = new VBox();
         
@@ -99,7 +103,6 @@ public class ListBooksScene {
 
         scrollPane.setContent(listBooksVBox);
         HBox otsikot = new HBox();
-        otsikot.setSpacing(5);
         otsikot.setSpacing(0);
         Label kirjailijaOtsikko = new Label("Kirjailija");
         kirjailijaOtsikko.setStyle(cssLayoutBorder01);
