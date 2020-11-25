@@ -23,6 +23,12 @@ dependencies {
 
 mainClassName = 'vinkkikirjasto.Main'
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'vinkkikirjasto.Main'
@@ -48,6 +54,7 @@ test {
     systemProperty 'prism.order', 'sw'
     systemProperty 'prism.text', 't2k'
     systemProperty 'java.awt.headless', 'true'
+    systemProperty 'file.encoding', 'utf-8'
     failFast = true
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
