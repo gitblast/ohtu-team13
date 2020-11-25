@@ -56,6 +56,6 @@ test {
     systemProperty 'java.awt.headless', 'true'
     systemProperty 'file.encoding', 'utf-8'
     failFast = true
-    testLogging.showStandardStreams = true
-    systemProperties System.getProperties()
+//    testLogging.showStandardStreams = true
+//    systemProperties System.getProperties()
 }

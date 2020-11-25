@@ -32,7 +32,7 @@ public class AddBookScene {
     public AddBookScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
 
-        this.returnButton = new Button("Takaisin");
+        this.returnButton = new Button("Back");
         this.kirjoittaja = new TextField();
         this.nimeke = new TextField();
         this.julkaisuvuosi = new TextField();
@@ -40,7 +40,7 @@ public class AddBookScene {
         //this.ISBN = new TextField();
         //this.tagit = new TextField();
         this.errorMessage = new Label();
-        this.submitButton = new Button("Lisää uusi kirja");
+        this.submitButton = new Button("Add new book");
     }
 
     public Scene createScene() {
@@ -49,10 +49,10 @@ public class AddBookScene {
         addBookVBox.setPadding(new Insets(80, 50, 50, 100));
         addBookVBox.setSpacing(5);
 
-        kirjoittaja.setPromptText("Kirjailija");
-        nimeke.setPromptText("Kirjan nimi");
-        julkaisuvuosi.setPromptText("Julkaisuvuosi");
-        sivumaara.setPromptText("Sivumäärä");
+        kirjoittaja.setPromptText("Author");
+        nimeke.setPromptText("Title");
+        julkaisuvuosi.setPromptText("Published");
+        sivumaara.setPromptText("Pages");
         //ISBN.setPromptText("ISBN");
         //tagit.setPromptText("Tagit");
 
@@ -70,14 +70,14 @@ public class AddBookScene {
                 int jvuosi = convertToInteger(julkaisuvuosi.getText());
                 int smaara = convertToInteger(sivumaara.getText());
                 if (jvuosi == -9999 || smaara == -9999) {
-                    errorMessage.setText("Syötä julkaisuvuosi "
-                                    + "ja sivumäärä oikein");
+                    errorMessage.setText("Enter valid release year "
+                                    + "and number of pages");
                     onnistuu = false;
                 }
                 String kirjailija = checkString(kirjoittaja.getText());
                 String nimi = checkString(nimeke.getText());
                 if (kirjailija == null || nimi == null) {
-                    errorMessage.setText("Syötä kirjailija ja kirjan nimi");
+                    errorMessage.setText("Enter author and title");
                     onnistuu = false;
                 }
                 if (onnistuu) {

@@ -32,8 +32,11 @@ public class VinkkiService {
                         julkaisuvuosi, sivumaara, ISBN);
     }
     
-    public void addURL(Url url) {
-        this.urlDao.createURL(url.getOtsikko(), url.getUrl());
+    public boolean addURL(Url url) {
+        boolean palautus;
+        palautus = this.urlDao.createURL(url.getOtsikko(), url.getUrl());
+        System.out.println(palautus);
+        return palautus;
     }
     
     public void addURL(String otsikko, String url) {

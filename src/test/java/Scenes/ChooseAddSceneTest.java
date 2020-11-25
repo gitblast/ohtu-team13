@@ -22,10 +22,10 @@ public class ChooseAddSceneTest extends ApplicationTest {
 
     @Test
     public void napeillaOikeatTekstit() {
-        verifyThat("#lisaa_kirja_btn", hasText("Lisää kirja"));
-        verifyThat("#lisaa_url_btn", hasText("Lisää URL"));
-        verifyThat("#listaa_kirjat_btn", hasText("Tallennetut kirjat"));
-        verifyThat("#listaa_urlit_btn", hasText("Tallennetut URLit"));
+        verifyThat("#lisaa_kirja_btn", hasText("Add Book"));
+        verifyThat("#lisaa_url_btn", hasText("Add URL"));
+        verifyThat("#listaa_kirjat_btn", hasText("List all books"));
+        verifyThat("#listaa_urlit_btn", hasText("List all URLs"));
     }
 
     @Test

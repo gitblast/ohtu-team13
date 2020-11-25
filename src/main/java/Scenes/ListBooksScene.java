@@ -26,7 +26,7 @@ public class ListBooksScene {
     
     public ListBooksScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
-        this.returnButton = new Button("Takaisin");
+        this.returnButton = new Button("Back");
     }
 
     public Node createBookNode(Book book) {
@@ -77,10 +77,10 @@ public class ListBooksScene {
         scrollPane.setContent(listBooksVBox);
         HBox otsikot = new HBox();
         otsikot.setSpacing(5);
-        Label kirjailijaOtsikko = new Label("Kirjailija");
-        Label nimiOtsikko = new Label("Nimi");
-        Label vuosiOtsikko = new Label("Julkaisuvuosi");
-        Label sivumaaraOtsikko = new Label("Sivumäärä");
+        Label kirjailijaOtsikko = new Label("Author");
+        Label nimiOtsikko = new Label("Title");
+        Label vuosiOtsikko = new Label("Published");
+        Label sivumaaraOtsikko = new Label("Pages");
         otsikot.getChildren().addAll(kirjailijaOtsikko,
             nimiOtsikko, vuosiOtsikko, sivumaaraOtsikko);
 

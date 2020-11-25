@@ -25,7 +25,11 @@ public class SqlDbUrlDao implements UrlDao {
     }
 
     @Override
-    public void createURL(String otsikko, String url) {
+    public boolean createURL(String otsikko, String url) {
+        if (otsikko == null || url == null) {
+            return false;
+        }
+        
         String query = "INSERT INTO Url (otsikko, url) values (?, ?);";
         try (Statement statement = connection.createStatement()) {
             PreparedStatement prepared = connection.prepareStatement(query);
@@ -34,7 +38,9 @@ public class SqlDbUrlDao implements UrlDao {
             prepared.executeUpdate();
         } catch (SQLException error) {
             System.out.println(error.getMessage());
+            return false;
         }
+        return true;
     }
     
     @Override

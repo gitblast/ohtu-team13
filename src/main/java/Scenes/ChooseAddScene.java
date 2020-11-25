@@ -32,21 +32,21 @@ public class ChooseAddScene {
                 new SqlDbUrlDao());
         int kirjojenmaara = vinkkiService.listBooks().size();
         int urlienmaara = vinkkiService.listURLs().size();
-        Label label = new Label("Kirjoja tietokannassa: " + kirjojenmaara
-                + "\nUrleja tietokannassa: " + urlienmaara);
+        Label label = new Label("Books in database: " + kirjojenmaara
+                + "\nUrls in database: " + urlienmaara);
         
         label.setId("maara_label");
         // set id for example test
         Label helloworld = new Label("Hello world!");
         helloworld.setId("hello-world-label");
         
-        Button switchToAddBookScene = new Button("Lisää kirja");
+        Button switchToAddBookScene = new Button("Add Book");
         switchToAddBookScene.setId("lisaa_kirja_btn");
-        Button switchToAddURLScene = new Button("Lisää URL");
+        Button switchToAddURLScene = new Button("Add URL");
         switchToAddURLScene.setId("lisaa_url_btn");
-        Button switchToListBooksScene = new Button("Tallennetut kirjat");
+        Button switchToListBooksScene = new Button("List all books");
         switchToListBooksScene.setId("listaa_kirjat_btn");
-        Button switchToListUrlsScene = new Button("Tallennetut URLit");
+        Button switchToListUrlsScene = new Button("List all URLs");
         switchToListUrlsScene.setId("listaa_urlit_btn");
         
         VBox elements = new VBox(10);

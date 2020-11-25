@@ -27,18 +27,19 @@ public class AddURLScene {
     Label errorMessage;
     Button submitButton;
     ChooseAddScene chooseAddScene;
+    VinkkiService vs;
 
     public AddURLScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
 
-        this.returnButton = new Button("Takaisin");
+        this.returnButton = new Button("Back");
         this.otsikko = new TextField();
         //this.tyyppi = new TextField();
         this.URL = new TextField();
         //this.kommentti = new TextField();
         //this.releatedCourses = new TextField();
         this.errorMessage = new Label();
-        this.submitButton = new Button("Lisää uusi URL");
+        this.submitButton = new Button("Add new URL");
     }
 
     public Scene createScene() {
@@ -46,7 +47,7 @@ public class AddURLScene {
         addURLVBox.setPadding(new Insets(80, 50, 50, 100));
         addURLVBox.setSpacing(5);
 
-        otsikko.setPromptText("Otsikko");
+        otsikko.setPromptText("Header");
         URL.setPromptText("URL");
         //releatedCourses.setPromptText("Releated Courses");
         //tyyppi.setPromptText("Tyyppi");
@@ -61,22 +62,20 @@ public class AddURLScene {
         });
 
         submitButton.setOnAction(e -> {
-            try {
-                boolean onnistuu = true;
+            try {   
                 String otsikkoText = checkString(otsikko.getText());
                 String urlText = checkString(URL.getText());
-                if (otsikkoText == null || urlText == null) {
-                    errorMessage.setText("Syötä URL ja sen otsikko");
-                    onnistuu = false;
-                }
-                if (onnistuu) {
-                    Url uusiURL = new Url(otsikkoText, urlText);
-                    lisaaURL(uusiURL);
+                Url uusiURL = new Url(otsikkoText, urlText);
+                if (lisaaURL(uusiURL)) {
                     otsikko.setText("");
                     URL.setText("");
                     errorMessage.setText("");
                     chooseAddScene.returnHere();
                 }
+                else { 
+                    errorMessage.setText("Enter URL and header");
+                }
+
             } catch (Exception e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
@@ -91,10 +90,9 @@ public class AddURLScene {
         return addURLScene;
     }
 
-    public void lisaaURL(Url url) throws Exception {
-        VinkkiService vs = new VinkkiService(new SqlDbBookDao(),
-                                    new SqlDbUrlDao());
-        vs.addURL(url);
+    public boolean lisaaURL(Url url) throws Exception {
+        this.vs = new VinkkiService(new SqlDbBookDao(), new SqlDbUrlDao());
+        return vs.addURL(url);
     }
 
     private String checkString(String s) {

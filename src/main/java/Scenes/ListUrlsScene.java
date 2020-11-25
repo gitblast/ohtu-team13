@@ -29,7 +29,7 @@ public class ListUrlsScene {
     
     public ListUrlsScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
-        this.returnButton = new Button("Takaisin");
+        this.returnButton = new Button("Back");
         copiedLabel = new Label();
     }
 
@@ -39,7 +39,7 @@ public class ListUrlsScene {
         Label labelUrl = new Label(url.getUrl());
 
         // Leikepöydälle kopioimisen toiminnallisuus
-        Button copyURL = new Button("Kopioi");
+        Button copyURL = new Button("Copy");
 
         copyURL.setOnAction(e -> {
             String copyText = labelUrl.getText();
@@ -47,7 +47,7 @@ public class ListUrlsScene {
             final ClipboardContent content = new ClipboardContent();
             content.putString(copyText);
             clipboard.setContent(content);
-            copiedLabel.setText("URL kopioitu leikepöydälle!");
+            copiedLabel.setText("URL copied to clipboard!");
         });
 
         box.setPadding(new Insets(5, 5, 5, 5));
