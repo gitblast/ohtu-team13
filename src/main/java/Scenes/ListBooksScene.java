@@ -15,9 +15,16 @@ import javafx.scene.Node;
 import java.util.List;
 import javafx.scene.control.ScrollPane;
 
-// My√∂hemmin muutetaan ListScene-vanhemman perij√§ksi
-// jotta koodi olisi v√§hemm√§n toisteista
+// Myˆhemmin muutetaan ListScene-vanhemman perij‰ksi
+// jotta koodi olisi v‰hemm‰n toisteista
 public class ListBooksScene {
+
+// UI Style elements
+
+    private String cssLayoutBorder01 = "-fx-border-color: gray;\n" +
+                   "-fx-border-insets: 0;\n" +
+                   "-fx-border-width: 1;\n" +
+                   "-fx-border-style: solid;\n";
 
     Button returnButton;
     private VBox bookNodes;
@@ -26,27 +33,46 @@ public class ListBooksScene {
     
     public ListBooksScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
-        this.returnButton = new Button("Back");
+        this.returnButton = new Button("Takaisin");
     }
-
     public Node createBookNode(Book book) {
         HBox box = new HBox(0);
         Label labelKirjoittaja  = new Label(book.getKirjoittaja());
+        labelKirjoittaja.setStyle(cssLayoutBorder01);
+        labelKirjoittaja.setMaxWidth(200);
+        labelKirjoittaja.setMinWidth(200);
+
         Label labelNimeke  = new Label(book.getNimeke());
+        labelNimeke.setStyle(cssLayoutBorder01);
+        labelNimeke.setMaxWidth(200);
+        labelNimeke.setMinWidth(200);
+
         Label labelJulkaisuvuosi  = 
             new Label(String.valueOf(book.getJulkaisuvuosi()));
+        labelJulkaisuvuosi.setStyle(cssLayoutBorder01);
+        labelJulkaisuvuosi.setMaxWidth(50);
+        labelJulkaisuvuosi.setMinWidth(50);
+
         Label labelSivumaara  = new Label(String.valueOf(book.getSivumaara()));
+        labelSivumaara.setStyle(cssLayoutBorder01);
+        labelSivumaara.setMaxWidth(50);
+        labelSivumaara.setMinWidth(50);
+
         Label labelISBN  = new Label(book.getISBN());
+        labelISBN.setStyle(cssLayoutBorder01);
+        labelISBN.setMaxWidth(50);
+        labelISBN.setMinWidth(50);
+
         Label labelReleatedCourses  = new Label(book.getReleatedCourses());
         box.setPadding(new Insets(5, 5, 5, 5));
         box.setSpacing(10);
+        box.setPadding(new Insets(0));
+        box.setSpacing(0);
         box.getChildren().addAll(labelKirjoittaja, labelNimeke,
             labelJulkaisuvuosi, labelSivumaara,
             labelISBN, labelReleatedCourses);
-
         return box;
     }
-
     public void redrawBooksNodes() {
         bookNodes.getChildren().clear();     
         if (books != null) {
@@ -55,9 +81,7 @@ public class ListBooksScene {
             });  
         }
     } 
-
     public Scene createScene(List books) {
-
         returnButton.setOnAction(e -> {
             try {
                 chooseAddScene.returnHere();
@@ -65,7 +89,6 @@ public class ListBooksScene {
                 e1.printStackTrace();
             }
         });
-
         this.books = books;
         bookNodes = new VBox();
         
@@ -77,10 +100,27 @@ public class ListBooksScene {
         scrollPane.setContent(listBooksVBox);
         HBox otsikot = new HBox();
         otsikot.setSpacing(5);
-        Label kirjailijaOtsikko = new Label("Author");
-        Label nimiOtsikko = new Label("Title");
-        Label vuosiOtsikko = new Label("Published");
-        Label sivumaaraOtsikko = new Label("Pages");
+        otsikot.setSpacing(0);
+        Label kirjailijaOtsikko = new Label("Kirjailija");
+        kirjailijaOtsikko.setStyle(cssLayoutBorder01);
+        kirjailijaOtsikko.setMaxWidth(200);
+        kirjailijaOtsikko.setMinWidth(200);
+
+        Label nimiOtsikko = new Label("Nimi");
+        nimiOtsikko.setStyle(cssLayoutBorder01);
+        nimiOtsikko.setMaxWidth(200);
+        nimiOtsikko.setMinWidth(200);
+
+        Label vuosiOtsikko = new Label("Julkaisuvuosi");
+        vuosiOtsikko.setStyle(cssLayoutBorder01);
+        vuosiOtsikko.setMaxWidth(50);
+        vuosiOtsikko.setMinWidth(50);
+
+        Label sivumaaraOtsikko = new Label("Sivum‰‰r‰");
+        sivumaaraOtsikko.setStyle(cssLayoutBorder01);
+        sivumaaraOtsikko.setMaxWidth(50);
+        sivumaaraOtsikko.setMinWidth(50);
+
         otsikot.getChildren().addAll(kirjailijaOtsikko,
             nimiOtsikko, vuosiOtsikko, sivumaaraOtsikko);
 
@@ -92,5 +132,5 @@ public class ListBooksScene {
         
         return listBooksScene;
     }
-
+    
 }
