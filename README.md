@@ -1,11 +1,13 @@
 # Lukuvinkit (ohtu-team13)
 
 ![Github Actions](https://github.com/gitblast/ohtu-team13/workflows/Java%20CI%20with%20Gradle/badge.svg)
+[![codecov](https://codecov.io/gh/gitblast/ohtu-team13/branch/main/graph/badge.svg?token=MZPE729U0Q)](https://codecov.io/gh/gitblast/ohtu-team13)
 
 ## Linkit
 
 - [Backlog](https://github.com/gitblast/ohtu-team13/projects/1)
 - [Definition of Done](docs/DOD.md)
+- [Testikattavuusraportti](https://codecov.io/gh/gitblast/ohtu-team13)
 
 ## Käyttöohje
 
