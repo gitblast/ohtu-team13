@@ -2,7 +2,7 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.9'
     id 'jacoco'
-    id "com.github.johnrengelman.shadow" version "6.1.0"
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'checkstyle'
 }
 
@@ -13,12 +13,15 @@ repositories {
 
 dependencies {
     testCompile 'junit:junit:4.13'
-    testCompile "org.testfx:testfx-core:4.0.+"
-    testCompile "org.testfx:testfx-junit:4.0.+"    
-    testCompile "org.testfx:openjfx-monocle:jdk-11+26"
+    testCompile 'org.testfx:testfx-core:4.0.+'
+    testCompile 'org.testfx:testfx-junit:4.0.+'    
+    testCompile 'org.testfx:openjfx-monocle:jdk-11+26'
     testCompile 'io.cucumber:cucumber-java:6.8.1'
     testCompile 'io.cucumber:cucumber-junit:6.8.1'
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.32.3.2'
+    compile 'org.openjfx:javafx-graphics:11.0.2:win'
+    compile 'org.openjfx:javafx-graphics:11.0.2:mac'
+    compile 'org.openjfx:javafx-graphics:11.0.2:linux'
 }
 
 mainClassName = 'vinkkikirjasto.Main'
@@ -29,10 +32,19 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'vinkkikirjasto.Main'
     }
+}
+
+shadowJar {
+
 }
 
 jacocoTestReport {
@@ -43,7 +55,7 @@ jacocoTestReport {
 }
 
 javafx {
-    version = "11"
+    version = '11'
     modules = [ 'javafx.controls' ]
 }
 
