@@ -3,45 +3,35 @@ package Domain;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Book {
+public class Book extends Bookmark {
+
     private String kirjoittaja;
     private String nimeke;
     private Integer julkaisuvuosi;
     private Integer sivumaara;
     private String ISBN;
-    private ArrayList<String> tagit;
-    private String releatedCourses;
-    
-    public Book() {
-    }
 
     public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi,
-                    Integer sivumaara, String ISBN, ArrayList<String> tagit,
-                    String releatedCourses) {
+            Integer sivumaara, String ISBN, ArrayList<String> tagit,
+            String releatedCourses) {
+        super(releatedCourses, tagit);
         this.kirjoittaja = kirjoittaja;
         this.nimeke = nimeke;
         this.julkaisuvuosi = julkaisuvuosi;
         this.sivumaara = sivumaara;
         this.ISBN = ISBN;
-        this.tagit = tagit;
-        this.releatedCourses = releatedCourses;
     }
 
     public Book(String kirjoittaja, String nimeke,
-                    Integer julkaisuvuosi, Integer sivumaara) {
-        this.kirjoittaja = kirjoittaja;
-        this.nimeke = nimeke;
-        this.julkaisuvuosi = julkaisuvuosi;
-        this.sivumaara = sivumaara;
+            Integer julkaisuvuosi, Integer sivumaara) {
+        this(kirjoittaja, nimeke, julkaisuvuosi,
+                sivumaara, null, new ArrayList<>(), null);
     }
 
     public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi,
-                Integer sivumaara, String ISBN) {
-        this.kirjoittaja = kirjoittaja;
-        this.nimeke = nimeke;
-        this.julkaisuvuosi = julkaisuvuosi;
-        this.sivumaara = sivumaara;
-        this.ISBN = ISBN;
+            Integer sivumaara, String ISBN) {
+        this(kirjoittaja, nimeke, julkaisuvuosi,
+                sivumaara, ISBN, new ArrayList<>(), null);
     }
 
     public String getKirjoittaja() {
@@ -84,22 +74,6 @@ public class Book {
         this.ISBN = ISBN;
     }
 
-    public ArrayList<String> getTagit() {
-        return tagit;
-    }
-
-    public void setTagit(ArrayList<String> tagit) {
-        this.tagit = tagit;
-    }
-
-    public String getReleatedCourses() {
-        return releatedCourses;
-    }
-
-    public void setReleatedCourses(String releatedCourses) {
-        this.releatedCourses = releatedCourses;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -133,5 +107,5 @@ public class Book {
                 + ", julkaisuvuosi=" + julkaisuvuosi + ", sivumaara="
                 + sivumaara + ", ISBN=" + ISBN + '}';
     }
-   
+
 }
