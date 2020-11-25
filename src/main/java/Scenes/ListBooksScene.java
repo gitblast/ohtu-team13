@@ -15,76 +15,75 @@ import javafx.scene.Node;
 import java.util.List;
 import javafx.scene.control.ScrollPane;
 
-// Myˆhemmin muutetaan ListScene-vanhemman perij‰ksi
-// jotta koodi olisi v‰hemm‰n toisteista
+// My√∂hemmin muutetaan ListScene-vanhemman perij√§ksi
+// jotta koodi olisi v√§hemm√§n toisteista
 public class ListBooksScene {
 
 // UI Style elements
-
-    private String cssLayoutBorder01 = "-fx-border-color: gray;\n" +
-                   "-fx-border-insets: 0;\n" +
-                   "-fx-border-width: 1;\n" +
-                   "-fx-border-style: solid;\n";
+    private String cssLayoutBorder01 = "-fx-border-color: gray;\n"
+            + "-fx-border-insets: 0;\n"
+            + "-fx-border-width: 1;\n"
+            + "-fx-border-style: solid;\n";
 
     Button returnButton;
     private VBox bookNodes;
     private List<Book> books;
     ChooseAddScene chooseAddScene;
-    
+
     public ListBooksScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
         this.returnButton = new Button("Takaisin");
     }
-    
+
     public Node createBookNode(Book book) {
         HBox box = new HBox(0);
-        Label labelKirjoittaja  = new Label(book.getKirjoittaja());
+        Label labelKirjoittaja = new Label(book.getKirjoittaja());
         labelKirjoittaja.setStyle(cssLayoutBorder01);
         labelKirjoittaja.setMaxWidth(200);
         labelKirjoittaja.setMinWidth(200);
 
-        Label labelNimeke  = new Label(book.getNimeke());
+        Label labelNimeke = new Label(book.getNimeke());
         labelNimeke.setStyle(cssLayoutBorder01);
         labelNimeke.setMaxWidth(200);
         labelNimeke.setMinWidth(200);
 
-        Label labelJulkaisuvuosi  = 
-            new Label(String.valueOf(book.getJulkaisuvuosi()));
+        Label labelJulkaisuvuosi
+                = new Label(String.valueOf(book.getJulkaisuvuosi()));
         labelJulkaisuvuosi.setStyle(cssLayoutBorder01);
         labelJulkaisuvuosi.setMaxWidth(50);
         labelJulkaisuvuosi.setMinWidth(50);
 
-        Label labelSivumaara  = new Label(String.valueOf(book.getSivumaara()));
+        Label labelSivumaara = new Label(String.valueOf(book.getSivumaara()));
         labelSivumaara.setStyle(cssLayoutBorder01);
         labelSivumaara.setMaxWidth(50);
         labelSivumaara.setMinWidth(50);
 
-        Label labelISBN  = new Label(book.getISBN());
+        Label labelISBN = new Label(book.getISBN());
         labelISBN.setStyle(cssLayoutBorder01);
         labelISBN.setMaxWidth(50);
         labelISBN.setMinWidth(50);
 
-        Label labelReleatedCourses  = new Label(book.getReleatedCourses());
+        Label labelReleatedCourses = new Label(book.getReleatedCourses());
         box.setPadding(new Insets(0));
         box.setSpacing(0);
         box.getChildren().addAll(labelKirjoittaja, labelNimeke,
-            labelJulkaisuvuosi, labelSivumaara,
-            labelISBN, labelReleatedCourses);
-        
+                labelJulkaisuvuosi, labelSivumaara,
+                labelISBN, labelReleatedCourses);
+
         return box;
     }
-    
+
     public void redrawBooksNodes() {
-        bookNodes.getChildren().clear();     
+        bookNodes.getChildren().clear();
         if (books != null) {
             books.forEach(book -> {
                 bookNodes.getChildren().add(createBookNode(book));
-            });  
+            });
         }
-    } 
-    
+    }
+
     public Scene createScene(List books) {
-        
+
         returnButton.setOnAction(e -> {
             try {
                 chooseAddScene.returnHere();
@@ -92,10 +91,10 @@ public class ListBooksScene {
                 e1.printStackTrace();
             }
         });
-        
+
         this.books = books;
         bookNodes = new VBox();
-        
+
         ScrollPane scrollPane = new ScrollPane();
         VBox listBooksVBox = new VBox();
         listBooksVBox.setPadding(new Insets(30, 20, 20, 20));
@@ -119,21 +118,21 @@ public class ListBooksScene {
         vuosiOtsikko.setMaxWidth(50);
         vuosiOtsikko.setMinWidth(50);
 
-        Label sivumaaraOtsikko = new Label("Sivum‰‰r‰");
+        Label sivumaaraOtsikko = new Label("Sivum√§√§r√§");
         sivumaaraOtsikko.setStyle(cssLayoutBorder01);
         sivumaaraOtsikko.setMaxWidth(50);
         sivumaaraOtsikko.setMinWidth(50);
 
         otsikot.getChildren().addAll(kirjailijaOtsikko,
-            nimiOtsikko, vuosiOtsikko, sivumaaraOtsikko);
+                nimiOtsikko, vuosiOtsikko, sivumaaraOtsikko);
 
         listBooksVBox.getChildren().addAll(returnButton, otsikot, bookNodes);
-        
+
         Scene listBooksScene = new Scene(scrollPane, 600, 400);
-        
+
         redrawBooksNodes();
-        
+
         return listBooksScene;
     }
-    
+
 }

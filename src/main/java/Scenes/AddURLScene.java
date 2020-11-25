@@ -27,7 +27,7 @@ public class AddURLScene {
     Label errorMessage;
     Button submitButton;
     ChooseAddScene chooseAddScene;
-    VinkkiService vs;
+    VinkkiService vinkkiService;
 
     public AddURLScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
@@ -40,6 +40,18 @@ public class AddURLScene {
         //this.releatedCourses = new TextField();
         this.errorMessage = new Label();
         this.submitButton = new Button("Add new URL");
+
+        try {
+            this.vinkkiService = new VinkkiService(
+                    new SqlDbBookDao(), new SqlDbUrlDao()
+            );
+        } catch (Exception e) {
+            this.vinkkiService = null;
+
+            this.errorMessage.setText(
+                    "Error in database connection: " + e.getMessage()
+            );
+        }
     }
 
     public Scene createScene() {
@@ -62,18 +74,17 @@ public class AddURLScene {
         });
 
         submitButton.setOnAction(e -> {
-            try {   
+            try {
                 String otsikkoText = checkString(otsikko.getText());
                 String urlText = checkString(URL.getText());
                 Url uusiURL = new Url(otsikkoText, urlText);
-                if (lisaaURL(uusiURL)) {
+                if (vinkkiService.addURL(uusiURL)) {
                     otsikko.setText("");
                     URL.setText("");
                     errorMessage.setText("");
                     chooseAddScene.returnHere();
-                }
-                else { 
-                    errorMessage.setText("Enter URL and header");
+                } else {
+                    errorMessage.setText("Problem adding URL to database");
                 }
 
             } catch (Exception e1) {
@@ -83,16 +94,11 @@ public class AddURLScene {
         });
 
         addURLVBox.getChildren().addAll(returnButton, otsikko, URL,
-                                    errorMessage, submitButton);
+                errorMessage, submitButton);
 
         Scene addURLScene = new Scene(addURLVBox, 600, 400);
 
         return addURLScene;
-    }
-
-    public boolean lisaaURL(Url url) throws Exception {
-        this.vs = new VinkkiService(new SqlDbBookDao(), new SqlDbUrlDao());
-        return vs.addURL(url);
     }
 
     private String checkString(String s) {

@@ -12,34 +12,45 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ChooseAddScene {
-    
+
     AddBookScene addBookScene;
     AddURLScene addURLScene;
     Stage primaryStage;
     ListBooksScene listBooksScene;
     ListUrlsScene listUrlsScene;
-    
+    Label errorMsg;
+    VinkkiService vinkkiService;
+
     public ChooseAddScene(Stage primaryStage) {
         this.primaryStage = primaryStage;
+
+        try {
+            vinkkiService = new VinkkiService(new SqlDbBookDao(),
+                    new SqlDbUrlDao());
+        } catch (Exception e) {
+            errorMsg.setText("Error in database connection: " + e.getMessage());
+        }
+
         addBookScene = new AddBookScene(this);
         addURLScene = new AddURLScene(this);
         listBooksScene = new ListBooksScene(this);
         listUrlsScene = new ListUrlsScene(this);
+        errorMsg = new Label();
+
     }
-    
-    public Scene createScene() throws Exception {
-        VinkkiService vinkkiService = new VinkkiService(new SqlDbBookDao(),
-                new SqlDbUrlDao());
+
+    public Scene createScene() {
+        Label label = new Label();
         int kirjojenmaara = vinkkiService.listBooks().size();
         int urlienmaara = vinkkiService.listURLs().size();
-        Label label = new Label("Books in database: " + kirjojenmaara
+        label.setText("Books in database: " + kirjojenmaara
                 + "\nUrls in database: " + urlienmaara);
-        
+
         label.setId("maara_label");
         // set id for example test
         Label helloworld = new Label("Hello world!");
         helloworld.setId("hello-world-label");
-        
+
         Button switchToAddBookScene = new Button("Add Book");
         switchToAddBookScene.setId("lisaa_kirja_btn");
         Button switchToAddURLScene = new Button("Add URL");
@@ -48,43 +59,44 @@ public class ChooseAddScene {
         switchToListBooksScene.setId("listaa_kirjat_btn");
         Button switchToListUrlsScene = new Button("List all URLs");
         switchToListUrlsScene.setId("listaa_urlit_btn");
-        
+
         VBox elements = new VBox(10);
         elements.setId("chooseAdd_elements");
         elements.setPadding(new Insets(100, 0, 50, 200));
         elements.setSpacing(5);
-        
+
         VBox.setVgrow(switchToAddBookScene, Priority.ALWAYS);
         VBox.setVgrow(switchToAddURLScene, Priority.ALWAYS);
         VBox.setVgrow(switchToListBooksScene, Priority.ALWAYS);
         VBox.setVgrow(switchToListUrlsScene, Priority.ALWAYS);
-        
+
         switchToAddBookScene.setOnAction(e -> {
             primaryStage.setScene(addBookScene.createScene());
         });
-        
+
         switchToAddURLScene.setOnAction(e -> {
             primaryStage.setScene(addURLScene.createScene());
         });
-        
+
         switchToListBooksScene.setOnAction(e -> {
             primaryStage.setScene(listBooksScene.createScene(
                     vinkkiService.listBooks()));
         });
-        
+
         switchToListUrlsScene.setOnAction(e -> {
             primaryStage.setScene(listUrlsScene.createScene(
                     vinkkiService.listURLs()));
+
         });
-        
+
         elements.getChildren().addAll(label, switchToAddBookScene,
                 switchToAddURLScene, switchToListBooksScene,
-                switchToListUrlsScene, helloworld);
-        
+                switchToListUrlsScene, errorMsg, helloworld);
+
         Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;
     }
-    
+
     public void returnHere() throws Exception {
         primaryStage.setScene(createScene());
         primaryStage.show();

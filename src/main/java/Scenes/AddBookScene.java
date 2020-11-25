@@ -28,6 +28,7 @@ public class AddBookScene {
     Label errorMessage;
     Button submitButton;
     ChooseAddScene chooseAddScene;
+    VinkkiService vinkkiService;
 
     public AddBookScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
@@ -41,6 +42,18 @@ public class AddBookScene {
         //this.tagit = new TextField();
         this.errorMessage = new Label();
         this.submitButton = new Button("Add new book");
+
+        try {
+            this.vinkkiService = new VinkkiService(
+                    new SqlDbBookDao(), new SqlDbUrlDao()
+            );
+        } catch (Exception e) {
+            this.vinkkiService = null;
+
+            this.errorMessage.setText(
+                    "Error in database connection: " + e.getMessage()
+            );
+        }
     }
 
     public Scene createScene() {
@@ -71,7 +84,7 @@ public class AddBookScene {
                 int smaara = convertToInteger(sivumaara.getText());
                 if (jvuosi == -9999 || smaara == -9999) {
                     errorMessage.setText("Enter valid release year "
-                                    + "and number of pages");
+                            + "and number of pages");
                     onnistuu = false;
                 }
                 String kirjailija = checkString(kirjoittaja.getText());
@@ -82,13 +95,20 @@ public class AddBookScene {
                 }
                 if (onnistuu) {
                     Book kirja = new Book(kirjailija, nimi, jvuosi, smaara);
-                    lisaaKirja(kirja);
-                    kirjoittaja.setText("");
-                    nimeke.setText("");
-                    julkaisuvuosi.setText("");
-                    sivumaara.setText("");
-                    errorMessage.setText("");
-                    chooseAddScene.returnHere();
+                    boolean added = vinkkiService.addBook(kirja);
+
+                    if (added) {
+                        kirjoittaja.setText("");
+                        nimeke.setText("");
+                        julkaisuvuosi.setText("");
+                        sivumaara.setText("");
+                        errorMessage.setText("");
+
+                        chooseAddScene.returnHere();
+                    } else {
+                        errorMessage.setText("Error adding book to database");
+                    }
+
                 }
             } catch (Exception e1) {
                 e1.printStackTrace();
@@ -96,18 +116,12 @@ public class AddBookScene {
         });
 
         addBookVBox.getChildren().addAll(returnButton, kirjoittaja, nimeke,
-                        julkaisuvuosi, sivumaara,
-                        errorMessage, submitButton);
+                julkaisuvuosi, sivumaara,
+                errorMessage, submitButton);
 
         Scene addBookScene = new Scene(addBookVBox, 600, 400);
 
         return addBookScene;
-    }
-
-    public void lisaaKirja(Book kirja) throws Exception {
-        VinkkiService vs = new VinkkiService(new SqlDbBookDao(),
-                                        new SqlDbUrlDao());
-        vs.addBook(kirja);
     }
 
     private int convertToInteger(String s) {
