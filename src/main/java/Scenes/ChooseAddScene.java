@@ -3,6 +3,7 @@ package Scenes;
 import Database.SqlDbBookDao;
 import Database.SqlDbUrlDao;
 import Service.VinkkiService;
+import java.util.ArrayList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -80,13 +81,12 @@ public class ChooseAddScene {
 
         switchToListBooksScene.setOnAction(e -> {
             primaryStage.setScene(listBooksScene.createScene(
-                    vinkkiService.listBooks()));
+                    new ArrayList<>(vinkkiService.listBooks())));
         });
 
         switchToListUrlsScene.setOnAction(e -> {
             primaryStage.setScene(listUrlsScene.createScene(
-                    vinkkiService.listURLs()));
-
+                    new ArrayList<>(vinkkiService.listURLs())));
         });
 
         elements.getChildren().addAll(label, switchToAddBookScene,

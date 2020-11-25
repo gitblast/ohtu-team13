@@ -1,23 +1,15 @@
 package Scenes;
 
 import Domain.Book;
-
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-// import javafx.scene.control.TextField;
-// import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import Domain.Bookmark;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import javafx.scene.Node;
 
+import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.control.ScrollPane;
 
-// Myöhemmin muutetaan ListScene-vanhemman perijäksi
-// jotta koodi olisi vähemmän toisteista
-public class ListBooksScene {
+public class ListBooksScene extends ListingScene {
 
 // UI Style elements
     private String cssLayoutBorder01 = "-fx-border-color: gray;\n"
@@ -25,84 +17,56 @@ public class ListBooksScene {
             + "-fx-border-width: 1;\n"
             + "-fx-border-style: solid;\n";
 
-    Button returnButton;
-    private VBox bookNodes;
-    private List<Book> books;
-    ChooseAddScene chooseAddScene;
-
     public ListBooksScene(ChooseAddScene chooseAddScene) {
-        this.chooseAddScene = chooseAddScene;
-        this.returnButton = new Button("Takaisin");
+        super(chooseAddScene);
     }
 
-    public Node createBookNode(Book book) {
-        HBox box = new HBox(0);
-        Label labelKirjoittaja = new Label(book.getKirjoittaja());
+    @Override
+    protected List<Node> createBookmarkContent(Bookmark book) {
+        List<Node> nodes = new ArrayList<>();
+
+        Label labelKirjoittaja = new Label(((Book)book).getKirjoittaja());
         labelKirjoittaja.setStyle(cssLayoutBorder01);
         labelKirjoittaja.setMaxWidth(200);
         labelKirjoittaja.setMinWidth(200);
 
-        Label labelNimeke = new Label(book.getNimeke());
+        Label labelNimeke = new Label(((Book)book).getNimeke());
         labelNimeke.setStyle(cssLayoutBorder01);
         labelNimeke.setMaxWidth(200);
         labelNimeke.setMinWidth(200);
 
-        Label labelJulkaisuvuosi
-                = new Label(String.valueOf(book.getJulkaisuvuosi()));
+        Label labelJulkaisuvuosi = new Label(String.valueOf(((Book)book).getJulkaisuvuosi()));
         labelJulkaisuvuosi.setStyle(cssLayoutBorder01);
         labelJulkaisuvuosi.setMaxWidth(50);
         labelJulkaisuvuosi.setMinWidth(50);
 
-        Label labelSivumaara = new Label(String.valueOf(book.getSivumaara()));
+        Label labelSivumaara = new Label(String.valueOf(((Book)book).getSivumaara()));
         labelSivumaara.setStyle(cssLayoutBorder01);
         labelSivumaara.setMaxWidth(50);
         labelSivumaara.setMinWidth(50);
 
-        Label labelISBN = new Label(book.getISBN());
+        Label labelISBN = new Label(((Book)book).getISBN());
         labelISBN.setStyle(cssLayoutBorder01);
         labelISBN.setMaxWidth(50);
         labelISBN.setMinWidth(50);
 
-        Label labelReleatedCourses = new Label(book.getReleatedCourses());
-        box.setPadding(new Insets(0));
-        box.setSpacing(0);
-        box.getChildren().addAll(labelKirjoittaja, labelNimeke,
-                labelJulkaisuvuosi, labelSivumaara,
-                labelISBN, labelReleatedCourses);
+        Label labelReleatedCourses = new Label(((Book)book).getRelatedCourses());
 
-        return box;
+        nodes.add(labelKirjoittaja);
+        nodes.add(labelNimeke);
+        nodes.add(labelJulkaisuvuosi);
+        nodes.add(labelSivumaara);
+        nodes.add(labelISBN);
+        nodes.add(labelReleatedCourses);
+
+        return nodes;
     }
 
-    public void redrawBooksNodes() {
-        bookNodes.getChildren().clear();
-        if (books != null) {
-            books.forEach(book -> {
-                bookNodes.getChildren().add(createBookNode(book));
-            });
-        }
-    }
-
-    public Scene createScene(List books) {
-
-        returnButton.setOnAction(e -> {
-            try {
-                chooseAddScene.returnHere();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-        });
-
-        this.books = books;
-        bookNodes = new VBox();
-
-        ScrollPane scrollPane = new ScrollPane();
-        VBox listBooksVBox = new VBox();
-        listBooksVBox.setPadding(new Insets(30, 20, 20, 20));
-        listBooksVBox.setSpacing(5);
-
-        scrollPane.setContent(listBooksVBox);
+    @Override
+    protected HBox otsikot() {
         HBox otsikot = new HBox();
-        otsikot.setSpacing(0);
+        otsikot.setSpacing(5);
+        
         Label kirjailijaOtsikko = new Label("Kirjailija");
         kirjailijaOtsikko.setStyle(cssLayoutBorder01);
         kirjailijaOtsikko.setMaxWidth(200);
@@ -121,18 +85,11 @@ public class ListBooksScene {
         Label sivumaaraOtsikko = new Label("Sivumäärä");
         sivumaaraOtsikko.setStyle(cssLayoutBorder01);
         sivumaaraOtsikko.setMaxWidth(50);
-        sivumaaraOtsikko.setMinWidth(50);
+        sivumaaraOtsikko.setMinWidth(50);     
+           
+        otsikot.getChildren().addAll(kirjailijaOtsikko, nimiOtsikko, vuosiOtsikko, sivumaaraOtsikko);
 
-        otsikot.getChildren().addAll(kirjailijaOtsikko,
-                nimiOtsikko, vuosiOtsikko, sivumaaraOtsikko);
-
-        listBooksVBox.getChildren().addAll(returnButton, otsikot, bookNodes);
-
-        Scene listBooksScene = new Scene(scrollPane, 600, 400);
-
-        redrawBooksNodes();
-
-        return listBooksScene;
+        return otsikot;
     }
 
 }

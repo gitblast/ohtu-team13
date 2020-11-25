@@ -3,28 +3,31 @@ package Domain;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Url extends Bookmark {
+public class Url implements Bookmark {
 
     private String otsikko;
     private String url;
     private String tyyppi;
     private String kommentti;
+    private ArrayList<String> tagit;
+    private String relatedCourses;
 
     public Url(String url) {
-        this(null, url, null, null, null);
+        this(null, url, null, null, null, null);
     }
 
-    public Url(String otsikko, String url, String releatedCourses,
-            String tyyppi, String kommentti) {
-        super(releatedCourses, new ArrayList<>());
+    public Url(String otsikko, String url, String relatedCourses,
+            String tyyppi, String kommentti, ArrayList<String> tagit) {
         this.otsikko = otsikko;
         this.url = url;
         this.tyyppi = tyyppi;
         this.kommentti = kommentti;
+        this.tagit = tagit;
+        this.relatedCourses = relatedCourses;
     }
 
     public Url(String otsikko, String url) {
-        this(otsikko, url, null, null, null);
+        this(otsikko, url, null, null, null, null);
     }
 
     /**
@@ -107,6 +110,28 @@ public class Url extends Bookmark {
     @Override
     public String toString() {
         return "Url{" + "otsikko=" + otsikko + ", url=" + url + '}';
+    }
+
+    @Override
+    public ArrayList<String> getTagit() {
+        return tagit;
+    }
+
+    @Override
+    public void setTagit(ArrayList<String> tagit) {
+        this.tagit = tagit;
+
+    }
+
+    @Override
+    public String getRelatedCourses() {
+        return this.relatedCourses;
+    }
+
+    @Override
+    public void setRelatedCourses(String relatedCourses) {
+        this.relatedCourses = relatedCourses;
+
     }
 
 }

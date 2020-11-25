@@ -3,23 +3,26 @@ package Domain;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Book extends Bookmark {
+public class Book implements Bookmark {
 
     private String kirjoittaja;
     private String nimeke;
     private Integer julkaisuvuosi;
     private Integer sivumaara;
     private String ISBN;
+    private ArrayList<String> tagit;
+    private String relatedCourses;
 
     public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi,
             Integer sivumaara, String ISBN, ArrayList<String> tagit,
-            String releatedCourses) {
-        super(releatedCourses, tagit);
+            String relatedCourses) {
         this.kirjoittaja = kirjoittaja;
         this.nimeke = nimeke;
         this.julkaisuvuosi = julkaisuvuosi;
         this.sivumaara = sivumaara;
         this.ISBN = ISBN;
+        this.tagit = tagit;
+        this.relatedCourses = relatedCourses;
     }
 
     public Book(String kirjoittaja, String nimeke,
@@ -106,6 +109,28 @@ public class Book extends Bookmark {
         return "Book{" + "kirjoittaja=" + kirjoittaja + ", nimeke=" + nimeke
                 + ", julkaisuvuosi=" + julkaisuvuosi + ", sivumaara="
                 + sivumaara + ", ISBN=" + ISBN + '}';
+    }
+
+    @Override
+    public ArrayList<String> getTagit() {
+        return this.tagit;
+    }
+
+    @Override
+    public void setTagit(ArrayList<String> tagit) {
+        this.tagit = tagit;
+
+    }
+
+    @Override
+    public String getRelatedCourses() {
+        return this.relatedCourses;
+    }
+
+    @Override
+    public void setRelatedCourses(String relatedCourses) {
+        this.relatedCourses = relatedCourses;
+
     }
 
 }
