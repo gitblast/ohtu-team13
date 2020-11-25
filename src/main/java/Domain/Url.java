@@ -1,33 +1,30 @@
 package Domain;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class Url {
+public class Url extends Bookmark {
+
     private String otsikko;
     private String url;
-    private String releatedCourses;
     private String tyyppi;
     private String kommentti;
-    
-    public Url() {
-    }
-    
+
     public Url(String url) {
-        this.url = url;
+        this(null, url, null, null, null);
     }
-    
+
     public Url(String otsikko, String url, String releatedCourses,
-                    String tyyppi, String kommentti) {
+            String tyyppi, String kommentti) {
+        super(releatedCourses, new ArrayList<>());
         this.otsikko = otsikko;
         this.url = url;
-        this.releatedCourses = releatedCourses;
         this.tyyppi = tyyppi;
         this.kommentti = kommentti;
     }
 
     public Url(String otsikko, String url) {
-        this.otsikko = otsikko;
-        this.url = url;
+        this(otsikko, url, null, null, null);
     }
 
     /**
@@ -56,20 +53,6 @@ public class Url {
      */
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    /**
-     * @return the releatedCourses
-     */
-    public String getReleatedCourses() {
-        return releatedCourses;
-    }
-
-    /**
-     * @param releatedCourses the releatedCourses to set
-     */
-    public void setReleatedCourses(String releatedCourses) {
-        this.releatedCourses = releatedCourses;
     }
 
     /**
@@ -125,5 +108,5 @@ public class Url {
     public String toString() {
         return "Url{" + "otsikko=" + otsikko + ", url=" + url + '}';
     }
-    
+
 }
