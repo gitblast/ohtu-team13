@@ -8,6 +8,10 @@ import javafx.scene.Node;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 
 public class ListBooksScene extends ListingScene {
 
@@ -18,7 +22,113 @@ public class ListBooksScene extends ListingScene {
             + "-fx-border-style: solid;\n";
 
     public ListBooksScene(ChooseAddScene chooseAddScene) {
-        super(chooseAddScene);
+        super(chooseAddScene, new String[]{"None", "Author", "Title", "ISBN"});
+    }
+
+    private List<Bookmark> getFilteredByString(
+            List<Bookmark> allBooks,
+            String value,
+            String filterType) {
+        return allBooks.stream().filter(book -> {
+            Book b = (Book) book;
+
+            if (filterType.equals("Author")) {
+                return b.getKirjoittaja() != null
+                        ? b.getKirjoittaja().contains(value)
+                        : false;
+            }
+
+            if (filterType.equals("ISBN")) {
+                return b.getISBN() != null
+                        ? b.getISBN().contains(value)
+                        : false;
+            }
+
+            if (filterType.equals("Title")) {
+                return b.getNimeke() != null
+                        ? b.getNimeke().contains(value)
+                        : false;
+            }
+
+            return false;
+        })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    protected void setChangeListenerForFilterField(TextField tf) {
+        tf.textProperty().addListener(
+                (ObservableValue<? extends String> ov, String old_val, String new_val) -> {
+                    String selectedFilter = this.getChoiceBox()
+                            .getSelectionModel()
+                            .getSelectedItem()
+                            .toString();
+
+                    handleFilterChange(selectedFilter, new_val);
+
+                    this.redrawBookmarkNodes();
+                }
+        );
+    }
+
+    @Override
+    protected void setChangeListenerForChoiceBox(ChoiceBox cb) {
+        cb.getSelectionModel().selectedIndexProperty().addListener(
+                (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
+                    handleFilterChange(this.getFilters()[new_val.intValue()],
+                            this.getFilterField().getText());
+
+                    this.redrawBookmarkNodes();
+                }
+        );
+    }
+
+    private void handleFilterChange(String filterType, String filterFieldValue) {
+        this.getFilterField().setDisable(filterType.equals("None"));
+
+        if (filterFieldValue.equals("")) {
+            this.setShownBookmarks(this.getAllBookmarks());
+
+            return;
+        }
+
+        switch (filterType) {
+            case "None": {
+                this.setShownBookmarks(this.getAllBookmarks());
+
+                break;
+            }
+            case "Author": {
+                this.setShownBookmarks(
+                        getFilteredByString(this.getAllBookmarks(),
+                                filterFieldValue,
+                                "Author")
+                );
+
+                break;
+            }
+
+            case "Title": {
+                this.setShownBookmarks(
+                        getFilteredByString(this.getAllBookmarks(),
+                                filterFieldValue,
+                                "Title")
+                );
+
+                break;
+            }
+            case "ISBN": {
+
+                this.setShownBookmarks(
+                        getFilteredByString(this.getAllBookmarks(),
+                                filterFieldValue,
+                                "ISBN")
+                );
+
+                break;
+            }
+
+        }
     }
 
     @Override
@@ -69,7 +179,7 @@ public class ListBooksScene extends ListingScene {
     protected HBox otsikot() {
         HBox otsikot = new HBox();
         otsikot.setSpacing(5);
-        
+
         Label kirjailijaOtsikko = new Label("Author");
         kirjailijaOtsikko.setStyle(cssLayoutBorder01);
         kirjailijaOtsikko.setMaxWidth(200);
@@ -88,8 +198,8 @@ public class ListBooksScene extends ListingScene {
         Label sivumaaraOtsikko = new Label("Page count");
         sivumaaraOtsikko.setStyle(cssLayoutBorder01);
         sivumaaraOtsikko.setMaxWidth(50);
-        sivumaaraOtsikko.setMinWidth(50);     
-           
+        sivumaaraOtsikko.setMinWidth(50);
+
         otsikot.getChildren().addAll(kirjailijaOtsikko, nimiOtsikko, vuosiOtsikko, sivumaaraOtsikko);
 
         return otsikot;
