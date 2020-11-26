@@ -23,16 +23,17 @@ public class SqlDbUrlDao implements UrlDao {
         this("jdbc:sqlite:lukuvinkit.db");
     }
 
-    public boolean createURL(String otsikko, String url) {
-        if (otsikko == null || url == null) {
+    @Override
+    public boolean createURL(Url url) {
+        if (url==null || url.getOtsikko() == null || url.getUrl() == null) {
             return false;
         }
 
-        String query = "INSERT INTO Url (otsikko, url) values (?, ?);";
+        String query = "INSERT INTO Url (otsikko, url) VALUES (?, ?);";
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
-            prepared.setString(1, otsikko);
-            prepared.setString(2, url);
+            prepared.setString(1, url.getOtsikko());
+            prepared.setString(2, url.getUrl());
             prepared.executeUpdate();
         } catch (SQLException error) {
             System.out.println(error.getMessage());
@@ -43,15 +44,15 @@ public class SqlDbUrlDao implements UrlDao {
 
     public ArrayList<Url> getAllURLs() {
         urlList = new ArrayList<Url>();
-        String query = "SELECT otsikko, url from Url;";
+        String query = "SELECT otsikko, url FROM Url;";
 
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
             ResultSet rs = prepared.executeQuery();
             while (rs.next()) {
                 String otsikko = rs.getString(("otsikko"));
-                String url = rs.getString("url");
-                Url lisattava = new Url(otsikko, url);
+                String osoite = rs.getString("url");
+                Url lisattava = new Url(otsikko, osoite);
                 urlList.add(lisattava);
             }
         } catch (SQLException error) {
@@ -70,8 +71,8 @@ public class SqlDbUrlDao implements UrlDao {
             ResultSet rs = prepared.executeQuery();
             while (rs.next()) {
                 String otsikko = rs.getString(("otsikko"));
-                String url = rs.getString("url");
-                Url lisattava = new Url(otsikko, url);
+                String osoite = rs.getString("url");
+                Url lisattava = new Url(otsikko, osoite);
                 urlList.add(lisattava);
             }
         } catch (SQLException error) {

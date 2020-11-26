@@ -5,11 +5,7 @@ import java.util.ArrayList;
 
 public interface BookDao {
 
-    boolean createBook(String kirjoittaja, String nimeke,
-            Integer julkaisuvuosi, Integer sivumaara, String ISBN);
-
-    boolean createBook(String kirjoittaja, String nimeke,
-            Integer julkaisuvuosi, Integer sivumaara);
+    boolean createBook(Book book);
 
     ArrayList<Book> getAllBooks();
 

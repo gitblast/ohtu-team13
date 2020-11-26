@@ -35,7 +35,7 @@ public class Stepdefs {
     @When("URL {string} and header {string} are entered")
     public void nonEmptyUrlAndHeaderAreEntered(String url, String header) {
         lisattava = new Url(url, header);
-        vinkkiService.addURL(url, header);
+        vinkkiService.addURL(lisattava);
     }
 
     @When("URL {string} and empty header are entered")
