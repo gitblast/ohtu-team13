@@ -30,6 +30,7 @@ public class SqlDbBookDao implements BookDao {
             return false;
         }*/
         if (book==null) return false; //kun käli tukee kirjan lisäämistä ISBN:llä voi poistaa tän ja ottaa käyttöön ylläolevan tarkistuksen
+        if (book.getKirjoittaja() == null || book.getNimeke() == null) return false; // Cucumber testej� varten
         String query = "INSERT INTO books (kirjoittaja, nimeke, julkaisuvuosi, "
                 + "sivumaara, ISBN) VALUES (?, ?, ?, ?, ?);";
         try {

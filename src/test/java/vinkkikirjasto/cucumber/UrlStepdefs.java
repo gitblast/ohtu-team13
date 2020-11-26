@@ -15,7 +15,7 @@ import Service.VinkkiService;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-public class Stepdefs {
+public class UrlStepdefs {
 
     private BookDao bookDao;
     private UrlDao urlDao;
@@ -60,26 +60,5 @@ public class Stepdefs {
     @Then("Service will return value false")
     public void serviceWillReturnValueFalse() {
         assertFalse(validUrl);
-    }
-    
-    @Given("Books Database is initialized")
-    public void bookDatabaseIsInitialized() throws Exception {
-        String db = "jdbc:sqlite::memory:";
-        bookDao = new SqlDbBookDao(db);
-        urlDao = new SqlDbUrlDao(db);
-        vinkkiService = new VinkkiService(bookDao, urlDao);
-    }
-    
-    @When("Author {string} and title {string} are entered")
-    public void nonEmptyAuthorAndTitleAreEntered(String url, String header) {
-        lisattavaKirja = new Book(url, header, 1991, 82);
-        vinkkiService.addBook(lisattavaKirja);
-    }
-    
-    @Then("Database contains entered book")
-    public void databaseContainsEnteredBook() {
-        Book book = vinkkiService.listBooks().get(0);
-        assertEquals(book.getKirjoittaja(), lisattavaKirja.getKirjoittaja());
-        assertEquals(book.getNimeke(), lisattavaKirja.getNimeke());
     }
 }
