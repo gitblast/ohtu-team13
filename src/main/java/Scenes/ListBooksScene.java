@@ -25,32 +25,35 @@ public class ListBooksScene extends ListingScene {
     protected List<Node> createBookmarkContent(Bookmark book) {
         List<Node> nodes = new ArrayList<>();
 
-        Label labelKirjoittaja = new Label(((Book)book).getKirjoittaja());
+        Label labelKirjoittaja = new Label(((Book) book).getKirjoittaja());
         labelKirjoittaja.setStyle(cssLayoutBorder01);
         labelKirjoittaja.setMaxWidth(200);
         labelKirjoittaja.setMinWidth(200);
 
-        Label labelNimeke = new Label(((Book)book).getNimeke());
+        Label labelNimeke = new Label(((Book) book).getNimeke());
         labelNimeke.setStyle(cssLayoutBorder01);
         labelNimeke.setMaxWidth(200);
         labelNimeke.setMinWidth(200);
 
-        Label labelJulkaisuvuosi = new Label(String.valueOf(((Book)book).getJulkaisuvuosi()));
+        String julkaisuvuosi = String.valueOf(((Book) book).getJulkaisuvuosi());
+        Label labelJulkaisuvuosi = new Label(julkaisuvuosi);
         labelJulkaisuvuosi.setStyle(cssLayoutBorder01);
         labelJulkaisuvuosi.setMaxWidth(50);
         labelJulkaisuvuosi.setMinWidth(50);
 
-        Label labelSivumaara = new Label(String.valueOf(((Book)book).getSivumaara()));
+        String sivumaara = String.valueOf(((Book) book).getSivumaara());
+        Label labelSivumaara = new Label(sivumaara);
         labelSivumaara.setStyle(cssLayoutBorder01);
         labelSivumaara.setMaxWidth(50);
         labelSivumaara.setMinWidth(50);
 
-        Label labelISBN = new Label(((Book)book).getISBN());
+        Label labelISBN = new Label(((Book) book).getISBN());
         labelISBN.setStyle(cssLayoutBorder01);
         labelISBN.setMaxWidth(50);
         labelISBN.setMinWidth(50);
 
-        Label labelReleatedCourses = new Label(((Book)book).getRelatedCourses());
+        String releatedCourses = ((Book) book).getRelatedCourses();
+        Label labelReleatedCourses = new Label(releatedCourses);
 
         nodes.add(labelKirjoittaja);
         nodes.add(labelNimeke);
