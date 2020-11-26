@@ -42,7 +42,8 @@ public abstract class ListingScene {
         nodes.getChildren().clear();     
         if (bookmarks != null) {
             bookmarks.forEach(bookmark -> {
-                nodes.getChildren().add(createBookmarkNode(createBookmarkContent(bookmark)));
+                nodes.getChildren().add(
+                    createBookmarkNode(createBookmarkContent(bookmark)));
             });  
         }
     }

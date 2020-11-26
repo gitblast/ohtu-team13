@@ -25,39 +25,42 @@ public class ListBooksScene extends ListingScene {
     protected List<Node> createBookmarkContent(Bookmark book) {
         List<Node> nodes = new ArrayList<>();
 
-        Label labelKirjoittaja = new Label(((Book)book).getKirjoittaja());
+        Label labelKirjoittaja = new Label(((Book) book).getKirjoittaja());
         labelKirjoittaja.setStyle(cssLayoutBorder01);
         labelKirjoittaja.setMaxWidth(200);
         labelKirjoittaja.setMinWidth(200);
 
-        Label labelNimeke = new Label(((Book)book).getNimeke());
+        Label labelNimeke = new Label(((Book) book).getNimeke());
         labelNimeke.setStyle(cssLayoutBorder01);
         labelNimeke.setMaxWidth(200);
         labelNimeke.setMinWidth(200);
 
-        Label labelJulkaisuvuosi = new Label(String.valueOf(((Book)book).getJulkaisuvuosi()));
+        String julkaisuvuosi = String.valueOf(((Book) book).getJulkaisuvuosi());
+        Label labelJulkaisuvuosi = new Label(julkaisuvuosi);
         labelJulkaisuvuosi.setStyle(cssLayoutBorder01);
         labelJulkaisuvuosi.setMaxWidth(50);
         labelJulkaisuvuosi.setMinWidth(50);
 
-        Label labelSivumaara = new Label(String.valueOf(((Book)book).getSivumaara()));
+        String sivumaara = String.valueOf(((Book) book).getSivumaara());
+        Label labelSivumaara = new Label(sivumaara);
         labelSivumaara.setStyle(cssLayoutBorder01);
         labelSivumaara.setMaxWidth(50);
         labelSivumaara.setMinWidth(50);
 
-        Label labelISBN = new Label(((Book)book).getISBN());
+        Label labelISBN = new Label(((Book) book).getISBN());
         labelISBN.setStyle(cssLayoutBorder01);
         labelISBN.setMaxWidth(50);
         labelISBN.setMinWidth(50);
 
-        Label labelReleatedCourses = new Label(((Book)book).getRelatedCourses());
+        String relatedCourses = ((Book) book).getRelatedCourses();
+        Label labelRelatedCourses = new Label(relatedCourses);
 
         nodes.add(labelKirjoittaja);
         nodes.add(labelNimeke);
         nodes.add(labelJulkaisuvuosi);
         nodes.add(labelSivumaara);
         nodes.add(labelISBN);
-        nodes.add(labelReleatedCourses);
+        nodes.add(labelRelatedCourses);
 
         return nodes;
     }
@@ -79,15 +82,21 @@ public class ListBooksScene extends ListingScene {
 
         Label vuosiOtsikko = new Label("Published");
         vuosiOtsikko.setStyle(cssLayoutBorder01);
-        vuosiOtsikko.setMaxWidth(50);
+        vuosiOtsikko.setMaxWidth(90);
         vuosiOtsikko.setMinWidth(50);
 
         Label sivumaaraOtsikko = new Label("Page count");
         sivumaaraOtsikko.setStyle(cssLayoutBorder01);
-        sivumaaraOtsikko.setMaxWidth(50);
+        sivumaaraOtsikko.setMaxWidth(90);
         sivumaaraOtsikko.setMinWidth(50);     
+
+        Label ISBNOtsikko = new Label("ISBN");
+        ISBNOtsikko.setStyle(cssLayoutBorder01);
+        ISBNOtsikko.setMaxWidth(50);
+        ISBNOtsikko.setMinWidth(50);
            
-        otsikot.getChildren().addAll(kirjailijaOtsikko, nimiOtsikko, vuosiOtsikko, sivumaaraOtsikko);
+        otsikot.getChildren().addAll(kirjailijaOtsikko, nimiOtsikko,
+            vuosiOtsikko, sivumaaraOtsikko, ISBNOtsikko);
 
         return otsikot;
     }

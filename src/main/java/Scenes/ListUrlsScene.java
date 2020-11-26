@@ -23,8 +23,8 @@ public class ListUrlsScene extends ListingScene {
     protected List<Node> createBookmarkContent(Bookmark url) {
         List<Node> nodes = new ArrayList<>();
 
-        Label labelOtsikko = new Label(((Url)url).getOtsikko() + ": ");
-        Label labelUrl = new Label(((Url)url).getUrl());
+        Label labelOtsikko = new Label(((Url) url).getOtsikko() + ": ");
+        Label labelUrl = new Label(((Url) url).getUrl());
 
         // Leikepöydälle kopioimisen toiminnallisuus
         Button copyURL = new Button("Copy");
