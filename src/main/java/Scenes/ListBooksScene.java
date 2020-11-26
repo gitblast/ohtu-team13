@@ -17,73 +17,82 @@ public class ListBooksScene extends ListingScene {
 
 // UI Style elements
     private String cssLayoutBorder01 = "-fx-border-color: gray;\n"
-            + "-fx-border-insets: 0;\n"
-            + "-fx-border-width: 1;\n"
-            + "-fx-border-style: solid;\n";
+        + "-fx-border-insets: 0;\n"
+        + "-fx-border-width: 1;\n"
+        + "-fx-border-style: solid;\n";
 
     public ListBooksScene(ChooseAddScene chooseAddScene) {
         super(chooseAddScene, new String[]{"None", "Author", "Title", "ISBN"});
     }
 
     private List<Bookmark> getFilteredByString(
-            List<Bookmark> allBooks,
-            String value,
-            String filterType) {
+        List<Bookmark> allBooks,
+        String value,
+        String filterType) {
         return allBooks.stream().filter(book -> {
             Book b = (Book) book;
 
             if (filterType.equals("Author")) {
                 return b.getKirjoittaja() != null
-                        ? b.getKirjoittaja().contains(value)
-                        : false;
+                    ? b.getKirjoittaja().contains(value)
+                    : false;
             }
 
             if (filterType.equals("ISBN")) {
                 return b.getISBN() != null
-                        ? b.getISBN().contains(value)
-                        : false;
+                    ? b.getISBN().contains(value)
+                    : false;
             }
 
             if (filterType.equals("Title")) {
                 return b.getNimeke() != null
-                        ? b.getNimeke().contains(value)
-                        : false;
+                    ? b.getNimeke().contains(value)
+                    : false;
             }
 
             return false;
         })
-                .collect(Collectors.toList());
+            .collect(Collectors.toList());
     }
 
     @Override
     protected void setChangeListenerForFilterField(TextField tf) {
         tf.textProperty().addListener(
-                (ObservableValue<? extends String> ov, String old_val, String new_val) -> {
-                    String selectedFilter = this.getChoiceBox()
-                            .getSelectionModel()
-                            .getSelectedItem()
-                            .toString();
+            (ObservableValue<? extends String> ov,
+                String old_val,
+                String new_val) -> {
 
-                    handleFilterChange(selectedFilter, new_val);
+                String selectedFilter = this.getChoiceBox()
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .toString();
 
-                    this.redrawBookmarkNodes();
-                }
+                handleFilterChange(selectedFilter, new_val);
+
+                this.redrawBookmarkNodes();
+            }
         );
     }
 
     @Override
     protected void setChangeListenerForChoiceBox(ChoiceBox cb) {
         cb.getSelectionModel().selectedIndexProperty().addListener(
-                (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
-                    handleFilterChange(this.getFilters()[new_val.intValue()],
-                            this.getFilterField().getText());
+            (ObservableValue<? extends Number> ov,
+                Number old_val,
+                Number new_val) -> {
 
-                    this.redrawBookmarkNodes();
-                }
+                handleFilterChange(this.getFilters()[new_val.intValue()],
+                    this.getFilterField().getText());
+
+                this.redrawBookmarkNodes();
+            }
         );
     }
 
-    private void handleFilterChange(String filterType, String filterFieldValue) {
+    private void handleFilterChange(
+        String filterType,
+        String filterFieldValue
+    ) {
         this.getFilterField().setDisable(filterType.equals("None"));
 
         if (filterFieldValue.equals("")) {
@@ -100,9 +109,9 @@ public class ListBooksScene extends ListingScene {
             }
             case "Author": {
                 this.setShownBookmarks(
-                        getFilteredByString(this.getAllBookmarks(),
-                                filterFieldValue,
-                                "Author")
+                    getFilteredByString(this.getAllBookmarks(),
+                        filterFieldValue,
+                        "Author")
                 );
 
                 break;
@@ -110,9 +119,9 @@ public class ListBooksScene extends ListingScene {
 
             case "Title": {
                 this.setShownBookmarks(
-                        getFilteredByString(this.getAllBookmarks(),
-                                filterFieldValue,
-                                "Title")
+                    getFilteredByString(this.getAllBookmarks(),
+                        filterFieldValue,
+                        "Title")
                 );
 
                 break;
@@ -120,9 +129,9 @@ public class ListBooksScene extends ListingScene {
             case "ISBN": {
 
                 this.setShownBookmarks(
-                        getFilteredByString(this.getAllBookmarks(),
-                                filterFieldValue,
-                                "ISBN")
+                    getFilteredByString(this.getAllBookmarks(),
+                        filterFieldValue,
+                        "ISBN")
                 );
 
                 break;
@@ -162,15 +171,15 @@ public class ListBooksScene extends ListingScene {
         labelISBN.setMaxWidth(50);
         labelISBN.setMinWidth(50);
 
-        String releatedCourses = ((Book) book).getRelatedCourses();
-        Label labelReleatedCourses = new Label(releatedCourses);
+        String relatedCourses = ((Book) book).getRelatedCourses();
+        Label labelRelatedCourses = new Label(relatedCourses);
 
         nodes.add(labelKirjoittaja);
         nodes.add(labelNimeke);
         nodes.add(labelJulkaisuvuosi);
         nodes.add(labelSivumaara);
         nodes.add(labelISBN);
-        nodes.add(labelReleatedCourses);
+        nodes.add(labelRelatedCourses);
 
         return nodes;
     }
@@ -192,15 +201,22 @@ public class ListBooksScene extends ListingScene {
 
         Label vuosiOtsikko = new Label("Published");
         vuosiOtsikko.setStyle(cssLayoutBorder01);
-        vuosiOtsikko.setMaxWidth(50);
+        vuosiOtsikko.setMaxWidth(90);
         vuosiOtsikko.setMinWidth(50);
 
         Label sivumaaraOtsikko = new Label("Page count");
         sivumaaraOtsikko.setStyle(cssLayoutBorder01);
-        sivumaaraOtsikko.setMaxWidth(50);
+
+        sivumaaraOtsikko.setMaxWidth(90);
         sivumaaraOtsikko.setMinWidth(50);
 
-        otsikot.getChildren().addAll(kirjailijaOtsikko, nimiOtsikko, vuosiOtsikko, sivumaaraOtsikko);
+        Label ISBNOtsikko = new Label("ISBN");
+        ISBNOtsikko.setStyle(cssLayoutBorder01);
+        ISBNOtsikko.setMaxWidth(50);
+        ISBNOtsikko.setMinWidth(50);
+
+        otsikot.getChildren().addAll(kirjailijaOtsikko, nimiOtsikko,
+            vuosiOtsikko, sivumaaraOtsikko, ISBNOtsikko);
 
         return otsikot;
     }

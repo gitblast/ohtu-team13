@@ -11,13 +11,13 @@ import Service.VinkkiService;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 public class VinkkiServiceTest {
+
     private BookDao bookDao;
     private UrlDao urlDao;
     private VinkkiService vinkkiService;
-    
+
     @Before
     public void setUp() throws Exception {
         String db = "jdbc:sqlite::memory:";
@@ -31,14 +31,14 @@ public class VinkkiServiceTest {
         assertTrue(vinkkiService.listBooks().isEmpty());
         assertTrue(vinkkiService.listBooks().isEmpty());
     }
-    
+
     @Test
     public void bookCanBeAddedWithObject() {
         Book book = new Book("Aleksis kivi", "Seitsemän veljestä", 1870, 427);
         assertTrue(vinkkiService.addBook(book));
         assertTrue(vinkkiService.listBooks().contains(book));
     }
-    
+
     @Test
     public void urlCanBeAddedWithObject() {
         Url url = new Url("Varjocafe", "http://varjocafe.net/");

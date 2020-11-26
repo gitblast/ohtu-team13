@@ -25,7 +25,7 @@ public class SqlDbUrlDao implements UrlDao {
 
     @Override
     public boolean createURL(Url url) {
-        if (url==null || url.getOtsikko() == null || url.getUrl() == null) {
+        if (url == null || url.getOtsikko() == null || url.getUrl() == null) {
             return false;
         }
 

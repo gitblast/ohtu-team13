@@ -26,10 +26,23 @@ public class SqlDbBookDao implements BookDao {
 
     @Override
     public boolean createBook(Book book) {
-        /*if (book==null || book.getKirjoittaja()==null || book.getNimeke()==null || book.getJulkaisuvuosi()==null || book.getSivumaara()==null || book.getISBN()==null) {
+        /*
+        if (book == null 
+            || book.getKirjoittaja() == null 
+            || book.getNimeke() == null 
+            || book.getJulkaisuvuosi() == null 
+            || book.getSivumaara() == null 
+            || book.getISBN() == null) {
+            
             return false;
         }*/
-        if (book==null) return false; //kun käli tukee kirjan lisäämistä ISBN:llä voi poistaa tän ja ottaa käyttöön ylläolevan tarkistuksen
+        if (book == null) {
+            return false; //kun käli tukee kirjan lisäämistä ISBN:llä 
+            //voi poistaa tän ja ottaa käyttöön ylläolevan tarkistuksen
+        }
+        if (book.getKirjoittaja() == null || book.getNimeke() == null) {
+            return false; // Cucumber testejä varten
+        }
         String query = "INSERT INTO books (kirjoittaja, nimeke, julkaisuvuosi, "
                 + "sivumaara, ISBN) VALUES (?, ?, ?, ?, ?);";
         try {

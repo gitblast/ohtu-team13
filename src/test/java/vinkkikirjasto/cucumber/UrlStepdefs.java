@@ -3,25 +3,27 @@ package vinkkikirjasto.cucumber;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-import static org.junit.Assert.assertEquals;
 
 import Dao.BookDao;
 import Dao.UrlDao;
 import Database.SqlDbBookDao;
 import Database.SqlDbUrlDao;
+import Domain.Book;
 import Domain.Url;
 import Service.VinkkiService;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-public class Stepdefs {
+public class UrlStepdefs {
 
     private BookDao bookDao;
     private UrlDao urlDao;
     private VinkkiService vinkkiService;
     private Url lisattava;
+    private Book lisattavaKirja;
     private boolean validUrl;
 
-    @Given("Database is initialized")
+    @Given("URLs Database is initialized")
     public void databaseIsInitialized() throws Exception {
         String db = "jdbc:sqlite::memory:";
         bookDao = new SqlDbBookDao(db);
@@ -47,7 +49,7 @@ public class Stepdefs {
         validUrl = vinkkiService.addURL(lisattava);
     }
 
-    @Then("Database contains entered data")
+    @Then("Database contains entered URL")
     public void dataBaseContainsEnteredData() {
         Url url = vinkkiService.listURLs().get(0);
         assertEquals(url.getUrl(), lisattava.getUrl());
