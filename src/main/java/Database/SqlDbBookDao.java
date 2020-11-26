@@ -24,28 +24,25 @@ public class SqlDbBookDao implements BookDao {
         this("jdbc:sqlite:lukuvinkit.db");
     }
 
-    public boolean createBook(String kirjoittaja, String nimeke,
-            Integer julkaisuvuosi, Integer sivumaara) {
-        return createBook(kirjoittaja, nimeke, julkaisuvuosi, sivumaara, null);
-    }
-
-    public boolean createBook(String kirjoittaja, String nimeke,
-            Integer julkaisuvuosi, Integer sivumaara, String ISBN) {
+    @Override
+    public boolean createBook(Book book) {
+        /*if (book==null || book.getKirjoittaja()==null || book.getNimeke()==null || book.getJulkaisuvuosi()==null || book.getSivumaara()==null || book.getISBN()==null) {
+            return false;
+        }*/
+        if (book==null) return false; //kun käli tukee kirjan lisäämistä ISBN:llä voi poistaa tän ja ottaa käyttöön ylläolevan tarkistuksen
         String query = "INSERT INTO books (kirjoittaja, nimeke, julkaisuvuosi, "
                 + "sivumaara, ISBN) VALUES (?, ?, ?, ?, ?);";
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
-            prepared.setString(1, kirjoittaja);
-            prepared.setString(2, nimeke);
-            prepared.setInt(3, julkaisuvuosi);
-            prepared.setInt(4, sivumaara);
-            prepared.setString(5, ISBN);
+            prepared.setString(1, book.getKirjoittaja());
+            prepared.setString(2, book.getNimeke());
+            prepared.setInt(3, book.getJulkaisuvuosi());
+            prepared.setInt(4, book.getSivumaara());
+            prepared.setString(5, book.getISBN());
             prepared.executeUpdate();
-
             return true;
         } catch (SQLException error) {
             System.out.println(error.getMessage());
-
             return false;
         }
     }
