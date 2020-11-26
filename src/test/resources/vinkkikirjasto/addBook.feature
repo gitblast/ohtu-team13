@@ -9,3 +9,13 @@ Feature: User can add a book with valid author and title
         Given Books database is initialized
         When empty author and empty title with 52 pages and published 1991 are entered
         Then Service will return false value
+
+    Scenario: User can't add a book without author's name
+        Given Books database is initialized
+        When empty author and "Sotahevonen" with 52 pages and published 1991 are entered
+        Then Service will return false value
+
+    Scenario: User can't add a book without title
+        Given Books database is initialized
+        When "Arto Paasilinna" and empty title with 52 pages and published 1991 are entered
+        Then Service will return false value

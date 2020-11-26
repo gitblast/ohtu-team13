@@ -42,6 +42,18 @@ public class BookStepdefs {
         validBook = vinkkiService.addBook(lisattavaKirja);
     }
     
+    @When("empty author and {string} with {int} pages and published {int} are entered")
+    public void emptyAuthorAndvalidTitle(String title, int pages, int published) {
+        lisattavaKirja = new Book(null, title, pages, published);
+        validBook = vinkkiService.addBook(lisattavaKirja);
+    }
+    
+    @When("{string} and empty title with {int} pages and published {int} are entered")
+    public void validAuthorAndEmptyTitle(String author, int pages, int published) {
+        lisattavaKirja = new Book(author, null, pages, published);
+        validBook = vinkkiService.addBook(lisattavaKirja);
+    }
+    
     @Then("Database contains entered book")
     public void databaseContainsEnteredBook() {
         Book book = vinkkiService.listBooks().get(0);
