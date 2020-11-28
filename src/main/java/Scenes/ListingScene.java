@@ -29,7 +29,7 @@ public abstract class ListingScene {
     Label info;
 
     public ListingScene(ChooseAddScene chooseAddScene) {
-        this(chooseAddScene, null);
+        this(chooseAddScene, new String[]{"None"});
     }
 
     public ListingScene(ChooseAddScene chooseAddScene, String[] filters) {
@@ -112,7 +112,6 @@ public abstract class ListingScene {
         listingVBox.getChildren().addAll(info, returnButton);
 
         if (filters.length > 1) {
-
             listingVBox.getChildren().add(getFilterElements());
         }
 
