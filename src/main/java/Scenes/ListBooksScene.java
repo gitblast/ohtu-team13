@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 
 public class ListBooksScene extends ListingScene {
 
-// UI Style elements
+    // UI Style elements
     private String cssLayoutBorder01 = "-fx-border-color: gray;\n"
         + "-fx-border-insets: 0;\n"
         + "-fx-border-width: 1;\n"

@@ -26,11 +26,20 @@ public abstract class CreateBookmarkScene {
 
     public CreateBookmarkScene(ChooseAddScene chooseAddScene) {
         this.chooseAddScene = chooseAddScene;
+
         this.title = new Label();
+        title.setId("title_label");
+
         this.returnButton = new Button("Return");
+        returnButton.setId("returnButton_btn");
+
         this.fields = new ArrayList<>();
+
         this.errorMessage = new Label();
+        this.errorMessage.setId("errorMessage_label");
+
         this.submitButton = new Button();
+        this.submitButton.setId("submitButton_btn");
 
         try {
             this.vinkkiService = new VinkkiService(
@@ -46,6 +55,7 @@ public abstract class CreateBookmarkScene {
 
     public Scene createScene() {
         VBox vbox = new VBox();
+        vbox.setId("elements");
         vbox.setPadding(new Insets(80, 50, 50, 100));
         vbox.setSpacing(5);
 

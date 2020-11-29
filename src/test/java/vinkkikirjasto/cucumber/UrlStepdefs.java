@@ -8,7 +8,6 @@ import Dao.BookDao;
 import Dao.UrlDao;
 import Database.SqlDbBookDao;
 import Database.SqlDbUrlDao;
-import Domain.Book;
 import Domain.Url;
 import Service.VinkkiService;
 import static org.junit.Assert.assertEquals;
@@ -20,7 +19,6 @@ public class UrlStepdefs {
     private UrlDao urlDao;
     private VinkkiService vinkkiService;
     private Url lisattava;
-    private Book lisattavaKirja;
     private boolean validUrl;
 
     @Given("URLs Database is initialized")

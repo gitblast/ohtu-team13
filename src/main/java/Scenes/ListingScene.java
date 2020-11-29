@@ -43,9 +43,7 @@ public abstract class ListingScene {
         this.shownBookmarks = null;
     }
 
-    protected void setChangeListenerForFilterField(TextField tf) {
-        // override this
-    }
+    protected abstract void setChangeListenerForFilterField(TextField tf);
 
     private TextField createFilterField() {
         TextField field = new TextField();
@@ -86,6 +84,8 @@ public abstract class ListingScene {
         returnButton.setOnAction(e -> {
             try {
                 info.setText("");
+                this.filterField.setText("");
+                this.filterField.setDisable(true);
                 chooseAddScene.returnHere();
             } catch (Exception e1) {
                 e1.printStackTrace();
@@ -124,9 +124,7 @@ public abstract class ListingScene {
         return listingScene;
     }
 
-    // need to be overridden in different listing scenes
-    protected void setChangeListenerForChoiceBox(ChoiceBox cb) {
-    }
+    protected abstract void setChangeListenerForChoiceBox(ChoiceBox cb);
 
     private HBox getFilterElements() {
         Label filterLabel = new Label("Filter:");

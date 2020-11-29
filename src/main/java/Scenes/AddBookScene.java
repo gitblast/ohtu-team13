@@ -22,6 +22,12 @@ public class AddBookScene extends CreateBookmarkScene {
         TextField sivumaara = new TextField();
         TextField ISBN = new TextField();
 
+        kirjoittaja.setId("kirjoittaja_field");
+        nimeke.setId("nimeke_field");
+        julkaisuvuosi.setId("julkaisuvuosi_field");
+        sivumaara.setId("sivumaara_field");
+        ISBN.setId("ISBN_field");
+
         kirjoittaja.setPromptText("Author");
         nimeke.setPromptText("Title");
         julkaisuvuosi.setPromptText("Published");
