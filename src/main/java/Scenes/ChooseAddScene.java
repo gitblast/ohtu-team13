@@ -48,9 +48,6 @@ public class ChooseAddScene {
                 + "\nUrls in database: " + urlienmaara);
 
         label.setId("maara_label");
-        // set id for example test
-        Label helloworld = new Label("Hello world!");
-        helloworld.setId("hello-world-label");
 
         Button switchToAddBookScene = new Button("Add Book");
         switchToAddBookScene.setId("lisaa_kirja_btn");
@@ -91,7 +88,7 @@ public class ChooseAddScene {
 
         elements.getChildren().addAll(label, switchToAddBookScene,
                 switchToAddURLScene, switchToListBooksScene,
-                switchToListUrlsScene, errorMsg, helloworld);
+                switchToListUrlsScene, errorMsg);
 
         Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;
