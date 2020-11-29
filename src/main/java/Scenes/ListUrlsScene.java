@@ -6,17 +6,101 @@ import Domain.Url;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListUrlsScene extends ListingScene {
 
     public ListUrlsScene(ChooseAddScene chooseAddScene) {
-        super(chooseAddScene);
+        super(chooseAddScene, new String[]{"None", "Title"});
+    }
+
+    private List<Bookmark> getFilteredByString(
+        List<Bookmark> allUrls,
+        String value,
+        String filterType
+    ) {
+        return allUrls.stream().filter(url -> {
+            Url u = (Url) url;
+
+            if (filterType.equals("Title")) {
+                return u.getOtsikko() != null
+                    ? u.getOtsikko().contains(value)
+                    : false;
+            }
+
+            return false;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    protected void setChangeListenerForFilterField(TextField tf) {
+        tf.textProperty().addListener(
+            (ObservableValue<? extends String> ov,
+                String old_val,
+                String new_val) -> {
+                
+                String selectedFilter = this.getChoiceBox()
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .toString();
+                    
+                handleFilterChange(selectedFilter, new_val);
+
+                this.redrawBookmarkNodes();
+            }
+        );
+    }
+
+    @Override
+    protected void setChangeListenerForChoiceBox(ChoiceBox cb) {
+        cb.getSelectionModel().selectedIndexProperty().addListener(
+            (ObservableValue<? extends Number> ov,
+                Number old_val,
+                Number new_val) -> {
+
+                this.handleFilterChange(this.getFilters()[new_val.intValue()],
+                    this.getFilterField().getText());
+
+                this.redrawBookmarkNodes();
+            }
+        );
+    }
+
+    private void handleFilterChange(
+        String filterType,
+        String filterFieldValue
+    ) {
+        this.getFilterField().setDisable(filterType.equals("None"));
+
+        if (filterFieldValue.equals("")) {
+            this.setShownBookmarks(this.getAllBookmarks());
+            return;
+        }
+
+        switch (filterType) {
+            case "None": {
+                this.setShownBookmarks(this.getAllBookmarks());
+
+                break;
+            }
+            case "Title": {
+                this.setShownBookmarks(
+                    this.getFilteredByString(this.getAllBookmarks(),
+                    filterFieldValue, "Title")
+                );
+
+                break;
+            }
+        }
     }
 
     @Override
@@ -52,6 +136,7 @@ public class ListUrlsScene extends ListingScene {
 
         Label otsikko = new Label("Header");
         Label url = new Label("URL");
+
         otsikot.getChildren().addAll(otsikko, url);
 
         return otsikot;
