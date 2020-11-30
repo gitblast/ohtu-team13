@@ -2,20 +2,53 @@ package Domain;
 
 import java.util.ArrayList;
 
-public interface Bookmark {
+public abstract class Bookmark {
+    private String type;
+    private String title;
+    private String relatedCourses;
+    private ArrayList<String> tags;
 
-    public String getType();
+    public Bookmark(
+        String type,
+        String title,
+        String relatedCourses,
+        ArrayList<String> tags
+    ) {
+        this.type = type;
+        this.title = title;
+        this.relatedCourses = relatedCourses;
+        this.tags = tags;
+    }
 
-    public String getTitle();
+    public Bookmark(String type, String title, String relatedCourses) {
+        this(type, title, relatedCourses, new ArrayList<>());
+    }
 
-    public void setTitle(String newTitle);
+    public String getType() {
+        return this.type;
+    }
 
-    public ArrayList<String> getTagit();
+    public String getTitle() {
+        return this.title;
+    }
 
-    public void setTagit(ArrayList<String> tagit);
+    public void setTitle(String newTitle) {
+        this.title = newTitle;
+    }
 
-    public String getRelatedCourses();
+    public ArrayList<String> getTags() {
+        return this.tags;
+    }
 
-    public void setRelatedCourses(String relatedCourses);
+    public void setTags(ArrayList<String> newTags) {
+        this.tags = newTags;
+    }
 
+    public String getRelatedCourses() {
+        return this.relatedCourses;
+    }
+
+    public void setRelatedCourses(String newRelatedCourses) {
+        this.relatedCourses = newRelatedCourses;
+    }
 }
