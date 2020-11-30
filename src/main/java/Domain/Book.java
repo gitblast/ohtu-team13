@@ -5,62 +5,71 @@ import java.util.Objects;
 
 public class Book extends Bookmark {
 
-    private String kirjoittaja;
-    private Integer julkaisuvuosi;
-    private Integer sivumaara;
+    private String author;
+    private Integer releaseYear;
+    private Integer pageCount;
     private String ISBN;
 
     public Book(
-        String kirjoittaja,
-        String nimeke,
-        Integer julkaisuvuosi,
-        Integer sivumaara,
+        String author,
+        String title,
+        Integer releaseYear,
+        Integer pageCount,
         String ISBN,
-        ArrayList<String> tagit,
+        ArrayList<String> tags,
         String relatedCourses
     ) {
-        super("Book", nimeke, relatedCourses);
+        super("Book", title, relatedCourses, tags);
 
-        this.kirjoittaja = kirjoittaja;
-        this.julkaisuvuosi = julkaisuvuosi;
-        this.sivumaara = sivumaara;
+        this.author = author;
+        this.releaseYear = releaseYear;
+        this.pageCount = pageCount;
         this.ISBN = ISBN;
     }
 
-    public Book(String kirjoittaja, String nimeke,
-            Integer julkaisuvuosi, Integer sivumaara) {
-        this(kirjoittaja, nimeke, julkaisuvuosi,
-                sivumaara, null, new ArrayList<>(), null);
+    public Book(
+        String author,
+        String title,
+        Integer releaseYear,
+        Integer pageCount
+    ) {
+        this(author, title, releaseYear, pageCount,
+                null, new ArrayList<>(), null);
     }
 
-    public Book(String kirjoittaja, String nimeke, Integer julkaisuvuosi,
-            Integer sivumaara, String ISBN) {
-        this(kirjoittaja, nimeke, julkaisuvuosi,
-                sivumaara, ISBN, new ArrayList<>(), null);
+    public Book(
+        String author,
+        String title,
+        Integer releaseYear,
+        Integer pageCount,
+        String ISBN
+    ) {
+        this(author, title, releaseYear, pageCount,
+                ISBN, new ArrayList<>(), null);
     }
 
     public String getKirjoittaja() {
-        return kirjoittaja;
+        return this.author;
     }
 
-    public void setKirjoittaja(String kirjoittaja) {
-        this.kirjoittaja = kirjoittaja;
+    public void setKirjoittaja(String author) {
+        this.author = author;
     }
 
     public Integer getJulkaisuvuosi() {
-        return julkaisuvuosi;
+        return releaseYear;
     }
 
-    public void setJulkaisuvuosi(Integer julkaisuvuosi) {
-        this.julkaisuvuosi = julkaisuvuosi;
+    public void setJulkaisuvuosi(Integer releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     public Integer getSivumaara() {
-        return sivumaara;
+        return pageCount;
     }
 
-    public void setSivumaara(Integer sivumaara) {
-        this.sivumaara = sivumaara;
+    public void setSivumaara(Integer pageCount) {
+        this.pageCount = pageCount;
     }
 
     public String getISBN() {
@@ -83,16 +92,16 @@ public class Book extends Bookmark {
             return false;
         }
         final Book other = (Book) obj;
-        if (!Objects.equals(this.kirjoittaja, other.kirjoittaja)) {
+        if (!Objects.equals(this.author, other.author)) {
             return false;
         }
         if (!Objects.equals(super.getTitle(), super.getTitle())) {
             return false;
         }
-        if (!Objects.equals(this.julkaisuvuosi, other.julkaisuvuosi)) {
+        if (!Objects.equals(this.releaseYear, other.releaseYear)) {
             return false;
         }
-        if (!Objects.equals(this.sivumaara, other.sivumaara)) {
+        if (!Objects.equals(this.pageCount, other.pageCount)) {
             return false;
         }
         return true;
@@ -100,8 +109,8 @@ public class Book extends Bookmark {
 
     @Override
     public String toString() {
-        return "Book{" + "kirjoittaja=" + kirjoittaja + ", nimeke="
-                + super.getTitle() + ", julkaisuvuosi=" + julkaisuvuosi
-                + ", sivumaara=" + sivumaara + ", ISBN=" + ISBN + '}';
+        return "Book{" + "kirjoittaja=" + this.author + ", nimeke="
+                + super.getTitle() + ", julkaisuvuosi=" + releaseYear
+                + ", sivumaara=" + pageCount + ", ISBN=" + ISBN + '}';
     }
 }
