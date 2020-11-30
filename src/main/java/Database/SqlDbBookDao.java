@@ -40,7 +40,7 @@ public class SqlDbBookDao implements BookDao {
             return false; //kun käli tukee kirjan lisäämistä ISBN:llä 
             //voi poistaa tän ja ottaa käyttöön ylläolevan tarkistuksen
         }
-        if (book.getKirjoittaja() == null || book.getNimeke() == null) {
+        if (book.getKirjoittaja() == null || book.getTitle() == null) {
             return false; // Cucumber testejä varten
         }
         String query = "INSERT INTO books (kirjoittaja, nimeke, julkaisuvuosi, "
@@ -48,7 +48,7 @@ public class SqlDbBookDao implements BookDao {
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
             prepared.setString(1, book.getKirjoittaja());
-            prepared.setString(2, book.getNimeke());
+            prepared.setString(2, book.getTitle());
             prepared.setInt(3, book.getJulkaisuvuosi());
             prepared.setInt(4, book.getSivumaara());
             prepared.setString(5, book.getISBN());

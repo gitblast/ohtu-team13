@@ -30,17 +30,21 @@ public class Url implements Bookmark {
         this(otsikko, url, null, null, null, null);
     }
 
+    public String getType() {
+        return "Url";
+    }
+
     /**
      * @return the otsikko
      */
-    public String getOtsikko() {
+    public String getTitle() {
         return otsikko;
     }
 
     /**
      * @param otsikko the otsikko to set
      */
-    public void setOtsikko(String otsikko) {
+    public void setTitle(String otsikko) {
         this.otsikko = otsikko;
     }
 

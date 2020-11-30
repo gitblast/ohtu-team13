@@ -32,8 +32,8 @@ public class ListUrlsScene extends ListingScene {
             Url u = (Url) url;
 
             if (filterType.equals("Title")) {
-                return u.getOtsikko() != null
-                    ? u.getOtsikko().contains(value)
+                return u.getTitle() != null
+                    ? u.getTitle().contains(value)
                     : false;
             }
 
@@ -107,7 +107,7 @@ public class ListUrlsScene extends ListingScene {
     protected List<Node> createBookmarkContent(Bookmark url) {
         List<Node> nodes = new ArrayList<>();
 
-        Label labelOtsikko = new Label(((Url) url).getOtsikko() + ": ");
+        Label labelOtsikko = new Label(((Url) url).getTitle() + ": ");
         Label labelUrl = new Label(((Url) url).getUrl());
 
         // Leikepöydälle kopioimisen toiminnallisuus

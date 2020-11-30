@@ -1,30 +1,17 @@
 package vinkkikirjasto.cucumber;
 
-import vinkkikirjasto.Main;
-import javafx.application.Application;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-import org.junit.Test;
-import static org.testfx.api.FxAssert.verifyThat;
 import org.testfx.framework.junit.ApplicationTest;
-import static org.testfx.matcher.base.NodeMatchers.hasChild;
-import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 
-import Scenes.*;
 import Dao.BookDao;
 import Dao.UrlDao;
 import Database.SqlDbBookDao;
 import Database.SqlDbUrlDao;
 import Domain.Book;
 import Service.VinkkiService;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 public class BookSearchStepdefs extends ApplicationTest {
 
@@ -32,7 +19,6 @@ public class BookSearchStepdefs extends ApplicationTest {
     private UrlDao urlDao;
     private VinkkiService vinkkiService;
     private Book lisattavaKirja;
-    private boolean validBook;
 
     void initializeDatabase() throws Exception {
         String db = "jdbc:sqlite::memory:";
@@ -46,8 +32,9 @@ public class BookSearchStepdefs extends ApplicationTest {
     public void bookDatabaseIsInitializedAndBookIsEntered(String author,
         String title, int pages, int published) {
         try {
-        initializeDatabase();
+            initializeDatabase();
         } catch (Exception e) {
+            // TODO
         }
         lisattavaKirja = new Book(author, title, pages, published);
         vinkkiService.addBook(lisattavaKirja);

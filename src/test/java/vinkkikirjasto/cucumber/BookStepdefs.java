@@ -64,7 +64,7 @@ public class BookStepdefs {
     public void databaseContainsEnteredBook() {
         Book book = vinkkiService.listBooks().get(0);
         assertEquals(book.getKirjoittaja(), lisattavaKirja.getKirjoittaja());
-        assertEquals(book.getNimeke(), lisattavaKirja.getNimeke());
+        assertEquals(book.getTitle(), lisattavaKirja.getTitle());
         assertEquals(book.getSivumaara(), lisattavaKirja.getSivumaara());
         assertEquals(book.getJulkaisuvuosi(),
             lisattavaKirja.getJulkaisuvuosi());

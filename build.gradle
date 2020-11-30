@@ -68,6 +68,6 @@ test {
     systemProperty 'java.awt.headless', 'true'
     systemProperty 'file.encoding', 'utf-8'
     failFast = true
-//    testLogging.showStandardStreams = true
+//    testLogging.showStandardStreams = true // uncomment to see cucumber test logs
 //    systemProperties System.getProperties()
 }

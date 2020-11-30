@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     plugin = "pretty", 
     features = "src/test/resources/vinkkikirjasto", 
-    snippets = SnippetType.CAMELCASE ,
+    snippets = SnippetType.CAMELCASE,
     tags = "~@ignore"
 )
 

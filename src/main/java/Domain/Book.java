@@ -37,6 +37,10 @@ public class Book implements Bookmark {
                 sivumaara, ISBN, new ArrayList<>(), null);
     }
 
+    public String getType() {
+        return "Book";
+    }
+
     public String getKirjoittaja() {
         return kirjoittaja;
     }
@@ -45,11 +49,11 @@ public class Book implements Bookmark {
         this.kirjoittaja = kirjoittaja;
     }
 
-    public String getNimeke() {
+    public String getTitle() {
         return nimeke;
     }
 
-    public void setNimeke(String nimeke) {
+    public void setTitle(String nimeke) {
         this.nimeke = nimeke;
     }
 

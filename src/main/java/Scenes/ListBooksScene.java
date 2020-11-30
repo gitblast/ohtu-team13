@@ -45,8 +45,8 @@ public class ListBooksScene extends ListingScene {
             }
 
             if (filterType.equals("Title")) {
-                return b.getNimeke() != null
-                    ? b.getNimeke().contains(value)
+                return b.getTitle() != null
+                    ? b.getTitle().contains(value)
                     : false;
             }
 
@@ -149,7 +149,7 @@ public class ListBooksScene extends ListingScene {
         labelKirjoittaja.setMaxWidth(200);
         labelKirjoittaja.setMinWidth(200);
 
-        Label labelNimeke = new Label(((Book) book).getNimeke());
+        Label labelNimeke = new Label(((Book) book).getTitle());
         labelNimeke.setStyle(cssLayoutBorder01);
         labelNimeke.setMaxWidth(200);
         labelNimeke.setMinWidth(200);

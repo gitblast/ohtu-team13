@@ -25,14 +25,14 @@ public class SqlDbUrlDao implements UrlDao {
 
     @Override
     public boolean createURL(Url url) {
-        if (url == null || url.getOtsikko() == null || url.getUrl() == null) {
+        if (url == null || url.getTitle() == null || url.getUrl() == null) {
             return false;
         }
 
         String query = "INSERT INTO Url (otsikko, url) VALUES (?, ?);";
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
-            prepared.setString(1, url.getOtsikko());
+            prepared.setString(1, url.getTitle());
             prepared.setString(2, url.getUrl());
             prepared.executeUpdate();
         } catch (SQLException error) {

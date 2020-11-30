@@ -51,7 +51,7 @@ public class UrlStepdefs {
     public void dataBaseContainsEnteredData() {
         Url url = vinkkiService.listURLs().get(0);
         assertEquals(url.getUrl(), lisattava.getUrl());
-        assertEquals(url.getOtsikko(), lisattava.getOtsikko());
+        assertEquals(url.getTitle(), lisattava.getTitle());
     }
 
     @Then("Service will return value false")
