@@ -34,19 +34,20 @@ public class ListBooksScene extends ListingScene {
 
             if (filterType.equals("Author")) {
                 return b.getKirjoittaja() != null
-                    ? b.getKirjoittaja().contains(value)
+                    ? b.getKirjoittaja().toLowerCase()
+                        .contains(value.toLowerCase())
                     : false;
             }
 
             if (filterType.equals("ISBN")) {
                 return b.getISBN() != null
-                    ? b.getISBN().contains(value)
+                    ? b.getISBN().toLowerCase().contains(value.toLowerCase())
                     : false;
             }
 
             if (filterType.equals("Title")) {
                 return b.getTitle() != null
-                    ? b.getTitle().contains(value)
+                    ? b.getTitle().toLowerCase().contains(value.toLowerCase())
                     : false;
             }
 

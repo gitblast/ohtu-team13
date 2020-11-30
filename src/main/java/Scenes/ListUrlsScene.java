@@ -33,7 +33,8 @@ public class ListUrlsScene extends ListingScene {
 
             if (filterType.equals("Title")) {
                 return u.getTitle() != null
-                    ? u.getTitle().contains(value)
+                    ? u.getTitle().toLowerCase()
+                        .contains(value.toLowerCase())
                     : false;
             }
 
@@ -47,12 +48,12 @@ public class ListUrlsScene extends ListingScene {
             (ObservableValue<? extends String> ov,
                 String old_val,
                 String new_val) -> {
-                
+
                 String selectedFilter = this.getChoiceBox()
                     .getSelectionModel()
                     .getSelectedItem()
                     .toString();
-                    
+
                 handleFilterChange(selectedFilter, new_val);
 
                 this.redrawBookmarkNodes();
@@ -95,7 +96,7 @@ public class ListUrlsScene extends ListingScene {
             case "Title": {
                 this.setShownBookmarks(
                     this.getFilteredByString(this.getAllBookmarks(),
-                    filterFieldValue, "Title")
+                        filterFieldValue, "Title")
                 );
 
                 break;
