@@ -61,7 +61,7 @@ public class ListUrlsScene extends ListingScene {
     }
 
     @Override
-    protected void setChangeListenerForChoiceBox(ChoiceBox cb) {
+    protected void setChangeListenerForChoiceBox(ChoiceBox<String> cb) {
         cb.getSelectionModel().selectedIndexProperty().addListener(
             (ObservableValue<? extends Number> ov,
                 Number old_val,

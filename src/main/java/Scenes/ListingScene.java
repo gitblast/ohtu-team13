@@ -24,7 +24,7 @@ public abstract class ListingScene {
     private List<Bookmark> shownBookmarks;
     private String[] filters;
     private TextField filterField;
-    private ChoiceBox choiceBox;
+    private ChoiceBox<String> choiceBox;
     ChooseAddScene chooseAddScene;
     Label info;
 
@@ -124,12 +124,12 @@ public abstract class ListingScene {
         return listingScene;
     }
 
-    protected abstract void setChangeListenerForChoiceBox(ChoiceBox cb);
+    protected abstract void setChangeListenerForChoiceBox(ChoiceBox<String> cb);
 
     private HBox getFilterElements() {
         Label filterLabel = new Label("Filter:");
 
-        choiceBox = new ChoiceBox(FXCollections.observableArrayList(
+        choiceBox = new ChoiceBox<String>(FXCollections.observableArrayList(
             filters)
         );
 
@@ -164,7 +164,7 @@ public abstract class ListingScene {
         return filterField;
     }
 
-    public ChoiceBox getChoiceBox() {
+    public ChoiceBox<String> getChoiceBox() {
         return choiceBox;
     }
 

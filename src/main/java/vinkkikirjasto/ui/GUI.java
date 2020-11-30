@@ -1,7 +1,7 @@
 package vinkkikirjasto.ui;
 
 import javafx.application.Application;
-import static javafx.application.Application.launch;
+//import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
