@@ -7,8 +7,10 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 
 import Dao.BookDao;
+import Dao.MovieDao;
 import Dao.UrlDao;
 import Database.SqlDbBookDao;
+import Database.SqlDbMovieDao;
 import Database.SqlDbUrlDao;
 import Domain.Book;
 import Service.VinkkiService;
@@ -17,6 +19,7 @@ public class BookSearchStepdefs extends ApplicationTest {
 
     private BookDao bookDao;
     private UrlDao urlDao;
+    private MovieDao movieDao;
     private VinkkiService vinkkiService;
     private Book lisattavaKirja;
 
@@ -24,7 +27,8 @@ public class BookSearchStepdefs extends ApplicationTest {
         String db = "jdbc:sqlite::memory:";
         bookDao = new SqlDbBookDao(db);
         urlDao = new SqlDbUrlDao(db);
-        vinkkiService = new VinkkiService(bookDao, urlDao);
+        movieDao = new SqlDbMovieDao(db);
+        vinkkiService = new VinkkiService(bookDao, urlDao, movieDao);
     }
 
     @Given("Books database is initialized and author {string}, title {string}, "

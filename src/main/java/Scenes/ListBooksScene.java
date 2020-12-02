@@ -1,6 +1,7 @@
 package Scenes;
 
 import Database.SqlDbBookDao;
+import Database.SqlDbMovieDao;
 import Database.SqlDbUrlDao;
 import Domain.Book;
 import Domain.Bookmark;
@@ -31,7 +32,7 @@ public class ListBooksScene extends ListingScene {
         super(chooseAddScene, new String[]{"None", "Author", "Title", "ISBN"});
         try {
             this.vinkkiService = new VinkkiService(
-                    new SqlDbBookDao(), new SqlDbUrlDao()
+                    new SqlDbBookDao(), new SqlDbUrlDao(), new SqlDbMovieDao()
             );
         } catch (Exception e) {
             this.vinkkiService = null;
@@ -184,9 +185,6 @@ public class ListBooksScene extends ListingScene {
         labelISBN.setStyle(cssLayoutBorder01);
         labelISBN.setMaxWidth(50);
         labelISBN.setMinWidth(50);
-
-        String relatedCourses = ((Book) book).getRelatedCourses();
-        Label labelRelatedCourses = new Label(relatedCourses);
         
         Button editButton = new Button("Edit");
         editButtonFunction(editButton, ((Book) book).getKirjoittaja(), ((Book) book).getTitle());
@@ -196,7 +194,6 @@ public class ListBooksScene extends ListingScene {
         nodes.add(labelJulkaisuvuosi);
         nodes.add(labelSivumaara);
         nodes.add(labelISBN);
-        nodes.add(labelRelatedCourses);
         nodes.add(editButton);
 
         return nodes;

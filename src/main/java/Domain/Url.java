@@ -21,7 +21,7 @@ public class Url extends Bookmark {
         String kommentti,
         ArrayList<String> tagit
     ) {
-        super("Url", otsikko, relatedCourses, tagit);
+        super("Url", otsikko);
         
         this.url = url;
         this.tyyppi = tyyppi;

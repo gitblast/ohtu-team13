@@ -1,6 +1,7 @@
 package Scenes;
 
 import Database.SqlDbBookDao;
+import Database.SqlDbMovieDao;
 import Database.SqlDbUrlDao;
 import Service.VinkkiService;
 
@@ -43,7 +44,7 @@ public abstract class CreateBookmarkScene {
 
         try {
             this.vinkkiService = new VinkkiService(
-                    new SqlDbBookDao(), new SqlDbUrlDao()
+                    new SqlDbBookDao(), new SqlDbUrlDao(), new SqlDbMovieDao()
             );
         } catch (Exception e) {
             this.vinkkiService = null;

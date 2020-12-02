@@ -1,6 +1,5 @@
 package Domain;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Book extends Bookmark {
@@ -15,11 +14,9 @@ public class Book extends Bookmark {
         String title,
         Integer releaseYear,
         Integer pageCount,
-        String ISBN,
-        ArrayList<String> tags,
-        String relatedCourses
+        String ISBN
     ) {
-        super("Book", title, relatedCourses, tags);
+        super("Book", title);
 
         this.author = author;
         this.releaseYear = releaseYear;
@@ -32,20 +29,8 @@ public class Book extends Bookmark {
         String title,
         Integer releaseYear,
         Integer pageCount
-    ) {
-        this(author, title, releaseYear, pageCount,
-                null, new ArrayList<>(), null);
-    }
-
-    public Book(
-        String author,
-        String title,
-        Integer releaseYear,
-        Integer pageCount,
-        String ISBN
-    ) {
-        this(author, title, releaseYear, pageCount,
-                ISBN, new ArrayList<>(), null);
+    ){
+        this(author, title, releaseYear, pageCount, null);
     }
 
     public String getKirjoittaja() {

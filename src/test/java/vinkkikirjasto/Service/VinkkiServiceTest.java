@@ -1,8 +1,10 @@
 package vinkkikirjasto.Service;
 
 import Dao.BookDao;
+import Dao.MovieDao;
 import Dao.UrlDao;
 import Database.SqlDbBookDao;
+import Database.SqlDbMovieDao;
 import Database.SqlDbUrlDao;
 import Domain.Book;
 import Domain.Url;
@@ -16,6 +18,7 @@ public class VinkkiServiceTest {
 
     private BookDao bookDao;
     private UrlDao urlDao;
+    private MovieDao movieDao;
     private VinkkiService vinkkiService;
 
     @Before
@@ -23,7 +26,8 @@ public class VinkkiServiceTest {
         String db = "jdbc:sqlite::memory:";
         bookDao = new SqlDbBookDao(db);
         urlDao = new SqlDbUrlDao(db);
-        vinkkiService = new VinkkiService(bookDao, urlDao);
+        movieDao = new SqlDbMovieDao(db);
+        vinkkiService = new VinkkiService(bookDao, urlDao, movieDao);
     }
 
     @Test

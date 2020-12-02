@@ -75,7 +75,7 @@ public class SqlDbBookDao implements BookDao {
                 Integer sivumaara = rs.getInt("sivumaara");
                 String ISBN = rs.getString("ISBN");
                 Book lisattava = new Book(kirjoittaja, nimeke, julkaisuvuosi,
-                        sivumaara, ISBN, null, null);
+                        sivumaara, ISBN);
 
                 bookList.add(lisattava);
             }
@@ -123,7 +123,7 @@ public class SqlDbBookDao implements BookDao {
                 Integer sivumaara = rs.getInt("sivumaara");
                 String ISBN = rs.getString("ISBN");
                 Book lisattava = new Book(kirjoittaja, nimeke, julkaisuvuosi,
-                        sivumaara, ISBN, null, null);
+                        sivumaara, ISBN);
 
                 bookList.add(lisattava);
             }
@@ -152,7 +152,7 @@ public class SqlDbBookDao implements BookDao {
                 Integer sivumaara = rs.getInt("sivumaara");
                 String ISBN = rs.getString("ISBN");
                 Book lisattava = new Book(kirjoittaja, nimeke, julkaisuvuosi,
-                        sivumaara, ISBN, null, null);
+                        sivumaara, ISBN);
 
                 bookList.add(lisattava);
             }
@@ -181,7 +181,7 @@ public class SqlDbBookDao implements BookDao {
                 Integer sivumaara = rs.getInt("sivumaara");
                 String ISBN = rs.getString("ISBN");
                 book = new Book(kirjoittaja, nimeke, julkaisuvuosi,
-                        sivumaara, ISBN, null, null);
+                        sivumaara, ISBN);
             }
         } catch (SQLException error) {
             System.out.println(error.getMessage());
