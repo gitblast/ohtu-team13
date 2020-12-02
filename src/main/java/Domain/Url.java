@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public class Url extends Bookmark {
 
+    private Integer id;
+    private String otsikko;
     private String url;
     private String tyyppi;
     private String kommentti;
@@ -22,7 +24,7 @@ public class Url extends Bookmark {
         ArrayList<String> tagit
     ) {
         super("Url", otsikko);
-        
+        this.otsikko = otsikko;
         this.url = url;
         this.tyyppi = tyyppi;
         this.kommentti = kommentti;
@@ -30,6 +32,19 @@ public class Url extends Bookmark {
 
     public Url(String otsikko, String url) {
         this(otsikko, url, null, null, null, null);
+    }
+
+    public Url(Integer id, String otsikko, String osoite) {
+        this(otsikko, osoite);
+        this.id = id;
+    }
+
+    public String getOtsikko() {
+        return otsikko;
+    }
+
+    public void setOtsikko(String otsikko) {
+        this.otsikko = otsikko;
     }
 
     /**
@@ -74,6 +89,14 @@ public class Url extends Bookmark {
         this.kommentti = kommentti;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

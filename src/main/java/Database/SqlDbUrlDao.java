@@ -44,15 +44,15 @@ public class SqlDbUrlDao implements UrlDao {
 
     public ArrayList<Url> getAllURLs() {
         urlList = new ArrayList<Url>();
-        String query = "SELECT otsikko, url FROM Url;";
-
+        String query = "SELECT id, otsikko, url FROM Url;";
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
             ResultSet rs = prepared.executeQuery();
             while (rs.next()) {
+                Integer id = rs.getInt("id");
                 String otsikko = rs.getString(("otsikko"));
                 String osoite = rs.getString("url");
-                Url lisattava = new Url(otsikko, osoite);
+                Url lisattava = new Url(id, otsikko, osoite);
                 urlList.add(lisattava);
             }
         } catch (SQLException error) {
@@ -81,4 +81,36 @@ public class SqlDbUrlDao implements UrlDao {
         return urlList;
     }
 
+    @Override
+    public boolean modifyURL(Url url) {
+        if (url.getId() == null) {
+            return false;
+        }
+        String query = "UPDATE Url SET otsikko=?, url=? WHERE id=?;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(query);
+            prepared.setString(1, url.getOtsikko());
+            prepared.setString(2, url.getUrl());
+            prepared.setInt(3, url.getId());
+            prepared.executeUpdate();
+            return true;
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteURL(int id) {
+        String query = "DELETE FROM Url WHERE id=?;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(query);
+            prepared.setInt(1, id);
+            prepared.executeUpdate();
+            return true;
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+            return false;
+        }
+    }
 }

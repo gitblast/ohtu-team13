@@ -62,21 +62,21 @@ public class SqlDbBookDao implements BookDao {
 
     public ArrayList<Book> getAllBooks() {
         bookList = new ArrayList<Book>();
-        String query = "SELECT kirjoittaja, nimeke, "
+        String query = "SELECT id, kirjoittaja, nimeke, "
                 + "julkaisuvuosi, sivumaara, ISBN "
                 + "FROM books;";
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
             ResultSet rs = prepared.executeQuery();
             while (rs.next()) {
+                Integer id = rs.getInt("id");
                 String kirjoittaja = rs.getString("kirjoittaja");
                 String nimeke = rs.getString("nimeke");
                 Integer julkaisuvuosi = rs.getInt("julkaisuvuosi");
                 Integer sivumaara = rs.getInt("sivumaara");
                 String ISBN = rs.getString("ISBN");
-                Book lisattava = new Book(kirjoittaja, nimeke, julkaisuvuosi,
-                        sivumaara, ISBN);
-
+                Book lisattava = new Book(id, kirjoittaja, nimeke,
+                        julkaisuvuosi, sivumaara, ISBN);
                 bookList.add(lisattava);
             }
         } catch (SQLException error) {
@@ -89,14 +89,15 @@ public class SqlDbBookDao implements BookDao {
 
     public Book findByISBN(String ISBN) {
         Book book = null;
-        String query = "SELECT kirjoittaja, nimeke, "
+        String query = "SELECT id, kirjoittaja, nimeke, "
                 + "julkaisuvuosi, sivumaara, ISBN "
                 + "FROM books WHERE ISBN=?;";
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
             prepared.setString(1, ISBN);
             ResultSet rs = prepared.executeQuery();
-            book = new Book(rs.getString("kirjoittaja"), rs.getString("nimeke"),
+            book = new Book(rs.getInt("id"),
+                    rs.getString("kirjoittaja"), rs.getString("nimeke"),
                     rs.getInt("julkaisuvuosi"), rs.getInt("sivumaara"),
                     rs.getString("ISBN"));
         } catch (SQLException error) {
@@ -109,7 +110,7 @@ public class SqlDbBookDao implements BookDao {
 
     public ArrayList<Book> findByKirjoittaja(String searchTerm) {
         bookList = new ArrayList<Book>();
-        String query = "SELECT kirjoittaja, nimeke, "
+        String query = "SELECT id, kirjoittaja, nimeke, "
                 + "julkaisuvuosi, sivumaara, ISBN "
                 + "FROM books WHERE kirjoittaja=?;";
         try {
@@ -117,13 +118,14 @@ public class SqlDbBookDao implements BookDao {
             prepared.setString(1, searchTerm);
             ResultSet rs = prepared.executeQuery();
             while (rs.next()) {
+                Integer id = rs.getInt("id");
                 String kirjoittaja = rs.getString("kirjoittaja");
                 String nimeke = rs.getString("nimeke");
                 Integer julkaisuvuosi = rs.getInt("julkaisuvuosi");
                 Integer sivumaara = rs.getInt("sivumaara");
                 String ISBN = rs.getString("ISBN");
-                Book lisattava = new Book(kirjoittaja, nimeke, julkaisuvuosi,
-                        sivumaara, ISBN);
+                Book lisattava = new Book(id, kirjoittaja, nimeke,
+                        julkaisuvuosi, sivumaara, ISBN);
 
                 bookList.add(lisattava);
             }
@@ -138,7 +140,7 @@ public class SqlDbBookDao implements BookDao {
 
     public ArrayList<Book> findByNimeke(String searchTerm) {
         bookList = new ArrayList<Book>();
-        String query = "SELECT kirjoittaja, nimeke, "
+        String query = "SELECT id, kirjoittaja, nimeke, "
                 + "julkaisuvuosi, sivumaara, ISBN "
                 + "FROM books WHERE kirjoittaja=?;";
         try {
@@ -146,13 +148,14 @@ public class SqlDbBookDao implements BookDao {
             prepared.setString(1, searchTerm);
             ResultSet rs = prepared.executeQuery();
             while (rs.next()) {
+                Integer id = rs.getInt("id");
                 String kirjoittaja = rs.getString("kirjoittaja");
                 String nimeke = rs.getString("nimeke");
                 Integer julkaisuvuosi = rs.getInt("julkaisuvuosi");
                 Integer sivumaara = rs.getInt("sivumaara");
                 String ISBN = rs.getString("ISBN");
-                Book lisattava = new Book(kirjoittaja, nimeke, julkaisuvuosi,
-                        sivumaara, ISBN);
+                Book lisattava = new Book(id, kirjoittaja, nimeke,
+                        julkaisuvuosi, sivumaara, ISBN);
 
                 bookList.add(lisattava);
             }
@@ -166,7 +169,7 @@ public class SqlDbBookDao implements BookDao {
     
     public Book findWithAuthorAndTitle(String author, String title) {
         Book book = null;
-        String query = "SELECT kirjoittaja, nimeke, "
+        String query = "SELECT id, kirjoittaja, nimeke, "
                 + "julkaisuvuosi, sivumaara, ISBN "
                 + "FROM books WHERE kirjoittaja=? AND nimeke=?;";
         try {
@@ -175,17 +178,56 @@ public class SqlDbBookDao implements BookDao {
             prepared.setString(2, title);
             ResultSet rs = prepared.executeQuery();
             while (rs.next()) {
+                Integer id = rs.getInt("id");
                 String kirjoittaja = rs.getString("kirjoittaja");
                 String nimeke = rs.getString("nimeke");
                 Integer julkaisuvuosi = rs.getInt("julkaisuvuosi");
                 Integer sivumaara = rs.getInt("sivumaara");
                 String ISBN = rs.getString("ISBN");
-                book = new Book(kirjoittaja, nimeke, julkaisuvuosi,
+                book = new Book(id, kirjoittaja, nimeke, julkaisuvuosi,
                         sivumaara, ISBN);
             }
         } catch (SQLException error) {
             System.out.println(error.getMessage());
         }
         return book;
+    }
+
+    @Override
+    public boolean modifyBook(Book book) {
+        if (book.getId() == null) {
+            return false;
+        }
+        String query = "UPDATE books SET kirjoittaja=?,"
+                + "nimeke=?, julkaisuvuosi=?,"
+                + "sivumaara=?, ISBN=? WHERE id=?;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(query);
+            prepared.setString(1, book.getKirjoittaja());
+            prepared.setString(2, book.getTitle());
+            prepared.setInt(3, book.getJulkaisuvuosi());
+            prepared.setInt(4, book.getSivumaara());
+            prepared.setString(5, book.getISBN());
+            prepared.setInt(6, book.getId());
+            prepared.executeUpdate();
+            return true;
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteBook(int id) {
+        String query = "DELETE FROM books WHERE id=?;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(query);
+            prepared.setInt(1, id);
+            prepared.executeUpdate();
+            return true;
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+            return false;
+        }
     }
 }

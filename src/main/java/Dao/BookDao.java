@@ -7,6 +7,10 @@ public interface BookDao {
 
     boolean createBook(Book book);
 
+    boolean modifyBook(Book book);
+    
+    boolean deleteBook(int id);
+    
     ArrayList<Book> getAllBooks();
 
     Book findByISBN(String ISBN);

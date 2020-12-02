@@ -2,6 +2,7 @@ package Domain;
 
 public class Movie extends Bookmark {
 
+    private Integer id;
     private String director;
     private Integer releaseYear;
     private Integer length;
@@ -17,6 +18,20 @@ public class Movie extends Bookmark {
         this.setDirector(director);
         this.setReleaseYear(releaseYear);
         this.setLength(length);
+    }
+
+    public Movie(Integer id, String nimeke, String ohjaaja,
+            Integer julkaisuvuosi, Integer kesto) {
+        this(nimeke, ohjaaja, julkaisuvuosi, kesto);
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getLength() {

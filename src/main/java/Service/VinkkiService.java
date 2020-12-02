@@ -40,7 +40,31 @@ public class VinkkiService {
     public ArrayList<Book> listBooks() {
         return this.bookDao.getAllBooks();
     }
+    
+    public boolean modifyBook(Book book) {
+        return this.bookDao.modifyBook(book);
+    }
+    
+    public boolean deleteBook(int id) {
+        return this.bookDao.deleteBook(id);
+    }
+    
+    public boolean modifyMovie(Movie movie) {
+        return this.movieDao.modifyMovie(movie);
+    }
+    
+    public boolean deleteMovie(int id) {
+        return this.movieDao.deleteMovie(id);
+    }
+    
+    public boolean modifyUrl(Url url) {
+        return this.urlDao.modifyURL(url);
+    }
 
+    public boolean deleteUrl(int id) {
+        return this.urlDao.deleteURL(id);
+    }
+    
     public Book searchBookByISBN(String ISBN) {
         return this.bookDao.findByISBN(ISBN);
     }
