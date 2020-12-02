@@ -1,6 +1,7 @@
 package Scenes;
 
 import Database.SqlDbBookDao;
+import Database.SqlDbMovieDao;
 import Database.SqlDbUrlDao;
 import Service.VinkkiService;
 import java.util.ArrayList;
@@ -16,9 +17,11 @@ public class ChooseAddScene {
 
     AddBookScene addBookScene;
     AddURLScene addURLScene;
+    AddMovieScene addMovieScene;
     Stage primaryStage;
     ListBooksScene listBooksScene;
     ListUrlsScene listUrlsScene;
+    ListMoviesScene listMoviesScene;
     Label errorMsg;
     VinkkiService vinkkiService;
 
@@ -27,15 +30,17 @@ public class ChooseAddScene {
 
         try {
             vinkkiService = new VinkkiService(new SqlDbBookDao(),
-                    new SqlDbUrlDao());
+                    new SqlDbUrlDao(), new SqlDbMovieDao());
         } catch (Exception e) {
             errorMsg.setText("Error in database connection: " + e.getMessage());
         }
 
         addBookScene = new AddBookScene(this);
         addURLScene = new AddURLScene(this);
+        addMovieScene = new AddMovieScene(this);
         listBooksScene = new ListBooksScene(this);
         listUrlsScene = new ListUrlsScene(this);
+        listMoviesScene = new ListMoviesScene(this);
         errorMsg = new Label();
 
     }
@@ -44,8 +49,10 @@ public class ChooseAddScene {
         Label label = new Label();
         int kirjojenmaara = vinkkiService.listBooks().size();
         int urlienmaara = vinkkiService.listURLs().size();
+        int elokuvienmaara = vinkkiService.listMovies().size();
         label.setText("Books in database: " + kirjojenmaara
-                + "\nUrls in database: " + urlienmaara);
+                + "\nUrls in database: " + urlienmaara
+                + "\nMovies in database: " + elokuvienmaara);
 
         label.setId("maara_label");
 
@@ -53,10 +60,14 @@ public class ChooseAddScene {
         switchToAddBookScene.setId("lisaa_kirja_btn");
         Button switchToAddURLScene = new Button("Add URL");
         switchToAddURLScene.setId("lisaa_url_btn");
+        Button switchToAddMovieScene = new Button("Add Movie");
+        switchToAddMovieScene.setId("lisaa_elokuva_btn");
         Button switchToListBooksScene = new Button("List all books");
         switchToListBooksScene.setId("listaa_kirjat_btn");
         Button switchToListUrlsScene = new Button("List all URLs");
         switchToListUrlsScene.setId("listaa_urlit_btn");
+        Button switchToListMoviesScene = new Button ("List all movies");
+        switchToListMoviesScene.setId("listaa_elokuvat_btn");
 
         VBox elements = new VBox(10);
         elements.setId("chooseAdd_elements");
@@ -65,8 +76,10 @@ public class ChooseAddScene {
 
         VBox.setVgrow(switchToAddBookScene, Priority.ALWAYS);
         VBox.setVgrow(switchToAddURLScene, Priority.ALWAYS);
+        VBox.setVgrow(switchToAddMovieScene, Priority.ALWAYS);
         VBox.setVgrow(switchToListBooksScene, Priority.ALWAYS);
         VBox.setVgrow(switchToListUrlsScene, Priority.ALWAYS);
+        VBox.setVgrow(switchToListMoviesScene, Priority.ALWAYS);
 
         switchToAddBookScene.setOnAction(e -> {
             primaryStage.setScene(addBookScene.createScene());
@@ -74,6 +87,10 @@ public class ChooseAddScene {
 
         switchToAddURLScene.setOnAction(e -> {
             primaryStage.setScene(addURLScene.createScene());
+        });
+
+        switchToAddMovieScene.setOnAction(e -> {
+            primaryStage.setScene(addMovieScene.createScene());
         });
 
         switchToListBooksScene.setOnAction(e -> {
@@ -86,9 +103,15 @@ public class ChooseAddScene {
                     new ArrayList<>(vinkkiService.listURLs())));
         });
 
+        switchToListMoviesScene.setOnAction(e -> {
+            primaryStage.setScene(listMoviesScene.createScene(
+                    new ArrayList<>(vinkkiService.listMovies())));
+        });
+
         elements.getChildren().addAll(label, switchToAddBookScene,
-                switchToAddURLScene, switchToListBooksScene,
-                switchToListUrlsScene, errorMsg);
+                switchToAddURLScene, switchToAddMovieScene, 
+                switchToListBooksScene, switchToListUrlsScene,
+                switchToListMoviesScene, errorMsg);
 
         Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;

@@ -172,15 +172,11 @@ public class ListBooksScene extends ListingScene {
         labelISBN.setMaxWidth(50);
         labelISBN.setMinWidth(50);
 
-        String relatedCourses = ((Book) book).getRelatedCourses();
-        Label labelRelatedCourses = new Label(relatedCourses);
-
         nodes.add(labelKirjoittaja);
         nodes.add(labelNimeke);
         nodes.add(labelJulkaisuvuosi);
         nodes.add(labelSivumaara);
         nodes.add(labelISBN);
-        nodes.add(labelRelatedCourses);
 
         return nodes;
     }

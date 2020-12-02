@@ -44,9 +44,16 @@ public class DbConnection {
                 + "kommentti varchar"
                 + "releatedCourses varchar)";
         
+        String createMovieTableQuery = "CREATE TABLE IF NOT EXISTS Movie "
+                + "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "nimeke varchar,"
+                + "ohjaaja varchar,"
+                + "julkaisuvuosi INTEGER,"
+                + "kesto INTEGER)";
         try {
             connection.createStatement().execute(createBookTableQuery); 
             connection.createStatement().execute(createUrlTableQuery);
+            connection.createStatement().execute(createMovieTableQuery);
         } catch (SQLException error) {
             System.out.println(error.getMessage());
         }
