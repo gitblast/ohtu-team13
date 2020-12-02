@@ -28,26 +28,21 @@ public class DbConnection {
     private void createDbIfNotExists() {
         String createBookTableQuery = "CREATE TABLE IF NOT EXISTS Books "
                 + "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "kirjoittaja varchar,"
-                + "nimeke varchar,"
-                + "julkaisuvuosi varchar,"
+                + "kirjoittaja VARCHAR,"
+                + "nimeke VARCHAR,"
+                + "julkaisuvuosi INTEGER,"
                 + "sivumaara INTEGER,"
-                + "ISBN varchar,"
-                + "tagit varchar,"
-                + "relatedCourses varchar)"; 
+                + "ISBN VARCHAR)"; 
         
         String createUrlTableQuery = "CREATE TABLE IF NOT EXISTS Url "
                 + "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "otsikko varchar,"
-                + "url varchar,"
-                + "tyyppi varchar,"
-                + "kommentti varchar"
-                + "releatedCourses varchar)";
+                + "otsikko VARCHAR,"
+                + "url VARCHAR)";
         
         String createMovieTableQuery = "CREATE TABLE IF NOT EXISTS Movie "
                 + "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "nimeke varchar,"
-                + "ohjaaja varchar,"
+                + "nimeke VARCHAR,"
+                + "ohjaaja VARCHAR,"
                 + "julkaisuvuosi INTEGER,"
                 + "kesto INTEGER)";
         try {
