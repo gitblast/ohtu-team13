@@ -29,7 +29,7 @@ public class Book extends Bookmark {
         String title,
         Integer releaseYear,
         Integer pageCount
-    ){
+    ) {
         this(author, title, releaseYear, pageCount, null);
     }
 
@@ -95,7 +95,7 @@ public class Book extends Bookmark {
     @Override
     public String toString() {
         return "Book{" + "kirjoittaja=" + this.author + ", nimeke="
-                + super.getTitle() + ", julkaisuvuosi=" + releaseYear
-                + ", sivumaara=" + pageCount + ", ISBN=" + ISBN + '}';
+            + super.getTitle() + ", julkaisuvuosi=" + releaseYear
+            + ", sivumaara=" + pageCount + ", ISBN=" + ISBN + '}';
     }
 }

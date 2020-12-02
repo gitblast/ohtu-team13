@@ -32,7 +32,7 @@ public class ChooseAddScene {
 
         try {
             vinkkiService = new VinkkiService(new SqlDbBookDao(),
-                    new SqlDbUrlDao(), new SqlDbMovieDao());
+                new SqlDbUrlDao(), new SqlDbMovieDao());
         } catch (Exception e) {
             errorMsg.setText("Error in database connection: " + e.getMessage());
         }
@@ -44,7 +44,7 @@ public class ChooseAddScene {
         listUrlsScene = new ListUrlsScene(this);
         editBookScene = new EditBookScene(this, null);
         listMoviesScene = new ListMoviesScene(this);
-        
+
         errorMsg = new Label();
 
     }
@@ -55,8 +55,8 @@ public class ChooseAddScene {
         int urlienmaara = vinkkiService.listURLs().size();
         int elokuvienmaara = vinkkiService.listMovies().size();
         label.setText("Books in database: " + kirjojenmaara
-                + "\nUrls in database: " + urlienmaara
-                + "\nMovies in database: " + elokuvienmaara);
+            + "\nUrls in database: " + urlienmaara
+            + "\nMovies in database: " + elokuvienmaara);
 
         label.setId("maara_label");
 
@@ -70,7 +70,7 @@ public class ChooseAddScene {
         switchToListBooksScene.setId("listaa_kirjat_btn");
         Button switchToListUrlsScene = new Button("List all URLs");
         switchToListUrlsScene.setId("listaa_urlit_btn");
-        Button switchToListMoviesScene = new Button ("List all movies");
+        Button switchToListMoviesScene = new Button("List all movies");
         switchToListMoviesScene.setId("listaa_elokuvat_btn");
 
         VBox elements = new VBox(10);
@@ -99,23 +99,23 @@ public class ChooseAddScene {
 
         switchToListBooksScene.setOnAction(e -> {
             primaryStage.setScene(listBooksScene.createScene(
-                    new ArrayList<>(vinkkiService.listBooks())));
+                new ArrayList<>(vinkkiService.listBooks())));
         });
 
         switchToListUrlsScene.setOnAction(e -> {
             primaryStage.setScene(listUrlsScene.createScene(
-                    new ArrayList<>(vinkkiService.listURLs())));
+                new ArrayList<>(vinkkiService.listURLs())));
         });
 
         switchToListMoviesScene.setOnAction(e -> {
             primaryStage.setScene(listMoviesScene.createScene(
-                    new ArrayList<>(vinkkiService.listMovies())));
+                new ArrayList<>(vinkkiService.listMovies())));
         });
 
         elements.getChildren().addAll(label, switchToAddBookScene,
-                switchToAddURLScene, switchToAddMovieScene, 
-                switchToListBooksScene, switchToListUrlsScene,
-                switchToListMoviesScene, errorMsg);
+            switchToAddURLScene, switchToAddMovieScene,
+            switchToListBooksScene, switchToListUrlsScene,
+            switchToListMoviesScene, errorMsg);
 
         Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;
@@ -125,7 +125,7 @@ public class ChooseAddScene {
         primaryStage.setScene(createScene());
         primaryStage.show();
     }
-    
+
     public void setScene(Scene scene) throws Exception {
         primaryStage.setScene(scene);
         primaryStage.show();

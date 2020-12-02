@@ -45,19 +45,25 @@ public class Movie extends Bookmark {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Movie other = (Movie) obj;
-        if (!director.equals(other.director))
+        if (!director.equals(other.director)) {
             return false;
-        if (!length.equals(other.length))
+        }
+        if (!length.equals(other.length)) {
             return false;
-        if (!releaseYear.equals(other.releaseYear))
+        }
+        if (!releaseYear.equals(other.releaseYear)) {
             return false;
+        }
         if (!super.getTitle().equals(other.getTitle())) {
             return false;
         }
@@ -66,10 +72,10 @@ public class Movie extends Bookmark {
 
     @Override
     public String toString() {
-        return "Movie [director=" + director +
-        ", nimeke=" + super.getTitle() +
-        ", length=" + length +
-        ", releaseYear=" + releaseYear + "]";
+        return "Movie [director=" + director
+            + ", nimeke=" + super.getTitle()
+            + ", length=" + length
+            + ", releaseYear=" + releaseYear + "]";
     }
-    
+
 }

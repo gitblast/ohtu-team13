@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import java.util.List;
 
 import Domain.Bookmark;
+import Service.VinkkiService;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
@@ -25,6 +26,7 @@ public abstract class ListingScene {
     private String[] filters;
     private TextField filterField;
     private ChoiceBox<String> choiceBox;
+    VinkkiService vinkkiService;
     ChooseAddScene chooseAddScene;
     Label info;
 
@@ -41,6 +43,7 @@ public abstract class ListingScene {
         this.choiceBox = null;
         this.allBookmarks = null;
         this.shownBookmarks = null;
+        this.vinkkiService = chooseAddScene.vinkkiService;
     }
 
     protected abstract void setChangeListenerForFilterField(TextField tf);

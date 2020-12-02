@@ -1,8 +1,5 @@
 package Scenes;
 
-import Database.SqlDbBookDao;
-import Database.SqlDbMovieDao;
-import Database.SqlDbUrlDao;
 import Service.VinkkiService;
 
 import javafx.geometry.Insets;

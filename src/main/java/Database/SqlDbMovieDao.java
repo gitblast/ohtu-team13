@@ -32,7 +32,7 @@ public class SqlDbMovieDao implements MovieDao {
             || movie.getDirector() == null
             || movie.getReleaseYear() == null
             || movie.getLength() == null) {
-                return false;
+            return false;
         }
         String query = "INSERT INTO Movie(nimeke, ohjaaja, "
             + "julkaisuvuosi, kesto) VALUES (?, ?, ?, ?);";
@@ -54,8 +54,8 @@ public class SqlDbMovieDao implements MovieDao {
     public ArrayList<Movie> getAllMovies() {
         movieList = new ArrayList<Movie>();
         String query = "SELECT nimeke, ohjaaja, "
-                + "julkaisuvuosi, kesto "
-                + "FROM Movie;";
+            + "julkaisuvuosi, kesto "
+            + "FROM Movie;";
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
             ResultSet rs = prepared.executeQuery();
@@ -65,7 +65,7 @@ public class SqlDbMovieDao implements MovieDao {
                 Integer julkaisuvuosi = rs.getInt("julkaisuvuosi");
                 Integer kesto = rs.getInt("kesto");
                 Movie lisattava = new Movie(nimeke, ohjaaja, julkaisuvuosi,
-                        kesto);
+                    kesto);
 
                 movieList.add(lisattava);
             }
@@ -88,5 +88,5 @@ public class SqlDbMovieDao implements MovieDao {
         // TODO Auto-generated method stub
         return null;
     }
-    
+
 }
