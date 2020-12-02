@@ -16,6 +16,7 @@ public class ChooseAddScene {
 
     AddBookScene addBookScene;
     AddURLScene addURLScene;
+    EditBookScene editBookScene;
     Stage primaryStage;
     ListBooksScene listBooksScene;
     ListUrlsScene listUrlsScene;
@@ -36,6 +37,7 @@ public class ChooseAddScene {
         addURLScene = new AddURLScene(this);
         listBooksScene = new ListBooksScene(this);
         listUrlsScene = new ListUrlsScene(this);
+        editBookScene = new EditBookScene(this, null);
         errorMsg = new Label();
 
     }
@@ -96,6 +98,11 @@ public class ChooseAddScene {
 
     public void returnHere() throws Exception {
         primaryStage.setScene(createScene());
+        primaryStage.show();
+    }
+    
+    public void setScene(Scene scene) throws Exception {
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 }

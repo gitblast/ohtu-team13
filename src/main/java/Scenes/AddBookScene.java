@@ -3,6 +3,7 @@ package Scenes;
 import Domain.Book;
 import javafx.scene.control.TextField;
 import java.util.ArrayList;
+import javafx.scene.control.Button;
 
 public class AddBookScene extends CreateBookmarkScene {
 
@@ -41,6 +42,11 @@ public class AddBookScene extends CreateBookmarkScene {
         list.add(ISBN);
 
         this.fields = list;
+    }
+    
+    @Override
+    protected Button setDeleteButton() {
+        return null;
     }
 
     @Override

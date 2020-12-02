@@ -67,6 +67,10 @@ public abstract class CreateBookmarkScene {
         for (TextField field: fields) {
             vbox.getChildren().add(field);
         }
+        
+        if (setDeleteButton() != null) {
+            vbox.getChildren().add(setDeleteButton());
+        }
 
         vbox.getChildren().add(errorMessage);
         vbox.getChildren().add(submitButton);
@@ -82,6 +86,8 @@ public abstract class CreateBookmarkScene {
     protected abstract void setBookmarkInputFields();
 
     protected abstract boolean bookmarkCreation();
+    
+    protected abstract Button setDeleteButton();
 
     protected void submitButtonFunction() {
         submitButton.setOnAction(e -> {

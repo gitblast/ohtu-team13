@@ -50,4 +50,8 @@ public class VinkkiService {
     public ArrayList<Url> searchUrlByName(String name) {
         return this.urlDao.findByOtsikko(name);
     }
+    
+    public Book findBookByAuthorAndTitle(String author, String title) {
+        return this.bookDao.findWithAuthorAndTitle(author, title);
+    }
 }

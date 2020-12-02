@@ -3,6 +3,7 @@ package Scenes;
 import Domain.Url;
 import javafx.scene.control.TextField;
 import java.util.ArrayList;
+import javafx.scene.control.Button;
 
 public class AddURLScene extends CreateBookmarkScene {
 
@@ -49,5 +50,10 @@ public class AddURLScene extends CreateBookmarkScene {
             return added;
         }
         return false;
+    }
+    
+    @Override
+    protected Button setDeleteButton() {
+        return null;
     }
 }

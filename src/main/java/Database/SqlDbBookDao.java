@@ -163,5 +163,29 @@ public class SqlDbBookDao implements BookDao {
         }
         return bookList;
     }
-
+    
+    public Book findWithAuthorAndTitle(String author, String title) {
+        Book book = null;
+        String query = "SELECT kirjoittaja, nimeke, "
+                + "julkaisuvuosi, sivumaara, ISBN "
+                + "FROM books WHERE kirjoittaja=? AND nimeke=?;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(query);
+            prepared.setString(1, author);
+            prepared.setString(2, title);
+            ResultSet rs = prepared.executeQuery();
+            while (rs.next()) {
+                String kirjoittaja = rs.getString("kirjoittaja");
+                String nimeke = rs.getString("nimeke");
+                Integer julkaisuvuosi = rs.getInt("julkaisuvuosi");
+                Integer sivumaara = rs.getInt("sivumaara");
+                String ISBN = rs.getString("ISBN");
+                book = new Book(kirjoittaja, nimeke, julkaisuvuosi,
+                        sivumaara, ISBN, null, null);
+            }
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+        }
+        return book;
+    }
 }

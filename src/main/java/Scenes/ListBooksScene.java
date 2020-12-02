@@ -1,20 +1,26 @@
 package Scenes;
 
+import Database.SqlDbBookDao;
+import Database.SqlDbUrlDao;
 import Domain.Book;
 import Domain.Bookmark;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import javafx.scene.Node;
+import Service.VinkkiService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 public class ListBooksScene extends ListingScene {
 
+    private EditBookScene editBookScene;
+    private VinkkiService vinkkiService;
     // UI Style elements
     private String cssLayoutBorder01 = "-fx-border-color: gray;\n"
         + "-fx-border-insets: 0;\n"
@@ -23,6 +29,13 @@ public class ListBooksScene extends ListingScene {
 
     public ListBooksScene(ChooseAddScene chooseAddScene) {
         super(chooseAddScene, new String[]{"None", "Author", "Title", "ISBN"});
+        try {
+            this.vinkkiService = new VinkkiService(
+                    new SqlDbBookDao(), new SqlDbUrlDao()
+            );
+        } catch (Exception e) {
+            this.vinkkiService = null;
+        }
     }
 
     private List<Bookmark> getFilteredByString(
@@ -174,15 +187,31 @@ public class ListBooksScene extends ListingScene {
 
         String relatedCourses = ((Book) book).getRelatedCourses();
         Label labelRelatedCourses = new Label(relatedCourses);
-
+        
+        Button editButton = new Button("Edit");
+        editButtonFunction(editButton, ((Book) book).getKirjoittaja(), ((Book) book).getTitle());
+        
         nodes.add(labelKirjoittaja);
         nodes.add(labelNimeke);
         nodes.add(labelJulkaisuvuosi);
         nodes.add(labelSivumaara);
         nodes.add(labelISBN);
         nodes.add(labelRelatedCourses);
+        nodes.add(editButton);
 
         return nodes;
+    }
+    
+    private void editButtonFunction(Button button, String author, String title) {
+        Book book = vinkkiService.findBookByAuthorAndTitle(author, title);
+        button.setOnAction(e -> {
+            try {
+                editBookScene = new EditBookScene(chooseAddScene, book);
+                chooseAddScene.setScene(editBookScene.createScene());
+            } catch (Exception error) {
+                System.out.println(error.getMessage());
+            }
+        });
     }
 
     @Override
