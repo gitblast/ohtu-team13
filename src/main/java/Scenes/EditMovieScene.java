@@ -3,13 +3,18 @@ package Scenes;
 import java.util.ArrayList;
 
 import Domain.Movie;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 public class EditMovieScene extends CreateBookmarkScene {
         
     Movie movie;
     Button deleteButton;
+    Alert alert;
     
     public EditMovieScene(ChooseAddScene chooseAddScene, Movie movie) {
         super(chooseAddScene);
@@ -17,6 +22,7 @@ public class EditMovieScene extends CreateBookmarkScene {
         this.deleteButton = new Button("Delete movie");
         this.title.setText("Editing movie");
         this.submitButton.setText("Submit changes");
+        this.alert = new Alert(AlertType.NONE);
     }
     
     @Override
@@ -53,14 +59,24 @@ public class EditMovieScene extends CreateBookmarkScene {
     
     @Override
     protected Button setDeleteButton() {
+        String h = "Are you sure you want to delete movie " + movie.getTitle();
         this.deleteButton.setOnAction(e -> {
-            try {
-                boolean poistettu = vinkkiService.deleteMovie(movie.getId());
-                if (poistettu) {
-                    chooseAddScene.listMoviesScene();
-                }
-            } catch (Exception error) {
-                System.out.println(error.getMessage());
+            alert.setAlertType(AlertType.CONFIRMATION); 
+            alert.setTitle("Delete Movie");
+            alert.setHeaderText(h);
+            alert.setContentText(movie.getDirector() + "\n"
+                                + movie.getReleaseYear() + "\n"
+                                + movie.getLength());
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() ==  ButtonType.OK) {
+                try {
+                    boolean poisto = vinkkiService.deleteMovie(movie.getId());
+                    if (poisto) {
+                        chooseAddScene.listMoviesScene();
+                    }
+                } catch (Exception error) {
+                    System.out.println(error.getMessage());
+                }       
             }
         });
         return this.deleteButton;

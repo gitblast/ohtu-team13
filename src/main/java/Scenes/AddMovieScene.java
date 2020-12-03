@@ -65,8 +65,8 @@ public class AddMovieScene extends CreateBookmarkScene {
         }
 
         if (inputsOK) {
-            Movie kirja = new Movie(nimeke, director, jvuosi, kesto);
-            boolean added = vinkkiService.addMovie(kirja);
+            Movie movie = new Movie(nimeke, director, jvuosi, kesto);
+            boolean added = vinkkiService.addMovie(movie);
             return added;
         }
         return false;

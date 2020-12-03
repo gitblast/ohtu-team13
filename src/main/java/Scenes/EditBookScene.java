@@ -56,33 +56,17 @@ public class EditBookScene extends CreateBookmarkScene {
         this.fields = list;
     }
     
-    /*
-    EventHandler<ActionEvent> event = new 
-                         EventHandler<ActionEvent>() { 
-            public void handle(ActionEvent e) 
-            { 
-                // set alert type 
-                alert.setAlertType(AlertType.CONFIRMATION); 
-  
-                // show the dialog 
-                alert.show(); 
-            } 
-        }; 
-    
-    
-            try {
-                boolean poistettu = vinkkiService.deleteBook(book.getId());
-                if (poistettu) {
-                    chooseAddScene.listBooksScene();
-                }
-            } catch (Exception error) {
-                System.out.println(error.getMessage());
-            }
-    */
     @Override
     protected Button setDeleteButton() {
+        String text = "Are you sure you want to delete book " + book.getTitle();
         this.deleteButton.setOnAction(e -> {
             alert.setAlertType(AlertType.CONFIRMATION); 
+            alert.setTitle("Delete book");
+            alert.setHeaderText(text);
+            alert.setContentText(book.getKirjoittaja() + "\n"
+                                + book.getSivumaara() + "\n"
+                                + book.getJulkaisuvuosi() + "\n"
+                                + book.getISBN());
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() ==  ButtonType.OK) {
                 try {
