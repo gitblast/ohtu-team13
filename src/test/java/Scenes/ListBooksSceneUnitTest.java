@@ -12,24 +12,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.when;
 import org.testfx.framework.junit.ApplicationTest;
 
-/**
- *
- * @author jmammela
- */
+@SuppressWarnings("unchecked")
 public class ListBooksSceneUnitTest extends ApplicationTest {
 
     ListBooksScene scene;
@@ -55,9 +45,6 @@ public class ListBooksSceneUnitTest extends ApplicationTest {
         List<Node> nodes = scene.createBookmarkContent(b);
 
         assertEquals(6, nodes.size());
-
-        verify(mockService, times(1))
-            .findBookByAuthorAndTitle(eq(kirjoittaja), eq(nimeke));
 
         for (int i = 0; i < 5; i++) {
             assertTrue(nodes.get(i) instanceof Label);
