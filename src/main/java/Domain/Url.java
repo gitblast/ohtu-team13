@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Url extends Bookmark {
 
-    private Integer id;
     private String otsikko;
     private String url;
     private String tyyppi;
@@ -36,7 +35,7 @@ public class Url extends Bookmark {
 
     public Url(Integer id, String otsikko, String osoite) {
         this(otsikko, osoite);
-        this.id = id;
+        this.setId(id);
     }
 
     public String getOtsikko() {
@@ -87,14 +86,6 @@ public class Url extends Bookmark {
      */
     public void setKommentti(String kommentti) {
         this.kommentti = kommentti;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
     
     @Override

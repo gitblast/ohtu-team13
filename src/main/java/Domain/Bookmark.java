@@ -3,6 +3,7 @@ package Domain;
 public abstract class Bookmark {
     private String type;
     private String title;
+    private Integer id;
 
     public Bookmark(
         String type,
@@ -23,4 +24,12 @@ public abstract class Bookmark {
     public void setTitle(String newTitle) {
         this.title = newTitle;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }  
 }
