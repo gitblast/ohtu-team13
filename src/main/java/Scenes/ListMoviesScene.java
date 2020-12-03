@@ -62,7 +62,7 @@ public class ListMoviesScene extends ListingScene {
         );
     }
 
-    private List<Bookmark> getFilteredByString(
+    protected List<Bookmark> getFilteredByString(
         List<Bookmark> allMovies,
         String value,
         String filterType) {
@@ -87,7 +87,7 @@ public class ListMoviesScene extends ListingScene {
             .collect(Collectors.toList());
     }
 
-    private void handleFilterChange(
+    protected void handleFilterChange(
         String filterType,
         String filterFieldValue
     ) {
@@ -207,7 +207,7 @@ public class ListMoviesScene extends ListingScene {
         kesto.setMaxWidth(90);
         kesto.setMinWidth(50);
 
-        otsikot.getChildren().addAll(nimeke, director, 
+        otsikot.getChildren().addAll(nimeke, director,
             jvuosi, kesto);
 
         return otsikot;
