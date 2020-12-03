@@ -27,7 +27,7 @@ public class ListBooksScene extends ListingScene {
         super(chooseAddScene, new String[]{"None", "Author", "Title", "ISBN"});
     }
 
-    private List<Bookmark> getFilteredByString(
+    protected List<Bookmark> getFilteredByString(
         List<Bookmark> allBooks,
         String value,
         String filterType) {
@@ -92,7 +92,7 @@ public class ListBooksScene extends ListingScene {
         );
     }
 
-    private void handleFilterChange(
+    protected void handleFilterChange(
         String filterType,
         String filterFieldValue
     ) {

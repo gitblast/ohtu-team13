@@ -170,4 +170,17 @@ public abstract class ListingScene {
     public ChoiceBox<String> getChoiceBox() {
         return choiceBox;
     }
+
+    public void setChoiceBox(ChoiceBox<String> choiceBox) {
+        this.choiceBox = choiceBox;
+    }
+
+    public void setAllBookmarks(List<Bookmark> allBookmarks) {
+        this.allBookmarks = allBookmarks;
+    }
+
+    public List<Bookmark> getShownBookmarks() {
+        return shownBookmarks;
+    }
+
 }
