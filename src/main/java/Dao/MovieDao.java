@@ -12,6 +12,8 @@ public interface MovieDao {
     boolean deleteMovie(int id);
     
     ArrayList<Movie> getAllMovies();
+    
+    boolean deleteAllMovies();
 
     ArrayList<Movie> findByDirector(String director);
 

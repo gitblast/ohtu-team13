@@ -113,4 +113,17 @@ public class SqlDbUrlDao implements UrlDao {
             return false;
         }
     }
+
+    @Override
+    public boolean deleteAllURLs() {
+        String query = "DELETE FROM Url;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(query);
+            prepared.executeUpdate();
+            return true;
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+            return false;
+        }
+    }
 }

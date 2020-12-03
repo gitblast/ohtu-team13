@@ -12,6 +12,8 @@ public interface BookDao {
     boolean deleteBook(int id);
     
     ArrayList<Book> getAllBooks();
+    
+    boolean deleteAllBooks();
 
     Book findByISBN(String ISBN);
 

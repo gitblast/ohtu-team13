@@ -8,5 +8,6 @@ public interface UrlDao {
     boolean modifyURL(Url url);
     boolean deleteURL(int id);
     ArrayList<Url> getAllURLs();
+    boolean deleteAllURLs();
     ArrayList<Url> findByOtsikko(String otsikko);
 }
