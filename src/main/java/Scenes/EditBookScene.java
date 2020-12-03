@@ -3,12 +3,18 @@ package Scenes;
 import Domain.Book;
 import javafx.scene.control.TextField;
 import java.util.ArrayList;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 public class EditBookScene extends CreateBookmarkScene {
     
     Book book;
     Button deleteButton;
+    Button confirmationButton;
+    Alert alert;
     
     public EditBookScene(ChooseAddScene chooseAddScene, Book book) {
         super(chooseAddScene);
@@ -16,6 +22,7 @@ public class EditBookScene extends CreateBookmarkScene {
         this.deleteButton = new Button("Delete book");
         this.title.setText("Editing book");
         this.submitButton.setText("Submit changes");
+        this.alert = new Alert(AlertType.NONE);
     }
     
     @Override
@@ -51,15 +58,27 @@ public class EditBookScene extends CreateBookmarkScene {
     
     @Override
     protected Button setDeleteButton() {
+        String text = "Are you sure you want to delete book " + book.getTitle();
         this.deleteButton.setOnAction(e -> {
-            try {
-                boolean poistettu = vinkkiService.deleteBook(book.getId());
-                if (poistettu) {
-                    chooseAddScene.listBooksScene();
+            alert.setAlertType(AlertType.CONFIRMATION); 
+            alert.setTitle("Delete book");
+            alert.setHeaderText(text);
+            alert.setContentText(book.getKirjoittaja() + "\n"
+                                + book.getSivumaara() + "\n"
+                                + book.getJulkaisuvuosi() + "\n"
+                                + book.getISBN());
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() ==  ButtonType.OK) {
+                try {
+                    boolean poistettu = vinkkiService.deleteBook(book.getId());
+                    if (poistettu) {
+                        chooseAddScene.listBooksScene();
+                    }
+                } catch (Exception error) {
+                    System.out.println(error.getMessage());
                 }
-            } catch (Exception error) {
-                System.out.println(error.getMessage());
             }
+            
         });
         return this.deleteButton;
     }
@@ -100,5 +119,10 @@ public class EditBookScene extends CreateBookmarkScene {
         }
         
         return false;
+    }
+
+    @Override
+    protected int destinationIndex() {
+        return 1;
     }
 }

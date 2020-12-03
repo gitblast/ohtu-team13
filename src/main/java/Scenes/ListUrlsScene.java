@@ -19,6 +19,8 @@ import java.util.List;
 
 public class ListUrlsScene extends ListingScene {
 
+    private EditURLScene editURLScene;
+
     public ListUrlsScene(ChooseAddScene chooseAddScene) {
         super(chooseAddScene, new String[]{"None", "Title"});
     }
@@ -123,11 +125,28 @@ public class ListUrlsScene extends ListingScene {
             info.setText("URL copied to clipboard!");
         });
 
+        Button editButton = new Button("Edit");
+        editButtonFunction(editButton, (Url) url);
+
         nodes.add(labelOtsikko);
         nodes.add(labelUrl);
         nodes.add(copyURL);
+        nodes.add(editButton);
 
         return nodes;
+    }
+
+    private void editButtonFunction(
+        Button button, Url url
+    ) {
+        button.setOnAction(e -> {
+            try {
+                editURLScene = new EditURLScene(chooseAddScene, url);
+                chooseAddScene.setScene(editURLScene.createScene());
+            } catch (Exception error) {
+                System.out.println(error.getMessage());
+            }
+        });
     }
 
     @Override

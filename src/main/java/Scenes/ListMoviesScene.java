@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import Domain.Bookmark;
 import Domain.Movie;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,6 +17,7 @@ import javafx.scene.layout.HBox;
 
 public class ListMoviesScene extends ListingScene {
 
+    private EditMovieScene editMovieScene;
     // UI Style elements
     private String cssLayoutBorder01 = "-fx-border-color: gray;\n"
         + "-fx-border-insets: 0;\n"
@@ -151,12 +153,29 @@ public class ListMoviesScene extends ListingScene {
         kesto.setMaxWidth(50);
         kesto.setMinWidth(50);
 
+        Button editButton = new Button("Edit");
+        editButtonFunction(editButton, (Movie) movie);
+
         nodes.add(nimeke);
         nodes.add(director);
         nodes.add(julkaisuvuosi);
         nodes.add(kesto);
+        nodes.add(editButton);
 
         return nodes;
+    }
+
+    private void editButtonFunction(
+        Button button, Movie movie
+    ) {
+        button.setOnAction(e -> {
+            try {
+                editMovieScene = new EditMovieScene(chooseAddScene, movie);
+                chooseAddScene.setScene(editMovieScene.createScene());
+            } catch (Exception error) {
+                System.out.println(error.getMessage());
+            }
+        });
     }
 
     @Override
