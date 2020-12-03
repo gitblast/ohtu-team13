@@ -154,26 +154,24 @@ public class ListMoviesScene extends ListingScene {
         kesto.setMinWidth(50);
 
         Button editButton = new Button("Edit");
-        editButtonFunction(editButton, movie.getTitle());
+        editButtonFunction(editButton, (Movie) movie);
 
         nodes.add(nimeke);
         nodes.add(director);
         nodes.add(julkaisuvuosi);
         nodes.add(kesto);
+        nodes.add(editButton);
 
         return nodes;
     }
 
     private void editButtonFunction(
-        Button button, String nimeke
+        Button button, Movie movie
     ) {
-        // TODO 
-        // movie = vinkkiService.findMovieByTitle(nimeke);
-        Movie movie = null;
         button.setOnAction(e -> {
             try {
                 editMovieScene = new EditMovieScene(chooseAddScene, movie);
-                // chooseAddScene.setScene(editMovieScene.createScene());
+                chooseAddScene.setScene(editMovieScene.createScene());
             } catch (Exception error) {
                 System.out.println(error.getMessage());
             }
