@@ -86,30 +86,27 @@ public class ChooseAddScene {
         VBox.setVgrow(switchToListMoviesScene, Priority.ALWAYS);
 
         switchToAddBookScene.setOnAction(e -> {
-            primaryStage.setScene(addBookScene.createScene());
+            addBookScene();
         });
 
         switchToAddURLScene.setOnAction(e -> {
-            primaryStage.setScene(addURLScene.createScene());
+            addUrlScene();
         });
 
         switchToAddMovieScene.setOnAction(e -> {
-            primaryStage.setScene(addMovieScene.createScene());
+            addMovieScene();
         });
 
         switchToListBooksScene.setOnAction(e -> {
-            primaryStage.setScene(listBooksScene.createScene(
-                new ArrayList<>(vinkkiService.listBooks())));
+            listBooksScene();
         });
 
         switchToListUrlsScene.setOnAction(e -> {
-            primaryStage.setScene(listUrlsScene.createScene(
-                new ArrayList<>(vinkkiService.listURLs())));
+            listUrlsScene();
         });
 
         switchToListMoviesScene.setOnAction(e -> {
-            primaryStage.setScene(listMoviesScene.createScene(
-                new ArrayList<>(vinkkiService.listMovies())));
+            listMoviesScene();
         });
 
         elements.getChildren().addAll(label, switchToAddBookScene,
@@ -119,6 +116,33 @@ public class ChooseAddScene {
 
         Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;
+    }
+    
+    public void addUrlScene() {
+        primaryStage.setScene(addURLScene.createScene());
+    }
+    
+    public void addMovieScene() {
+        primaryStage.setScene(addMovieScene.createScene());
+    }
+    
+    public void listUrlsScene() {
+        primaryStage.setScene(listUrlsScene.createScene(
+                new ArrayList<>(vinkkiService.listURLs())));
+    }
+    
+    public void listMoviesScene() {
+        primaryStage.setScene(listMoviesScene.createScene(
+                new ArrayList<>(vinkkiService.listMovies())));
+    }
+    
+    public void addBookScene() {
+        primaryStage.setScene(addBookScene.createScene());
+    }
+    
+    public void listBooksScene() {
+        primaryStage.setScene(listBooksScene.createScene(
+                new ArrayList<>(vinkkiService.listBooks())));
     }
 
     public void returnHere() throws Exception {
