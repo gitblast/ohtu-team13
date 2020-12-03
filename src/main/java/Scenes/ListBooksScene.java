@@ -143,6 +143,10 @@ public class ListBooksScene extends ListingScene {
         }
     }
 
+    public List<Node> getBookmarkNode(Bookmark book) {
+        return createBookmarkContent(book);
+    }
+
     @Override
     protected List<Node> createBookmarkContent(Bookmark book) {
         List<Node> nodes = new ArrayList<>();

@@ -24,6 +24,7 @@ public class ChooseAddScene {
     ListBooksScene listBooksScene;
     ListUrlsScene listUrlsScene;
     ListMoviesScene listMoviesScene;
+    ListAllScene listAllScene;
     Label errorMsg;
     VinkkiService vinkkiService;
 
@@ -44,6 +45,7 @@ public class ChooseAddScene {
         listUrlsScene = new ListUrlsScene(this);
         editBookScene = new EditBookScene(this, null);
         listMoviesScene = new ListMoviesScene(this);
+        listAllScene = new ListAllScene(this);
 
         errorMsg = new Label();
 
@@ -72,6 +74,8 @@ public class ChooseAddScene {
         switchToListUrlsScene.setId("listaa_urlit_btn");
         Button switchToListMoviesScene = new Button("List all movies");
         switchToListMoviesScene.setId("listaa_elokuvat_btn");
+        Button switchToListAllScene = new Button("List all bookmarks");
+        switchToListAllScene.setId("listaa_kaikki_btn");
 
         VBox elements = new VBox(10);
         elements.setId("chooseAdd_elements");
@@ -84,6 +88,7 @@ public class ChooseAddScene {
         VBox.setVgrow(switchToListBooksScene, Priority.ALWAYS);
         VBox.setVgrow(switchToListUrlsScene, Priority.ALWAYS);
         VBox.setVgrow(switchToListMoviesScene, Priority.ALWAYS);
+        VBox.setVgrow(switchToListAllScene, Priority.ALWAYS);
 
         switchToAddBookScene.setOnAction(e -> {
             addBookScene();
@@ -107,6 +112,10 @@ public class ChooseAddScene {
 
         switchToListMoviesScene.setOnAction(e -> {
             listMoviesScene();
+        });
+
+        switchToListAllScene.setOnAction(e -> {
+            listAllScene();
         });
 
         elements.getChildren().addAll(label, switchToAddBookScene,
@@ -143,6 +152,13 @@ public class ChooseAddScene {
     public void listBooksScene() {
         primaryStage.setScene(listBooksScene.createScene(
                 new ArrayList<>(vinkkiService.listBooks())));
+    }
+
+    // TODO
+    public void listAllScene() {
+        // primaryStage.setScene(listAllScene.createScene(
+        //         new ArrayList<>(vinkkiService.listAll()))); 
+        // ));
     }
 
     public void returnHere() throws Exception {

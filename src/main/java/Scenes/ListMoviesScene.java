@@ -127,6 +127,10 @@ public class ListMoviesScene extends ListingScene {
         }
     }
 
+    public List<Node> getBookmarkNode(Bookmark movie) {
+        return createBookmarkContent(movie);
+    }
+
     @Override
     protected List<Node> createBookmarkContent(Bookmark movie) {
         List<Node> nodes = new ArrayList<>();

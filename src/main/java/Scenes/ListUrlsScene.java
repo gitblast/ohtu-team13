@@ -106,6 +106,10 @@ public class ListUrlsScene extends ListingScene {
         }
     }
 
+    public List<Node> getBookmarkNode(Bookmark url) {
+        return createBookmarkContent(url);
+    }
+
     @Override
     protected List<Node> createBookmarkContent(Bookmark url) {
         List<Node> nodes = new ArrayList<>();
