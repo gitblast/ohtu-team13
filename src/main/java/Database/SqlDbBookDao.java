@@ -15,12 +15,12 @@ public class SqlDbBookDao implements BookDao {
     private Connection connection;
     private ArrayList<Book> bookList;
 
-    public SqlDbBookDao(String dbFile) throws Exception {
+    public SqlDbBookDao(String dbFile) throws SQLException {
         this.db = new DbConnection(dbFile);
         this.connection = db.getConnection();
     }
 
-    public SqlDbBookDao() throws Exception {
+    public SqlDbBookDao() throws SQLException {
         this("jdbc:sqlite:lukuvinkit.db");
     }
 

@@ -14,12 +14,12 @@ public class SqlDbUrlDao implements UrlDao {
     private Connection connection;
     private ArrayList<Url> urlList;
 
-    public SqlDbUrlDao(String dbFile) throws Exception {
+    public SqlDbUrlDao(String dbFile) throws SQLException {
         this.db = new DbConnection(dbFile);
         this.connection = db.getConnection();
     }
 
-    public SqlDbUrlDao() throws Exception {
+    public SqlDbUrlDao() throws SQLException {
         this("jdbc:sqlite:lukuvinkit.db");
     }
 

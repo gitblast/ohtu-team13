@@ -9,3 +9,4 @@ bin
 *.db
 .DS_Store
 :test:
+/.nb-gradle/
