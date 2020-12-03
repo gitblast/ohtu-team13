@@ -58,11 +58,11 @@ public class EditBookScene extends CreateBookmarkScene {
     
     @Override
     protected Button setDeleteButton() {
-
+        String text = "Are you sure you want to delete book " + book.getTitle();
         this.deleteButton.setOnAction(e -> {
             alert.setAlertType(AlertType.CONFIRMATION); 
             alert.setTitle("Delete book");
-            alert.setHeaderText("Are you sure you want to delete book " + book.getTitle());
+            alert.setHeaderText(text);
             alert.setContentText(book.getKirjoittaja() + "\n"
                                 + book.getSivumaara() + "\n"
                                 + book.getJulkaisuvuosi() + "\n"
