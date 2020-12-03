@@ -6,7 +6,11 @@ import java.util.ArrayList;
 public interface MovieDao {
     
     boolean createMovie(Movie movie);
-
+    
+    boolean modifyMovie(Movie movie);
+    
+    boolean deleteMovie(int id);
+    
     ArrayList<Movie> getAllMovies();
 
     ArrayList<Movie> findByDirector(String director);

@@ -3,7 +3,8 @@ package Domain;
 import java.util.Objects;
 
 public class Book extends Bookmark {
-
+    
+    private Integer id;
     private String author;
     private Integer releaseYear;
     private Integer pageCount;
@@ -29,10 +30,24 @@ public class Book extends Bookmark {
         String title,
         Integer releaseYear,
         Integer pageCount
-    ){
+    ) {
         this(author, title, releaseYear, pageCount, null);
     }
 
+    public Book(Integer id, String kirjoittaja, String nimeke,
+            Integer julkaisuvuosi, Integer sivumaara, String ISBN) {
+        this(kirjoittaja, nimeke, julkaisuvuosi, sivumaara, ISBN);
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }    
+    
     public String getKirjoittaja() {
         return this.author;
     }
@@ -95,7 +110,7 @@ public class Book extends Bookmark {
     @Override
     public String toString() {
         return "Book{" + "kirjoittaja=" + this.author + ", nimeke="
-                + super.getTitle() + ", julkaisuvuosi=" + releaseYear
-                + ", sivumaara=" + pageCount + ", ISBN=" + ISBN + '}';
+            + super.getTitle() + ", julkaisuvuosi=" + releaseYear
+            + ", sivumaara=" + pageCount + ", ISBN=" + ISBN + '}';
     }
 }

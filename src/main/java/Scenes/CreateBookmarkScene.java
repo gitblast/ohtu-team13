@@ -1,8 +1,5 @@
 package Scenes;
 
-import Database.SqlDbBookDao;
-import Database.SqlDbMovieDao;
-import Database.SqlDbUrlDao;
 import Service.VinkkiService;
 
 import javafx.geometry.Insets;
@@ -42,16 +39,7 @@ public abstract class CreateBookmarkScene {
         this.submitButton = new Button();
         this.submitButton.setId("submitButton_btn");
 
-        try {
-            this.vinkkiService = new VinkkiService(
-                    new SqlDbBookDao(), new SqlDbUrlDao(), new SqlDbMovieDao()
-            );
-        } catch (Exception e) {
-            this.vinkkiService = null;
-            this.errorMessage.setText(
-                    "Error in database connection: " + e.getMessage()
-            );
-        }
+        this.vinkkiService = chooseAddScene.vinkkiService;
     }
 
     public Scene createScene() {
@@ -65,10 +53,10 @@ public abstract class CreateBookmarkScene {
 
         setBookmarkInputFields();
 
-        for (TextField field: fields) {
+        for (TextField field : fields) {
             vbox.getChildren().add(field);
         }
-        
+
         if (setDeleteButton() != null) {
             vbox.getChildren().add(setDeleteButton());
         }
@@ -87,7 +75,7 @@ public abstract class CreateBookmarkScene {
     protected abstract void setBookmarkInputFields();
 
     protected abstract boolean bookmarkCreation();
-    
+
     protected abstract Button setDeleteButton();
 
     protected void submitButtonFunction() {
@@ -95,7 +83,7 @@ public abstract class CreateBookmarkScene {
             try {
                 boolean added = bookmarkCreation();
                 if (added) {
-                    for (TextField field: fields) {
+                    for (TextField field : fields) {
                         field.setText("");
                     }
                     errorMessage.setText("");
@@ -108,7 +96,7 @@ public abstract class CreateBookmarkScene {
                 }
             } catch (Exception e1) {
                 e1.printStackTrace();
-            }    
+            }
         });
     }
 
@@ -144,4 +132,5 @@ public abstract class CreateBookmarkScene {
         }
         return s;
     }
+
 }

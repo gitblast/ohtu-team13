@@ -1,14 +1,10 @@
 package Scenes;
 
-import Database.SqlDbBookDao;
-import Database.SqlDbMovieDao;
-import Database.SqlDbUrlDao;
 import Domain.Book;
 import Domain.Bookmark;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import javafx.scene.Node;
-import Service.VinkkiService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +17,6 @@ import javafx.scene.control.TextField;
 public class ListBooksScene extends ListingScene {
 
     private EditBookScene editBookScene;
-    private VinkkiService vinkkiService;
     // UI Style elements
     private String cssLayoutBorder01 = "-fx-border-color: gray;\n"
         + "-fx-border-insets: 0;\n"
@@ -30,13 +25,6 @@ public class ListBooksScene extends ListingScene {
 
     public ListBooksScene(ChooseAddScene chooseAddScene) {
         super(chooseAddScene, new String[]{"None", "Author", "Title", "ISBN"});
-        try {
-            this.vinkkiService = new VinkkiService(
-                    new SqlDbBookDao(), new SqlDbUrlDao(), new SqlDbMovieDao()
-            );
-        } catch (Exception e) {
-            this.vinkkiService = null;
-        }
     }
 
     private List<Bookmark> getFilteredByString(
@@ -45,7 +33,7 @@ public class ListBooksScene extends ListingScene {
         String filterType) {
         return allBooks.stream().filter(book -> {
             Book b = (Book) book;
-
+            System.out.println(b.getId());
             if (filterType.equals("Author")) {
                 return b.getKirjoittaja() != null
                     ? b.getKirjoittaja().toLowerCase()
@@ -185,10 +173,11 @@ public class ListBooksScene extends ListingScene {
         labelISBN.setStyle(cssLayoutBorder01);
         labelISBN.setMaxWidth(50);
         labelISBN.setMinWidth(50);
-        
+
         Button editButton = new Button("Edit");
-        editButtonFunction(editButton, ((Book) book).getKirjoittaja(), ((Book) book).getTitle());
-        
+        editButtonFunction(editButton,
+            ((Book) book).getKirjoittaja(), ((Book) book).getTitle());
+
         nodes.add(labelKirjoittaja);
         nodes.add(labelNimeke);
         nodes.add(labelJulkaisuvuosi);
@@ -198,8 +187,10 @@ public class ListBooksScene extends ListingScene {
 
         return nodes;
     }
-    
-    private void editButtonFunction(Button button, String author, String title) {
+
+    private void editButtonFunction(
+        Button button, String author, String title
+    ) {
         Book book = vinkkiService.findBookByAuthorAndTitle(author, title);
         button.setOnAction(e -> {
             try {

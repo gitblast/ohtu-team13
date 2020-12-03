@@ -2,6 +2,7 @@ package Domain;
 
 public class Movie extends Bookmark {
 
+    private Integer id;
     private String director;
     private Integer releaseYear;
     private Integer length;
@@ -17,6 +18,20 @@ public class Movie extends Bookmark {
         this.setDirector(director);
         this.setReleaseYear(releaseYear);
         this.setLength(length);
+    }
+
+    public Movie(Integer id, String nimeke, String ohjaaja,
+            Integer julkaisuvuosi, Integer kesto) {
+        this(nimeke, ohjaaja, julkaisuvuosi, kesto);
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getLength() {
@@ -45,19 +60,25 @@ public class Movie extends Bookmark {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Movie other = (Movie) obj;
-        if (!director.equals(other.director))
+        if (!director.equals(other.director)) {
             return false;
-        if (!length.equals(other.length))
+        }
+        if (!length.equals(other.length)) {
             return false;
-        if (!releaseYear.equals(other.releaseYear))
+        }
+        if (!releaseYear.equals(other.releaseYear)) {
             return false;
+        }
         if (!super.getTitle().equals(other.getTitle())) {
             return false;
         }
@@ -66,10 +87,10 @@ public class Movie extends Bookmark {
 
     @Override
     public String toString() {
-        return "Movie [director=" + director +
-        ", nimeke=" + super.getTitle() +
-        ", length=" + length +
-        ", releaseYear=" + releaseYear + "]";
+        return "Movie [director=" + director
+            + ", nimeke=" + super.getTitle()
+            + ", length=" + length
+            + ", releaseYear=" + releaseYear + "]";
     }
-    
+
 }

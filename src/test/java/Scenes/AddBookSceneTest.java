@@ -1,15 +1,16 @@
 package Scenes;
+
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 import org.testfx.framework.junit.ApplicationTest;
 import static org.testfx.matcher.base.NodeMatchers.hasChild;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 public class AddBookSceneTest extends ApplicationTest {
+
     private ChooseAddScene cas;
     private AddBookScene addBook;
 
@@ -37,7 +38,6 @@ public class AddBookSceneTest extends ApplicationTest {
     //     addBook.submitButton.fire();
     //     assertEquals("", addBook.fields.get(0).getText());
     // }
-
     // TODO
     // assertEquals ja verifyThat antoivat molemmat virheen:
     // "java.lang.RuntimeException: java.lang.IllegalStateException:
@@ -51,9 +51,9 @@ public class AddBookSceneTest extends ApplicationTest {
     //     addBook.submitButton.fire();
     //     assertEquals("Enter author, title and ISBN",
     //         addBook.errorMessage.getText());
-    //     // verifyThat("#errorMessage_label", hasText("Enter author, title and ISBN"));
+    //     // verifyThat("#errorMessage_label", 
+    //           hasText("Enter author, title and ISBN"));
     // }
-
     @Test
     public void elementeillaOikeatTekstit() {
         verifyThat("#title_label", hasText("Adding a new Book"));

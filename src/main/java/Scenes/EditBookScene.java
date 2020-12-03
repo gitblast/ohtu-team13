@@ -56,6 +56,38 @@ public class EditBookScene extends CreateBookmarkScene {
     
     @Override
     protected boolean bookmarkCreation() {
+        boolean inputsOK = true;
+        
+        String kirjoittaja = this.fields.get(0).getText();
+        String nimeke = this.fields.get(1).getText();
+        String julkaisuvuosi = this.fields.get(2).getText();
+        String sivumaara = this.fields.get(3).getText();
+        String ISBN = this.fields.get(4).getText();
+
+        int jvuosi = convertToInteger(julkaisuvuosi);
+        int smaara = convertToInteger(sivumaara);
+        if (jvuosi == -9999 || smaara == -9999) {
+            errorMessage.setText("Enter valid release year "
+                    + "and number of pages");
+            inputsOK = false;
+        }
+
+        kirjoittaja = checkString(kirjoittaja);
+        nimeke = checkString(nimeke);
+        ISBN = checkString(ISBN);
+        if (kirjoittaja == null || nimeke == null || ISBN == null) {
+            errorMessage.setText("Enter author, title and ISBN");
+            inputsOK = false;
+        }
+
+        if (inputsOK) {
+            book.setKirjoittaja(kirjoittaja);
+            book.setTitle(nimeke);
+            book.setJulkaisuvuosi(jvuosi);
+            book.setSivumaara(smaara);
+            book.setISBN(ISBN);
+            return vinkkiService.modifyBook(book);
+        }
         
         return false;
     }
