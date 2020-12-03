@@ -6,6 +6,7 @@ import Dao.BookDao;
 import Dao.MovieDao;
 import Domain.Url;
 import Dao.UrlDao;
+import Domain.Bookmark;
 import java.util.ArrayList;
 
 public class VinkkiService {
@@ -111,5 +112,13 @@ public class VinkkiService {
 
     public ArrayList<Movie> listMovies() {
         return this.movieDao.getAllMovies();
+    }
+    
+    public ArrayList<Bookmark> listAllBookmarks() {
+        ArrayList<Bookmark> allBookmarks = new ArrayList<>();
+        allBookmarks.addAll(this.listBooks());
+        allBookmarks.addAll(this.listURLs());
+        allBookmarks.addAll(this.listMovies());
+        return allBookmarks;
     }
 }
