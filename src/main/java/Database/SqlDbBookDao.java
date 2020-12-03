@@ -37,11 +37,11 @@ public class SqlDbBookDao implements BookDao {
             return false;
         }*/
         if (book == null) {
-            return false; //kun käli tukee kirjan lisäämistä ISBN:llä 
-            //voi poistaa tän ja ottaa käyttöön ylläolevan tarkistuksen
+            return false; //kun kï¿½li tukee kirjan lisï¿½ï¿½mistï¿½ ISBN:llï¿½ 
+            //voi poistaa tï¿½n ja ottaa kï¿½yttï¿½ï¿½n yllï¿½olevan tarkistuksen
         }
         if (book.getKirjoittaja() == null || book.getTitle() == null) {
-            return false; // Cucumber testejä varten
+            return false; // Cucumber testejï¿½ varten
         }
         String query = "INSERT INTO books (kirjoittaja, nimeke, julkaisuvuosi, "
                 + "sivumaara, ISBN) VALUES (?, ?, ?, ?, ?);";
@@ -223,6 +223,19 @@ public class SqlDbBookDao implements BookDao {
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
             prepared.setInt(1, id);
+            prepared.executeUpdate();
+            return true;
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAllBooks() {
+        String query = "DELETE FROM books;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(query);
             prepared.executeUpdate();
             return true;
         } catch (SQLException error) {

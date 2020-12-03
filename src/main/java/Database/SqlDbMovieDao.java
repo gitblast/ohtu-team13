@@ -126,4 +126,17 @@ public class SqlDbMovieDao implements MovieDao {
         }
     }
 
+    @Override
+    public boolean deleteAllMovies() {
+        String query = "DELETE FROM Movie;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(query);
+            prepared.executeUpdate();
+            return true;
+        } catch (SQLException error) {
+            System.out.println(error.getMessage());
+            return false;
+        }
+    }
+
 }

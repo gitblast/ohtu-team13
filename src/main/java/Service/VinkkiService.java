@@ -65,6 +65,26 @@ public class VinkkiService {
         return this.urlDao.deleteURL(id);
     }
     
+    public boolean deleteAllBooks() {
+        return this.bookDao.deleteAllBooks();
+    }
+    
+    public boolean deleteAllURLs() {
+        return this.urlDao.deleteAllURLs();
+    }
+    
+    public boolean deleteAllMovies() {
+        return this.movieDao.deleteAllMovies();
+    }
+    
+    public boolean deleteAllBookMarks() {
+        if (this.deleteAllBooks()
+            && this.deleteAllURLs() && this.deleteAllMovies()) {
+            return true;
+        }
+        return false;
+    }
+    
     public Book searchBookByISBN(String ISBN) {
         return this.bookDao.findByISBN(ISBN);
     }
