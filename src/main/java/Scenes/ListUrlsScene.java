@@ -25,7 +25,7 @@ public class ListUrlsScene extends ListingScene {
         super(chooseAddScene, new String[]{"None", "Title"});
     }
 
-    private List<Bookmark> getFilteredByString(
+    protected List<Bookmark> getFilteredByString(
         List<Bookmark> allUrls,
         String value,
         String filterType
@@ -78,7 +78,7 @@ public class ListUrlsScene extends ListingScene {
         );
     }
 
-    private void handleFilterChange(
+    protected void handleFilterChange(
         String filterType,
         String filterFieldValue
     ) {
