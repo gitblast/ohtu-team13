@@ -16,4 +16,6 @@ public interface BookDao {
     ArrayList<Book> findByNimeke(String nimeke);
     
     Book findWithAuthorAndTitle(String author, String title);
+    
+    boolean updateBook(Book book);
 }
