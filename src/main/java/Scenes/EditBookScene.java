@@ -120,4 +120,9 @@ public class EditBookScene extends CreateBookmarkScene {
         
         return false;
     }
+
+    @Override
+    protected int destinationIndex() {
+        return 1;
+    }
 }

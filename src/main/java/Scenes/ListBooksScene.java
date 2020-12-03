@@ -175,8 +175,7 @@ public class ListBooksScene extends ListingScene {
         labelISBN.setMinWidth(50);
 
         Button editButton = new Button("Edit");
-        editButtonFunction(editButton,
-            ((Book) book).getKirjoittaja(), ((Book) book).getTitle());
+        editButtonFunction(editButton, (Book) book);
 
         nodes.add(labelKirjoittaja);
         nodes.add(labelNimeke);
@@ -189,9 +188,8 @@ public class ListBooksScene extends ListingScene {
     }
 
     private void editButtonFunction(
-        Button button, String author, String title
+        Button button, Book book
     ) {
-        Book book = vinkkiService.findBookByAuthorAndTitle(author, title);
         button.setOnAction(e -> {
             try {
                 editBookScene = new EditBookScene(chooseAddScene, book);

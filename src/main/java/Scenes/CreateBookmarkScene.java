@@ -80,33 +80,46 @@ public abstract class CreateBookmarkScene {
 
     protected void submitButtonFunction() {
         submitButton.setOnAction(e -> {
-            try {
-                boolean added = bookmarkCreation();
-                if (added) {
-                    for (TextField field : fields) {
-                        field.setText("");
-                    }
-                    errorMessage.setText("");
-                    chooseAddScene.returnHere();
-                } else {
-                    if (errorMessage.getText().equals("")) {
-                        errorMessage.setText(
-                            "Error adding bookmark to database");
-                    }
+            boolean added = bookmarkCreation();
+            if (added) {
+                for (TextField field : fields) {
+                    field.setText("");
                 }
-            } catch (Exception e1) {
-                e1.printStackTrace();
+                errorMessage.setText("");
+                destination(destinationIndex());
+            } else {
+                if (errorMessage.getText().equals("")) {
+                    errorMessage.setText(
+                        "Error adding bookmark to database");
+                }
             }
         });
     }
 
+    protected void destination(int sceneIndex) {
+        try {
+            if (sceneIndex == 0) {
+                chooseAddScene.returnHere();
+            } else if (sceneIndex == 1) {
+                chooseAddScene.listBooksScene();
+            } else if (sceneIndex == 2) {
+                chooseAddScene.listUrlsScene();
+            } else if (sceneIndex == 3) {
+                chooseAddScene.listMoviesScene();
+            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    // Always override in Edit-scenes
+    protected int destinationIndex() {
+        return 0;
+    }
+
     protected void returnButtonFunction() {
         returnButton.setOnAction(e -> {
-            try {
-                chooseAddScene.returnHere();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
+            destination(destinationIndex());
         });
     }
 
