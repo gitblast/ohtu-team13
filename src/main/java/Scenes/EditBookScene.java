@@ -51,6 +51,16 @@ public class EditBookScene extends CreateBookmarkScene {
     
     @Override
     protected Button setDeleteButton() {
+        this.deleteButton.setOnAction(e -> {
+            try {
+                boolean poistettu = vinkkiService.deleteBook(book.getId());
+                if (poistettu) {
+                    chooseAddScene.returnHere();
+                }
+            } catch (Exception error) {
+                System.out.println(error.getMessage());
+            }
+        });
         return this.deleteButton;
     }
     
