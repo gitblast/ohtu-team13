@@ -3,12 +3,18 @@ package Scenes;
 import Domain.Book;
 import javafx.scene.control.TextField;
 import java.util.ArrayList;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 public class EditBookScene extends CreateBookmarkScene {
     
     Book book;
     Button deleteButton;
+    Button confirmationButton;
+    Alert alert;
     
     public EditBookScene(ChooseAddScene chooseAddScene, Book book) {
         super(chooseAddScene);
@@ -16,6 +22,7 @@ public class EditBookScene extends CreateBookmarkScene {
         this.deleteButton = new Button("Delete book");
         this.title.setText("Editing book");
         this.submitButton.setText("Submit changes");
+        this.alert = new Alert(AlertType.NONE);
     }
     
     @Override
@@ -49,9 +56,20 @@ public class EditBookScene extends CreateBookmarkScene {
         this.fields = list;
     }
     
-    @Override
-    protected Button setDeleteButton() {
-        this.deleteButton.setOnAction(e -> {
+    /*
+    EventHandler<ActionEvent> event = new 
+                         EventHandler<ActionEvent>() { 
+            public void handle(ActionEvent e) 
+            { 
+                // set alert type 
+                alert.setAlertType(AlertType.CONFIRMATION); 
+  
+                // show the dialog 
+                alert.show(); 
+            } 
+        }; 
+    
+    
             try {
                 boolean poistettu = vinkkiService.deleteBook(book.getId());
                 if (poistettu) {
@@ -60,6 +78,23 @@ public class EditBookScene extends CreateBookmarkScene {
             } catch (Exception error) {
                 System.out.println(error.getMessage());
             }
+    */
+    @Override
+    protected Button setDeleteButton() {
+        this.deleteButton.setOnAction(e -> {
+            alert.setAlertType(AlertType.CONFIRMATION); 
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() ==  ButtonType.OK) {
+                try {
+                    boolean poistettu = vinkkiService.deleteBook(book.getId());
+                    if (poistettu) {
+                        chooseAddScene.listBooksScene();
+                    }
+                } catch (Exception error) {
+                    System.out.println(error.getMessage());
+                }
+            }
+            
         });
         return this.deleteButton;
     }
