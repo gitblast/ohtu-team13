@@ -87,7 +87,7 @@ public class Url extends Bookmark {
     public void setKommentti(String kommentti) {
         this.kommentti = kommentti;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -100,7 +100,7 @@ public class Url extends Bookmark {
             return false;
         }
         final Url other = (Url) obj;
-        if (!Objects.equals(super.getTitle(), super.getTitle())) {
+        if (!Objects.equals(this.otsikko, other.otsikko)) {
             return false;
         }
         if (!Objects.equals(this.url, other.url)) {
@@ -108,6 +108,8 @@ public class Url extends Bookmark {
         }
         return true;
     }
+    
+
 
     @Override
     public String toString() {

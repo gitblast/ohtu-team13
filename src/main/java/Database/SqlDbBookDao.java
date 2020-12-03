@@ -60,6 +60,7 @@ public class SqlDbBookDao implements BookDao {
         }
     }
 
+    @Override
     public ArrayList<Book> getAllBooks() {
         bookList = new ArrayList<Book>();
         String query = "SELECT id, kirjoittaja, nimeke, "
@@ -87,6 +88,7 @@ public class SqlDbBookDao implements BookDao {
         return bookList;
     }
 
+    @Override
     public Book findByISBN(String ISBN) {
         Book book = null;
         String query = "SELECT id, kirjoittaja, nimeke, "
@@ -108,6 +110,7 @@ public class SqlDbBookDao implements BookDao {
         return book;
     }
 
+    @Override
     public ArrayList<Book> findByKirjoittaja(String searchTerm) {
         bookList = new ArrayList<Book>();
         String query = "SELECT id, kirjoittaja, nimeke, "
@@ -138,11 +141,12 @@ public class SqlDbBookDao implements BookDao {
         return bookList;
     }
 
+    @Override
     public ArrayList<Book> findByNimeke(String searchTerm) {
         bookList = new ArrayList<Book>();
         String query = "SELECT id, kirjoittaja, nimeke, "
                 + "julkaisuvuosi, sivumaara, ISBN "
-                + "FROM books WHERE kirjoittaja=?;";
+                + "FROM books WHERE nimeke=?;";
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
             prepared.setString(1, searchTerm);
@@ -167,6 +171,7 @@ public class SqlDbBookDao implements BookDao {
         return bookList;
     }
     
+    @Override
     public Book findWithAuthorAndTitle(String author, String title) {
         Book book = null;
         String query = "SELECT id, kirjoittaja, nimeke, "
