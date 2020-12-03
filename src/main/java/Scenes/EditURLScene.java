@@ -3,13 +3,18 @@ package Scenes;
 import java.util.ArrayList;
 
 import Domain.Url;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 public class EditURLScene extends CreateBookmarkScene {
        
     Url url;
     Button deleteButton;
+    Alert alert;
     
     public EditURLScene(ChooseAddScene chooseAddScene, Url url) {
         super(chooseAddScene);
@@ -17,6 +22,7 @@ public class EditURLScene extends CreateBookmarkScene {
         this.deleteButton = new Button("Delete URL");
         this.title.setText("Editing URL");
         this.submitButton.setText("Submit changes");
+        this.alert = new Alert(AlertType.NONE);
     }
     
     @Override
@@ -44,15 +50,24 @@ public class EditURLScene extends CreateBookmarkScene {
     
     @Override
     protected Button setDeleteButton() {
+        String text = "Are you sure you want to delete url " + url.getTitle();
         this.deleteButton.setOnAction(e -> {
-            try {
-                boolean poistettu = vinkkiService.deleteUrl(url.getId());
-                if (poistettu) {
-                    chooseAddScene.listUrlsScene();
+            alert.setAlertType(AlertType.CONFIRMATION); 
+            alert.setTitle("Delete Movie");
+            alert.setHeaderText(text);
+            alert.setContentText(url.getUrl() + "\n"
+                                + url.getOtsikko());
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    boolean poistettu = vinkkiService.deleteUrl(url.getId());
+                    if (poistettu) {
+                        chooseAddScene.listUrlsScene();
+                    }
+                } catch (Exception error) {
+                    System.out.println(error.getMessage());
                 }
-            } catch (Exception error) {
-                System.out.println(error.getMessage());
-            }
+            }    
         });
         return this.deleteButton;
     }
