@@ -64,8 +64,8 @@ public abstract class ListingScene {
 
     protected Node createBookmarkNode(List<Node> attributes) {
         HBox box = new HBox();
-        box.setPadding(new Insets(5, 5, 5, 5));
-        box.setSpacing(10);
+        box.setPadding(new Insets(0));
+        box.setSpacing(0);
         box.getChildren().addAll(attributes);
         return box;
     }

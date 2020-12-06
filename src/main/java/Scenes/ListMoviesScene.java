@@ -22,7 +22,14 @@ public class ListMoviesScene extends ListingScene {
     private String cssLayoutBorder01 = "-fx-border-color: gray;\n"
         + "-fx-border-insets: 0;\n"
         + "-fx-border-width: 1;\n"
-        + "-fx-border-style: solid;\n";
+        + "-fx-border-style: solid;\n"
+        + "-fx-background-color: white;\n";
+
+    private String cssLayoutBorderTitle01 = "-fx-border-color: gray;\n"
+        + "-fx-border-insets: 0;\n"
+        + "-fx-border-width: 1;\n"
+        + "-fx-border-style: solid;\n"
+        + "-fx-background-color: lightblue;\n";
 
     public ListMoviesScene(ChooseAddScene chooseAddScene) {
         super(chooseAddScene, new String[]{"None", "Director", "Title"});
@@ -137,25 +144,33 @@ public class ListMoviesScene extends ListingScene {
 
         Label nimeke = new Label(((Movie) movie).getTitle());
         nimeke.setStyle(cssLayoutBorder01);
+        nimeke.setMaxHeight(26);
+        nimeke.setMinHeight(26);
         nimeke.setMaxWidth(200);
         nimeke.setMinWidth(200);
 
         Label director = new Label(((Movie) movie).getDirector());
         director.setStyle(cssLayoutBorder01);
+        director.setMaxHeight(26);
+        director.setMinHeight(26);
         director.setMaxWidth(200);
         director.setMinWidth(200);
 
         String jvuosi = String.valueOf(((Movie) movie).getReleaseYear());
         Label julkaisuvuosi = new Label(jvuosi);
         julkaisuvuosi.setStyle(cssLayoutBorder01);
-        julkaisuvuosi.setMaxWidth(50);
-        julkaisuvuosi.setMinWidth(50);
+        julkaisuvuosi.setMaxHeight(26);
+        julkaisuvuosi.setMinHeight(26);
+        julkaisuvuosi.setMaxWidth(90);
+        julkaisuvuosi.setMinWidth(90);
 
         String kestoMin = String.valueOf(((Movie) movie).getLength());
         Label kesto = new Label(kestoMin);
         kesto.setStyle(cssLayoutBorder01);
-        kesto.setMaxWidth(50);
-        kesto.setMinWidth(50);
+        kesto.setMaxHeight(26);
+        kesto.setMinHeight(26);
+        kesto.setMaxWidth(90);
+        kesto.setMinWidth(90);
 
         Button editButton = new Button("Edit");
         editButtonFunction(editButton, (Movie) movie);
@@ -185,27 +200,35 @@ public class ListMoviesScene extends ListingScene {
     @Override
     protected HBox otsikot() {
         HBox otsikot = new HBox();
-        otsikot.setSpacing(5);
+        otsikot.setSpacing(0);
 
         Label nimeke = new Label("Title");
-        nimeke.setStyle(cssLayoutBorder01);
+        nimeke.setStyle(cssLayoutBorderTitle01);
+        nimeke.setMaxHeight(26);
+        nimeke.setMinHeight(26);
         nimeke.setMaxWidth(200);
         nimeke.setMinWidth(200);
 
         Label director = new Label("Director");
-        director.setStyle(cssLayoutBorder01);
+        director.setStyle(cssLayoutBorderTitle01);
+        director.setMaxHeight(26);
+        director.setMinHeight(26);
         director.setMaxWidth(200);
         director.setMinWidth(200);
 
         Label jvuosi = new Label("Published");
-        jvuosi.setStyle(cssLayoutBorder01);
+        jvuosi.setStyle(cssLayoutBorderTitle01);
+        jvuosi.setMaxHeight(26);
+        jvuosi.setMinHeight(26);
         jvuosi.setMaxWidth(90);
-        jvuosi.setMinWidth(50);
+        jvuosi.setMinWidth(90);
 
         Label kesto = new Label("Length");
-        kesto.setStyle(cssLayoutBorder01);
+        kesto.setStyle(cssLayoutBorderTitle01);
+        kesto.setMaxHeight(26);
+        kesto.setMinHeight(26);
         kesto.setMaxWidth(90);
-        kesto.setMinWidth(50);
+        kesto.setMinWidth(90);
 
         otsikot.getChildren().addAll(nimeke, director,
             jvuosi, kesto);

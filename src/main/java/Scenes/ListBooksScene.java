@@ -21,7 +21,14 @@ public class ListBooksScene extends ListingScene {
     private String cssLayoutBorder01 = "-fx-border-color: gray;\n"
         + "-fx-border-insets: 0;\n"
         + "-fx-border-width: 1;\n"
-        + "-fx-border-style: solid;\n";
+        + "-fx-border-style: solid;\n"
+        + "-fx-background-color: white;\n";
+
+    private String cssLayoutBorderTitle01 = "-fx-border-color: gray;\n"
+        + "-fx-border-insets: 0;\n"
+        + "-fx-border-width: 1;\n"
+        + "-fx-border-style: solid;\n"
+        + "-fx-background-color: lightblue;\n";
 
     public ListBooksScene(ChooseAddScene chooseAddScene) {
         super(chooseAddScene, new String[]{"None", "Author", "Title", "ISBN"});
@@ -153,30 +160,40 @@ public class ListBooksScene extends ListingScene {
 
         Label labelKirjoittaja = new Label(((Book) book).getKirjoittaja());
         labelKirjoittaja.setStyle(cssLayoutBorder01);
+        labelKirjoittaja.setMaxHeight(26);
+        labelKirjoittaja.setMinHeight(26);
         labelKirjoittaja.setMaxWidth(200);
         labelKirjoittaja.setMinWidth(200);
 
         Label labelNimeke = new Label(((Book) book).getTitle());
         labelNimeke.setStyle(cssLayoutBorder01);
+        labelNimeke.setMaxHeight(26);
+        labelNimeke.setMinHeight(26);
         labelNimeke.setMaxWidth(200);
         labelNimeke.setMinWidth(200);
 
         String julkaisuvuosi = String.valueOf(((Book) book).getJulkaisuvuosi());
         Label labelJulkaisuvuosi = new Label(julkaisuvuosi);
         labelJulkaisuvuosi.setStyle(cssLayoutBorder01);
-        labelJulkaisuvuosi.setMaxWidth(50);
-        labelJulkaisuvuosi.setMinWidth(50);
+        labelJulkaisuvuosi.setMaxHeight(26);
+        labelJulkaisuvuosi.setMinHeight(26);
+        labelJulkaisuvuosi.setMaxWidth(60);
+        labelJulkaisuvuosi.setMinWidth(60);
 
         String sivumaara = String.valueOf(((Book) book).getSivumaara());
         Label labelSivumaara = new Label(sivumaara);
         labelSivumaara.setStyle(cssLayoutBorder01);
+        labelSivumaara.setMaxHeight(26);
+        labelSivumaara.setMinHeight(26);
         labelSivumaara.setMaxWidth(50);
         labelSivumaara.setMinWidth(50);
 
         Label labelISBN = new Label(((Book) book).getISBN());
         labelISBN.setStyle(cssLayoutBorder01);
-        labelISBN.setMaxWidth(50);
-        labelISBN.setMinWidth(50);
+        labelISBN.setMaxHeight(26);
+        labelISBN.setMinHeight(26);
+        labelISBN.setMaxWidth(90);
+        labelISBN.setMinWidth(90);
 
         Button editButton = new Button("Edit");
         editButtonFunction(editButton, (Book) book);
@@ -207,33 +224,42 @@ public class ListBooksScene extends ListingScene {
     @Override
     protected HBox otsikot() {
         HBox otsikot = new HBox();
-        otsikot.setSpacing(5);
+        otsikot.setSpacing(0);
 
         Label kirjailijaOtsikko = new Label("Author");
-        kirjailijaOtsikko.setStyle(cssLayoutBorder01);
+        kirjailijaOtsikko.setStyle(cssLayoutBorderTitle01);
+        kirjailijaOtsikko.setMaxHeight(26);
+        kirjailijaOtsikko.setMinHeight(26);
         kirjailijaOtsikko.setMaxWidth(200);
         kirjailijaOtsikko.setMinWidth(200);
 
         Label nimiOtsikko = new Label("Title");
-        nimiOtsikko.setStyle(cssLayoutBorder01);
+        nimiOtsikko.setStyle(cssLayoutBorderTitle01);
+        nimiOtsikko.setMaxHeight(26);
+        nimiOtsikko.setMinHeight(26);
         nimiOtsikko.setMaxWidth(200);
         nimiOtsikko.setMinWidth(200);
 
         Label vuosiOtsikko = new Label("Published");
-        vuosiOtsikko.setStyle(cssLayoutBorder01);
-        vuosiOtsikko.setMaxWidth(90);
-        vuosiOtsikko.setMinWidth(50);
+        vuosiOtsikko.setStyle(cssLayoutBorderTitle01);
+        vuosiOtsikko.setMaxHeight(26);
+        vuosiOtsikko.setMinHeight(26);
+        vuosiOtsikko.setMaxWidth(60);
+        vuosiOtsikko.setMinWidth(60);
 
         Label sivumaaraOtsikko = new Label("Page count");
-        sivumaaraOtsikko.setStyle(cssLayoutBorder01);
-
-        sivumaaraOtsikko.setMaxWidth(90);
+        sivumaaraOtsikko.setStyle(cssLayoutBorderTitle01);
+        sivumaaraOtsikko.setMaxHeight(26);
+        sivumaaraOtsikko.setMinHeight(26);
+        sivumaaraOtsikko.setMaxWidth(50);
         sivumaaraOtsikko.setMinWidth(50);
 
         Label ISBNOtsikko = new Label("ISBN");
-        ISBNOtsikko.setStyle(cssLayoutBorder01);
-        ISBNOtsikko.setMaxWidth(50);
-        ISBNOtsikko.setMinWidth(50);
+        ISBNOtsikko.setStyle(cssLayoutBorderTitle01);
+        ISBNOtsikko.setMaxHeight(26);
+        ISBNOtsikko.setMinHeight(26);
+        ISBNOtsikko.setMaxWidth(90);
+        ISBNOtsikko.setMinWidth(90);
 
         otsikot.getChildren().addAll(kirjailijaOtsikko, nimiOtsikko,
             vuosiOtsikko, sivumaaraOtsikko, ISBNOtsikko);

@@ -21,6 +21,19 @@ public class ListUrlsScene extends ListingScene {
 
     private EditURLScene editURLScene;
 
+    // UI Style elements
+    private String cssLayoutBorder01 = "-fx-border-color: gray;\n"
+        + "-fx-border-insets: 0;\n"
+        + "-fx-border-width: 1;\n"
+        + "-fx-border-style: solid;\n"
+        + "-fx-background-color: white;\n";
+
+    private String cssLayoutBorderTitle01 = "-fx-border-color: gray;\n"
+        + "-fx-border-insets: 0;\n"
+        + "-fx-border-width: 1;\n"
+        + "-fx-border-style: solid;\n"
+        + "-fx-background-color: lightblue;\n";
+
     public ListUrlsScene(ChooseAddScene chooseAddScene) {
         super(chooseAddScene, new String[]{"None", "Title"});
     }
@@ -115,7 +128,18 @@ public class ListUrlsScene extends ListingScene {
         List<Node> nodes = new ArrayList<>();
 
         Label labelOtsikko = new Label(((Url) url).getTitle() + ": ");
+        labelOtsikko.setStyle(cssLayoutBorder01);
+        labelOtsikko.setMaxHeight(26);
+        labelOtsikko.setMinHeight(26);
+        labelOtsikko.setMaxWidth(150);
+        labelOtsikko.setMinWidth(150);
+
         Label labelUrl = new Label(((Url) url).getUrl());
+        labelUrl.setStyle(cssLayoutBorder01);
+        labelUrl.setMaxHeight(26);
+        labelUrl.setMinHeight(26);
+        labelUrl.setMaxWidth(350);
+        labelUrl.setMinWidth(350);
 
         // Leikepöydälle kopioimisen toiminnallisuus
         Button copyURL = new Button("Copy");
@@ -156,10 +180,21 @@ public class ListUrlsScene extends ListingScene {
     @Override
     protected HBox otsikot() {
         HBox otsikot = new HBox();
-        otsikot.setSpacing(5);
+        otsikot.setSpacing(0);
 
         Label otsikko = new Label("Header");
+        otsikko.setStyle(cssLayoutBorderTitle01);
+        otsikko.setMaxHeight(26);
+        otsikko.setMinHeight(26);
+        otsikko.setMaxWidth(150);
+        otsikko.setMinWidth(150);
+
         Label url = new Label("URL");
+        url.setStyle(cssLayoutBorderTitle01);
+        url.setMaxHeight(26);
+        url.setMinHeight(26);
+        url.setMaxWidth(350);
+        url.setMinWidth(350);
 
         otsikot.getChildren().addAll(otsikko, url);
 
