@@ -16,12 +16,12 @@ public class SqlDbMovieDao implements MovieDao {
     private Connection connection;
     private ArrayList<Movie> movieList;
 
-    public SqlDbMovieDao(String dbFile) throws Exception {
+    public SqlDbMovieDao(String dbFile) throws SQLException {
         this.db = new DbConnection(dbFile);
         this.connection = db.getConnection();
     }
 
-    public SqlDbMovieDao() throws Exception {
+    public SqlDbMovieDao() throws SQLException {
         this("jdbc:sqlite:lukuvinkit.db");
     }
 

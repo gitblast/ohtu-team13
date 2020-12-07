@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.sql.SQLException;
 
 public class ChooseAddScene {
 
@@ -34,7 +35,8 @@ public class ChooseAddScene {
         try {
             vinkkiService = new VinkkiService(new SqlDbBookDao(),
                 new SqlDbUrlDao(), new SqlDbMovieDao());
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            errorMsg = new Label();
             errorMsg.setText("Error in database connection: " + e.getMessage());
         }
 

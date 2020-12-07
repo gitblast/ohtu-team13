@@ -69,3 +69,4 @@ Etusivulla paina Tallennetut URLit -nappia. Selausnäkymässä voit painaa Takai
 URLien tiedot on listattuna niin, että yhdellä rivillä on yhden URLin tiedot, ensiksi otsikko ja toiseksi itse URL. Jokaisen URLin jälkeen on myös Kopioi-nappi, jonka avulla URLin voi kopioida koneen leikepöydälle ja sieltä kätevästi liittää esimerkiksi selaimella osoitekenttään. Kun kopioit URLin onnistuneesti, sivun yläosaan ilmestyy teksti "URL kopioitu leikepöydälle!" varmitukseksi siitä, että kopiointi onnistui.
 
 Hakutuloksia voi suodattaa tietyn kentän perusteella valitsemalla suodatin vetolaatikosta, ja kirjottamalla hakukenttään etsittävä avainsana.
+
