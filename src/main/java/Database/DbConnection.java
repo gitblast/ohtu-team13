@@ -18,7 +18,7 @@ public class DbConnection {
         createDbIfNotExists();
     }
 
-    public Connection getConnection() throws Exception {
+    public Connection getConnection() throws SQLException {
         if (this.connection == null) {
             this.connect();
         }
