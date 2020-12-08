@@ -1,7 +1,9 @@
 package Scenes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javafx.beans.value.ObservableValue;
@@ -32,7 +34,12 @@ public class ListMoviesScene extends ListingScene {
         + "-fx-background-color: lightblue;\n";
 
     public ListMoviesScene(ChooseAddScene chooseAddScene) {
-        super(chooseAddScene, new String[]{"None", "Director", "Title"});
+        super(
+            chooseAddScene,
+            new HashMap<String, String[]>(Map.of(
+                "Movie", new String[]{"None", "Director", "Title"}
+            ))
+        );
     }
 
     @Override
@@ -72,18 +79,18 @@ public class ListMoviesScene extends ListingScene {
     protected List<Bookmark> getFilteredByString(
         List<Bookmark> allMovies,
         String value,
-        String filterType) {
+        String textFilterType) {
         return allMovies.stream().filter(movie -> {
             Movie m = (Movie) movie;
 
-            if (filterType.equals("Director")) {
+            if (textFilterType.equals("Director")) {
                 return m.getDirector() != null
                     ? m.getDirector().toLowerCase()
                         .contains(value.toLowerCase())
                     : false;
             }
 
-            if (filterType.equals("Title")) {
+            if (textFilterType.equals("Title")) {
                 return m.getTitle() != null
                     ? m.getTitle().toLowerCase().contains(value.toLowerCase())
                     : false;
@@ -95,27 +102,29 @@ public class ListMoviesScene extends ListingScene {
     }
 
     protected void handleFilterChange(
-        String filterType,
-        String filterFieldValue
+        String textFilterType,
+        String textFilterValue,
+        String typeFilterValue
     ) {
-        this.getFilterField().setDisable(filterType.equals("None"));
+        this.getFilterField().setDisable(textFilterType.equals("None"));
 
-        if (filterFieldValue.equals("")) {
+        if (textFilterValue.equals("")) {
             this.setShownBookmarks(this.getAllBookmarks());
 
             return;
         }
 
-        switch (filterType) {
+        switch (textFilterType) {
             case "None": {
                 this.setShownBookmarks(this.getAllBookmarks());
 
                 break;
             }
+
             case "Director": {
                 this.setShownBookmarks(
                     getFilteredByString(this.getAllBookmarks(),
-                        filterFieldValue,
+                        textFilterValue,
                         "Director")
                 );
 
@@ -125,7 +134,7 @@ public class ListMoviesScene extends ListingScene {
             case "Title": {
                 this.setShownBookmarks(
                     getFilteredByString(this.getAllBookmarks(),
-                        filterFieldValue,
+                        textFilterValue,
                         "Title")
                 );
 

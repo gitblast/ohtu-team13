@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.Node;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.beans.value.ObservableValue;
@@ -31,30 +33,35 @@ public class ListBooksScene extends ListingScene {
         + "-fx-background-color: lightblue;\n";
 
     public ListBooksScene(ChooseAddScene chooseAddScene) {
-        super(chooseAddScene, new String[]{"None", "Author", "Title", "ISBN"});
+        super(
+            chooseAddScene,
+            new HashMap<String, String[]>(Map.of(
+                "Book", new String[]{"None", "Author", "Title", "ISBN"}
+            ))
+        );
     }
 
     protected List<Bookmark> getFilteredByString(
         List<Bookmark> allBooks,
         String value,
-        String filterType) {
+        String textFilterType) {
         return allBooks.stream().filter(book -> {
             Book b = (Book) book;
             System.out.println(b.getId());
-            if (filterType.equals("Author")) {
+            if (textFilterType.equals("Author")) {
                 return b.getKirjoittaja() != null
                     ? b.getKirjoittaja().toLowerCase()
                         .contains(value.toLowerCase())
                     : false;
             }
 
-            if (filterType.equals("ISBN")) {
+            if (textFilterType.equals("ISBN")) {
                 return b.getISBN() != null
                     ? b.getISBN().toLowerCase().contains(value.toLowerCase())
                     : false;
             }
 
-            if (filterType.equals("Title")) {
+            if (textFilterType.equals("Title")) {
                 return b.getTitle() != null
                     ? b.getTitle().toLowerCase().contains(value.toLowerCase())
                     : false;
@@ -100,18 +107,19 @@ public class ListBooksScene extends ListingScene {
     }
 
     protected void handleFilterChange(
-        String filterType,
-        String filterFieldValue
+        String textFilterType,
+        String textFilterValue,
+        String typeFilterValue
     ) {
-        this.getFilterField().setDisable(filterType.equals("None"));
+        this.getFilterField().setDisable(textFilterType.equals("None"));
 
-        if (filterFieldValue.equals("")) {
+        if (textFilterValue.equals("")) {
             this.setShownBookmarks(this.getAllBookmarks());
 
             return;
         }
 
-        switch (filterType) {
+        switch (textFilterType) {
             case "None": {
                 this.setShownBookmarks(this.getAllBookmarks());
 
@@ -120,7 +128,7 @@ public class ListBooksScene extends ListingScene {
             case "Author": {
                 this.setShownBookmarks(
                     getFilteredByString(this.getAllBookmarks(),
-                        filterFieldValue,
+                        textFilterValue,
                         "Author")
                 );
 
@@ -130,7 +138,7 @@ public class ListBooksScene extends ListingScene {
             case "Title": {
                 this.setShownBookmarks(
                     getFilteredByString(this.getAllBookmarks(),
-                        filterFieldValue,
+                        textFilterValue,
                         "Title")
                 );
 
@@ -140,7 +148,7 @@ public class ListBooksScene extends ListingScene {
 
                 this.setShownBookmarks(
                     getFilteredByString(this.getAllBookmarks(),
-                        filterFieldValue,
+                        textFilterValue,
                         "ISBN")
                 );
 

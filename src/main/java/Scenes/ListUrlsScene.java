@@ -15,7 +15,9 @@ import javafx.scene.Node;
 
 import java.util.stream.Collectors;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ListUrlsScene extends ListingScene {
 
@@ -35,18 +37,23 @@ public class ListUrlsScene extends ListingScene {
         + "-fx-background-color: lightblue;\n";
 
     public ListUrlsScene(ChooseAddScene chooseAddScene) {
-        super(chooseAddScene, new String[]{"None", "Title"});
+        super(
+            chooseAddScene,
+            new HashMap<String, String[]>(Map.of(
+                "Url", new String[]{"None", "Title"}
+            ))
+        );
     }
 
     protected List<Bookmark> getFilteredByString(
         List<Bookmark> allUrls,
         String value,
-        String filterType
+        String textFilterType
     ) {
         return allUrls.stream().filter(url -> {
             Url u = (Url) url;
 
-            if (filterType.equals("Title")) {
+            if (textFilterType.equals("Title")) {
                 return u.getTitle() != null
                     ? u.getTitle().toLowerCase()
                         .contains(value.toLowerCase())
@@ -92,17 +99,18 @@ public class ListUrlsScene extends ListingScene {
     }
 
     protected void handleFilterChange(
-        String filterType,
-        String filterFieldValue
+        String textFilterType,
+        String textFilterValue,
+        String typeFilterValue
     ) {
-        this.getFilterField().setDisable(filterType.equals("None"));
+        this.getFilterField().setDisable(textFilterType.equals("None"));
 
-        if (filterFieldValue.equals("")) {
+        if (textFilterValue.equals("")) {
             this.setShownBookmarks(this.getAllBookmarks());
             return;
         }
 
-        switch (filterType) {
+        switch (textFilterType) {
             case "None": {
                 this.setShownBookmarks(this.getAllBookmarks());
 
@@ -111,7 +119,7 @@ public class ListUrlsScene extends ListingScene {
             case "Title": {
                 this.setShownBookmarks(
                     this.getFilteredByString(this.getAllBookmarks(),
-                        filterFieldValue, "Title")
+                        textFilterValue, "Title")
                 );
 
                 break;

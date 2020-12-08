@@ -8,12 +8,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.Node;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import Domain.Bookmark;
 import Service.VinkkiService;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
@@ -25,40 +24,43 @@ public abstract class ListingScene {
     private VBox nodes;
     private List<Bookmark> allBookmarks;
     private List<Bookmark> shownBookmarks;
-    private String[] filters;
+    //private String[] filters;
     private TextField filterField;
     private ChoiceBox<String> searchChoice;
 
     private ChoiceBox<String> typeChoice;
     private String[] types;
+    private HashMap<String, String[]> filters;
 
     VinkkiService vinkkiService;
     ChooseAddScene chooseAddScene;
     Label info;
 
-    public ListingScene(ChooseAddScene chooseAddScene) {
-        this(chooseAddScene, new String[]{"None"}, new String[]{"None"});
-    }
-
-    public ListingScene(ChooseAddScene chooseAddScene, String[] filters) {
-        this(chooseAddScene, filters, new String[]{"None"});
-    }
-
     public ListingScene(
         ChooseAddScene chooseAddScene,
-        String[] filters,
-        String[] types
+        HashMap<String, String[]> filters
     ) {
         this.chooseAddScene = chooseAddScene;
         this.returnButton = new Button("Return");
         this.info = new Label();
         this.filters = filters;
-        this.types = types;
         this.filterField = createFilterField();
         this.searchChoice = null;
         this.allBookmarks = null;
         this.shownBookmarks = null;
         this.vinkkiService = chooseAddScene.vinkkiService;
+
+        this.types = new String[1];
+        this.types = (String[]) filters.keySet().toArray(this.types);
+    }
+
+    public ListingScene(
+        ChooseAddScene chooseAddScene,
+        HashMap<String, String[]> filters,
+        String[] types
+    ) {
+        this(chooseAddScene, filters);
+        this.types = types;
     }
 
     protected abstract void setChangeListenerForFilterField(TextField tf);
@@ -129,7 +131,7 @@ public abstract class ListingScene {
 
         listingVBox.getChildren().addAll(info, returnButton);
 
-        if (filters.length > 1 || types.length > 1) {
+        if (this.getFilters().length > 1 || types.length > 1) {
             listingVBox.getChildren().add(getFilterElements());
         }
 
@@ -145,30 +147,21 @@ public abstract class ListingScene {
     protected abstract void setChangeListenerForChoiceBox(ChoiceBox<String> cb);
 
     protected void setChangeListenerForTypeChoice(ChoiceBox<String> tc) {
-        tc.getSelectionModel().selectedIndexProperty().addListener(
-            (ObservableValue<? extends Number> ov,
-                Number old_val,
-                Number new_val) -> {
-
-                handleTypeChange(this.types[new_val.intValue()]);
-        
-                this.redrawBookmarkNodes();
-            }
-        );
         
     }
 
-    protected void handleTypeChange(String typeName) {
-        if (typeName == "All") {
-            this.setShownBookmarks(this.getAllBookmarks());
-        } else {
-            this.setShownBookmarks(
-                this.getAllBookmarks().stream().filter(b -> {
-                    return b.getType().equals(typeName);
-                }).collect(Collectors.toList())
-            );
-        }
+    protected void handleFilterChange(
+        String textFilterType,
+        String textFilterValue
+    ) {
+        this.handleFilterChange(textFilterType, textFilterValue, "");
     }
+
+    protected abstract void handleFilterChange(
+        String textFilterType,
+        String textFilterValue,
+        String typeFilterValue
+    );
 
     private HBox getFilterElements() {
         Label filterLabel = new Label("Filter:");
@@ -182,7 +175,7 @@ public abstract class ListingScene {
         setChangeListenerForTypeChoice(typeChoice);
 
         searchChoice = new ChoiceBox<String>(FXCollections.observableArrayList(
-            filters)
+            this.getFilters())
         );
 
         searchChoice.getSelectionModel().selectFirst();
@@ -202,7 +195,7 @@ public abstract class ListingScene {
             filterBox.getChildren().add(tcWithLabel);
         }
         filterBox.getChildren().add(textFielWithLabel);
-        if (filters.length > 1) {
+        if (this.getFilters().length > 1) {
             filterBox.getChildren().add(scWithLabel);
         }
 
@@ -210,7 +203,11 @@ public abstract class ListingScene {
     }
 
     public String[] getFilters() {
-        return filters;
+        return (String[]) this.filters.values().toArray()[0];
+    }
+
+    public String[] getTypes() {
+        return this.types;
     }
 
     public List<Bookmark> getAllBookmarks() {
@@ -227,6 +224,10 @@ public abstract class ListingScene {
 
     public ChoiceBox<String> getChoiceBox() {
         return searchChoice;
+    }
+
+    public ChoiceBox<String> getTypeChoiceBox() {
+        return this.typeChoice;
     }
 
     public void setChoiceBox(ChoiceBox<String> searchChoice) {

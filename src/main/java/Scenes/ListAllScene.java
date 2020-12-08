@@ -1,6 +1,8 @@
 package Scenes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import Domain.Bookmark;
@@ -17,8 +19,16 @@ public class ListAllScene extends ListingScene {
     private ListMoviesScene listMoviesScene;
 
     public ListAllScene(ChooseAddScene chooseAddScene) {
-        super(chooseAddScene, new String[]{"None", "Title"},
-                new String[]{"All", "Book", "Url", "Movie"});
+        super(chooseAddScene,
+            new HashMap<String, String[]>(Map.of(
+                    "All", new String[]{"None", "Title"},
+                    "Book", new String[]{"None", "Author", "Title", "ISBN"},
+                    "Url", new String[]{"None", "Title"},
+                    "Movie", new String[]{"None", "Director", "Title"}
+                )
+            ),
+            new String[]{"All", "Book", "Url", "Movie"}
+        );
         
         this.listBooksScene = new ListBooksScene(chooseAddScene);
         this.listUrlsScene = new ListUrlsScene(chooseAddScene);
@@ -37,7 +47,12 @@ public class ListAllScene extends ListingScene {
                     .getSelectedItem()
                     .toString();
 
-                handleFilterChange(selectedFilter, new_val);
+                String type = this.getTypeChoiceBox()
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .toString();
+
+                handleFilterChange(selectedFilter, new_val, type);
 
                 this.redrawBookmarkNodes();
             }
@@ -70,42 +85,82 @@ public class ListAllScene extends ListingScene {
                 Number old_val,
                 Number new_val) -> {
 
-                handleFilterChange(this.getFilters()[new_val.intValue()],
-                    this.getFilterField().getText());
+                String type = this.getTypeChoiceBox()
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .toString();
+
+                String searchText = this.getFilterField().getText();
+
+                String textFilterType = this.getFilters()[new_val.intValue()];
+
+                handleFilterChange(textFilterType, searchText, type);
 
                 this.redrawBookmarkNodes();
             }
         );
     }
+
+    @Override
+    protected void setChangeListenerForTypeChoice(ChoiceBox<String> tc) {
+        tc.getSelectionModel().selectedIndexProperty().addListener(
+            (ObservableValue<? extends Number> ov,
+                Number old_val,
+                Number new_val) -> {
+
+                String selectedFilter = this.getChoiceBox()
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .toString();
+
+                String searchText = this.getFilterField().getText();
+
+                handleFilterChange(selectedFilter, searchText,
+                    this.getTypes()[new_val.intValue()]);
+                
+                this.redrawBookmarkNodes();
+            }
+        );
+    }
     
-    private void handleFilterChange(
-        String filterType,
-        String filterFieldValue
+    @Override
+    protected void handleFilterChange(
+        String textFilterType,
+        String textFilterValue,
+        String typeFilterValue
     ) {
-        this.getFilterField().setDisable(filterType.equals("None"));
+        this.getFilterField().setDisable(textFilterType.equals("None"));
 
-        if (filterFieldValue.equals("")) {
+        if (typeFilterValue == "All") {
             this.setShownBookmarks(this.getAllBookmarks());
+        } else {
+            this.setShownBookmarks(
+                this.getAllBookmarks().stream().filter(b -> {
+                    return b.getType().equals(typeFilterValue);
+                }).collect(Collectors.toList())
+            );
+        }
 
+        if (textFilterValue.equals("")) {
             return;
         }
 
-        switch (filterType) {
+        switch (textFilterType) {
             case "None": {
-                this.setShownBookmarks(this.getAllBookmarks());
-
                 break;
             }
             case "Title": {
                 this.setShownBookmarks(
-                    getFilteredByString(this.getAllBookmarks(),
-                        filterFieldValue,
+                    getFilteredByString(this.getShownBookmarks(),
+                        textFilterValue,
                         "Title")
                 );
 
                 break;
             }
         }
+        
+        
     }
 
     private List<Bookmark> getFilteredByString(
