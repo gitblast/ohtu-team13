@@ -47,7 +47,7 @@ public class ListBooksScene extends ListingScene {
         String textFilterType) {
         return allBooks.stream().filter(book -> {
             Book b = (Book) book;
-            System.out.println(b.getId());
+            //System.out.println(b.getId());
             if (textFilterType.equals("Author")) {
                 return b.getKirjoittaja() != null
                     ? b.getKirjoittaja().toLowerCase()

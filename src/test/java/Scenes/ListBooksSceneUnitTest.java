@@ -19,7 +19,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import org.testfx.framework.junit.ApplicationTest;
 
-@SuppressWarnings("unchecked")
 public class ListBooksSceneUnitTest extends ApplicationTest {
 
     ListBooksScene scene;
@@ -199,8 +198,10 @@ public class ListBooksSceneUnitTest extends ApplicationTest {
 
         scene.createScene(books);
 
-        ChoiceBox cb = new ChoiceBox<String>(FXCollections.observableArrayList(
-            new String[]{"Author"})
+        ChoiceBox<String> cb = new ChoiceBox<String>(
+            FXCollections.observableArrayList(
+                new String[]{"Author"}
+            )
         );
 
         scene.setChoiceBox(cb);
@@ -226,8 +227,10 @@ public class ListBooksSceneUnitTest extends ApplicationTest {
 
         scene.createScene(books);
 
-        ChoiceBox cb = new ChoiceBox<String>(FXCollections.observableArrayList(
-            new String[]{"None", "Title"})
+        ChoiceBox<String> cb = new ChoiceBox<String>(
+            FXCollections.observableArrayList(
+                new String[]{"None", "Title"}
+            )
         );
 
         scene.setChoiceBox(cb);

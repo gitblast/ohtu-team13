@@ -19,7 +19,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import org.testfx.framework.junit.ApplicationTest;
 
-@SuppressWarnings("unchecked")
 public class ListMovieSceneUnitTest extends ApplicationTest {
 
     ListMoviesScene scene;
@@ -178,8 +177,10 @@ public class ListMovieSceneUnitTest extends ApplicationTest {
 
         scene.createScene(movies);
 
-        ChoiceBox cb = new ChoiceBox<String>(FXCollections.observableArrayList(
-            new String[]{"Title", "Director"})
+        ChoiceBox<String> cb = new ChoiceBox<String>(
+            FXCollections.observableArrayList(
+                new String[]{"Title", "Director"}
+            )
         );
 
         scene.setChoiceBox(cb);
@@ -219,8 +220,10 @@ public class ListMovieSceneUnitTest extends ApplicationTest {
 
         scene.createScene(movies);
 
-        ChoiceBox cb = new ChoiceBox<String>(FXCollections.observableArrayList(
-            new String[]{"None", "Title", "Director"})
+        ChoiceBox<String> cb = new ChoiceBox<String>(
+            FXCollections.observableArrayList(
+                new String[]{"None", "Title", "Director"}
+            )
         );
 
         scene.setChoiceBox(cb);
