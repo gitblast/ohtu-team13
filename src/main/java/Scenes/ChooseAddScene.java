@@ -123,7 +123,7 @@ public class ChooseAddScene {
         elements.getChildren().addAll(label, switchToAddBookScene,
             switchToAddURLScene, switchToAddMovieScene,
             switchToListBooksScene, switchToListUrlsScene,
-            switchToListMoviesScene, errorMsg);
+            switchToListMoviesScene, switchToListAllScene, errorMsg);
 
         Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;
@@ -158,9 +158,8 @@ public class ChooseAddScene {
 
     // TODO
     public void listAllScene() {
-        // primaryStage.setScene(listAllScene.createScene(
-        //         new ArrayList<>(vinkkiService.listAll()))); 
-        // ));
+        primaryStage.setScene(listAllScene.createScene(
+                new ArrayList<>(vinkkiService.listAllBookmarks())));
     }
 
     public void returnHere() throws Exception {

@@ -17,7 +17,9 @@ public class ListAllScene extends ListingScene {
     private ListMoviesScene listMoviesScene;
 
     public ListAllScene(ChooseAddScene chooseAddScene) {
-        super(chooseAddScene, new String[]{"None", "Title"});
+        super(chooseAddScene, new String[]{"None", "Title"},
+                new String[]{"All", "Book", "Url", "Movie"});
+        
         this.listBooksScene = new ListBooksScene(chooseAddScene);
         this.listUrlsScene = new ListUrlsScene(chooseAddScene);
         this.listMoviesScene = new ListMoviesScene(chooseAddScene);
@@ -58,8 +60,7 @@ public class ListAllScene extends ListingScene {
 
     @Override
     protected HBox otsikot() {
-        // TODO Auto-generated method stub
-        return null;
+        return new HBox();
     }
 
     @Override
