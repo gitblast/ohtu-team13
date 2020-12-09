@@ -20,6 +20,9 @@ public class AddURLScene extends CreateBookmarkScene {
         TextField otsikko = new TextField();
         TextField URL = new TextField();
 
+        otsikko.setId("otsikko_field");
+        URL.setId("URL_field");
+        
         otsikko.setPromptText("Header");
         URL.setPromptText("URL");
 

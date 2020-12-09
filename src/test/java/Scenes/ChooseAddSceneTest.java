@@ -38,4 +38,30 @@ public class ChooseAddSceneTest extends ApplicationTest {
         verifyThat("#chooseAdd_elements", hasChild("#listaa_elokuvat_btn"));*/
         verifyThat("#chooseAdd_elements", hasChild("#listaa_kaikki_btn"));
     }
+    
+    @Test
+    public void lisaaKirjaButtoninKlikkaaminenRenderoiOikeatElementit() {
+        clickOn("#lisaa_kirja_btn");
+        verifyThat("#elements", hasChild("#kirjoittaja_field"));
+        verifyThat("#elements", hasChild("#nimeke_field"));
+        verifyThat("#elements", hasChild("#julkaisuvuosi_field"));
+        verifyThat("#elements", hasChild("#sivumaara_field"));
+        verifyThat("#elements", hasChild("#ISBN_field"));
+    }
+    
+    @Test
+    public void lisaaElokuvaButtoninKlikkaaminenRenderoiOikeatElementit() {
+        clickOn("#lisaa_elokuva_btn");
+        verifyThat("#elements", hasChild("#nimeke_field"));
+        verifyThat("#elements", hasChild("#director_field"));
+        verifyThat("#elements", hasChild("#julkaisuvuosi_field"));
+        verifyThat("#elements", hasChild("#kesto_field"));
+    }
+    
+    @Test
+    public void lisaaURLButtoninKlikkaaminenRenderoiOikeatElementit() {
+        clickOn("#lisaa_url_btn");
+        verifyThat("#elements", hasChild("#otsikko_field"));
+        verifyThat("#elements", hasChild("#URL_field"));
+    }
 }
