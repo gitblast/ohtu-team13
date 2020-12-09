@@ -51,24 +51,9 @@ public class AddMovieSceneUnitTest extends ApplicationTest {
     }
 
     @Test
-    public void elokuvaaEiLuodaInvalideillaSyotteilla() {
+    public void elokuvaaEiLuodaTyhjallaNimekkeella() {
         // tyhjä nimeke
         asetaSyotteet("", "valid ohjaaja", "111", "222");
-
-        assertFalse(addMovieScene.bookmarkCreation());
-
-        // tyhjä ohjaaja
-        asetaSyotteet("valid nimeke", "", "111", "222");
-
-        assertFalse(addMovieScene.bookmarkCreation());
-
-        // invalidi vuosi
-        asetaSyotteet("valid nimeke", "valid ohjaaja", "invalidi", "222");
-
-        assertFalse(addMovieScene.bookmarkCreation());
-
-        // invalidi kesto
-        asetaSyotteet("valid nimeke", "valid ohjaaja", "111", "invalidi");
 
         assertFalse(addMovieScene.bookmarkCreation());
 
