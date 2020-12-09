@@ -170,16 +170,16 @@ public class ListMoviesScene extends ListingScene {
         julkaisuvuosi.setStyle(cssLayoutBorder01);
         julkaisuvuosi.setMaxHeight(26);
         julkaisuvuosi.setMinHeight(26);
-        julkaisuvuosi.setMaxWidth(90);
-        julkaisuvuosi.setMinWidth(90);
+        julkaisuvuosi.setMaxWidth(40);
+        julkaisuvuosi.setMinWidth(40);
 
         String kestoMin = String.valueOf(((Movie) movie).getLength());
         Label kesto = new Label(kestoMin);
         kesto.setStyle(cssLayoutBorder01);
         kesto.setMaxHeight(26);
         kesto.setMinHeight(26);
-        kesto.setMaxWidth(90);
-        kesto.setMinWidth(90);
+        kesto.setMaxWidth(40);
+        kesto.setMinWidth(40);
 
         Button editButton = new Button("Edit");
         editButtonFunction(editButton, (Movie) movie);
