@@ -21,14 +21,12 @@ import javafx.scene.control.TextField;
 public abstract class ListingScene {
 
     private Button returnButton;
-    private VBox nodes;
-    private List<Bookmark> allBookmarks;
-    private List<Bookmark> shownBookmarks;
-    //private String[] filters;
+    private VBox nodes = null;
+    private List<Bookmark> allBookmarks = null;
+    private List<Bookmark> shownBookmarks = null;
     private TextField filterField;
-    private ChoiceBox<String> searchChoice;
-
-    private ChoiceBox<String> typeChoice;
+    private ChoiceBox<String> searchChoice = null;
+    private ChoiceBox<String> typeChoice = null;
     private String[] types;
     private HashMap<String, String[]> filters;
 
@@ -45,9 +43,6 @@ public abstract class ListingScene {
         this.info = new Label();
         this.filters = filters;
         this.filterField = createFilterField();
-        this.searchChoice = null;
-        this.allBookmarks = null;
-        this.shownBookmarks = null;
         this.vinkkiService = chooseAddScene.vinkkiService;
 
         this.types = new String[1];
@@ -91,7 +86,6 @@ public abstract class ListingScene {
         nodes.getChildren().clear();
 
         if (shownBookmarks != null) {
-
             shownBookmarks.forEach(bookmark -> {
                 nodes.getChildren().add(
                     createBookmarkNode(createBookmarkContent(bookmark))
@@ -167,22 +161,25 @@ public abstract class ListingScene {
         Label filterLabel = new Label("Filter:");
         Label typeLabel = new Label("Type:");
 
-        typeChoice = new ChoiceBox<String>(FXCollections.observableArrayList(
-            types
-        ));
+        if (this.typeChoice == null) {
+            this.typeChoice = new ChoiceBox<String>(
+                FXCollections.observableArrayList(types)
+            );
 
-        typeChoice.getSelectionModel().selectFirst();
-        setChangeListenerForTypeChoice(typeChoice);
+            typeChoice.getSelectionModel().selectFirst();
+            setChangeListenerForTypeChoice(typeChoice);
+        }
 
-        searchChoice = new ChoiceBox<String>(FXCollections.observableArrayList(
-            this.getFilters())
-        );
+        if (this.searchChoice == null) {
+            this.searchChoice = new ChoiceBox<String>(
+                FXCollections.observableArrayList(this.getFilters())
+            );
 
-        searchChoice.getSelectionModel().selectFirst();
-        setChangeListenerForChoiceBox(searchChoice);
+            this.searchChoice.getSelectionModel().selectFirst();
+            setChangeListenerForChoiceBox(this.searchChoice);
+        }
 
-
-        VBox scWithLabel = new VBox(filterLabel, searchChoice);
+        VBox scWithLabel = new VBox(filterLabel, this.searchChoice);
 
         VBox tcWithLabel = new VBox(typeLabel, typeChoice);
 
@@ -204,6 +201,10 @@ public abstract class ListingScene {
 
     public String[] getFilters() {
         return (String[]) this.filters.values().toArray()[0];
+    }
+
+    public String[] getFilters(String type) {
+        return this.filters.get(type);
     }
 
     public String[] getTypes() {
@@ -231,6 +232,7 @@ public abstract class ListingScene {
     }
 
     public void setChoiceBox(ChoiceBox<String> searchChoice) {
+        this.setChangeListenerForChoiceBox(searchChoice);
         this.searchChoice = searchChoice;
     }
 
@@ -238,8 +240,19 @@ public abstract class ListingScene {
         this.allBookmarks = allBookmarks;
     }
 
+    public void setType(String newType) {
+        this.filterField.clear();
+        this.searchChoice.setItems(FXCollections.observableArrayList(
+            this.filters.get(newType)
+        ));
+        this.searchChoice.getSelectionModel().selectFirst();
+    }
+
     public List<Bookmark> getShownBookmarks() {
         return shownBookmarks;
     }
 
+    public String getSelectedType() {
+        return this.typeChoice.getSelectionModel().getSelectedItem().toString();
+    }
 }

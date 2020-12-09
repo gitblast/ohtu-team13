@@ -24,15 +24,18 @@ public class ChooseAddSceneTest extends ApplicationTest {
     public void napeillaOikeatTekstit() {
         verifyThat("#lisaa_kirja_btn", hasText("Add Book"));
         verifyThat("#lisaa_url_btn", hasText("Add URL"));
-        verifyThat("#listaa_kirjat_btn", hasText("List all books"));
-        verifyThat("#listaa_urlit_btn", hasText("List all URLs"));
+        verifyThat("#lisaa_elokuva_btn", hasText("Add Movie"));
+        verifyThat("#listaa_kaikki_btn", hasText("List all bookmarks"));
     }
 
     @Test
     public void renderoiOikeatElementit() {
         verifyThat("#chooseAdd_elements", hasChild("#lisaa_kirja_btn"));
         verifyThat("#chooseAdd_elements", hasChild("#lisaa_url_btn"));
-        verifyThat("#chooseAdd_elements", hasChild("#listaa_kirjat_btn"));
+        verifyThat("#chooseAdd_elements", hasChild("#lisaa_elokuva_btn"));
+        /*verifyThat("#chooseAdd_elements", hasChild("#listaa_kirjat_btn"));
         verifyThat("#chooseAdd_elements", hasChild("#listaa_urlit_btn"));
+        verifyThat("#chooseAdd_elements", hasChild("#listaa_elokuvat_btn"));*/
+        verifyThat("#chooseAdd_elements", hasChild("#listaa_kaikki_btn"));
     }
 }
