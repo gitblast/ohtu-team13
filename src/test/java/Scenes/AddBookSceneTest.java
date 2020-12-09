@@ -25,35 +25,6 @@ public class AddBookSceneTest extends ApplicationTest {
         stage.show();
     }
 
-    // TODO
-    // Toistaiseksi luo tämä kyseisen kirjan
-    // aina kun suoritetaan gradle test
-    // @Test
-    // public void kirjanLuominenToimii() {
-    //     addBook.fields.get(0).setText("Johanna Sinisalo");
-    //     addBook.fields.get(1).setText("Auringon ydin");
-    //     addBook.fields.get(2).setText("2013");
-    //     addBook.fields.get(3).setText("300");
-    //     addBook.fields.get(4).setText("9789518515527");
-    //     addBook.submitButton.fire();
-    //     assertEquals("", addBook.fields.get(0).getText());
-    // }
-    // TODO
-    // assertEquals ja verifyThat antoivat molemmat virheen:
-    // "java.lang.RuntimeException: java.lang.IllegalStateException:
-    // Not on FX application thread; currentThread = main"
-    // @Test
-    // public void kirjaaEiLuodaIlmanKaikkiaKenttiä1() {
-    //     addBook.fields.get(0).setText("Johanna Sinisalo");
-    //     addBook.fields.get(1).setText("Auringon ydin");
-    //     addBook.fields.get(2).setText("2013");
-    //     addBook.fields.get(3).setText("300");
-    //     addBook.submitButton.fire();
-    //     assertEquals("Enter author, title and ISBN",
-    //         addBook.errorMessage.getText());
-    //     // verifyThat("#errorMessage_label", 
-    //           hasText("Enter author, title and ISBN"));
-    // }
     @Test
     public void elementeillaOikeatTekstit() {
         verifyThat("#title_label", hasText("Adding a new Book"));
