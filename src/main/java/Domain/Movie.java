@@ -79,13 +79,4 @@ public class Movie extends Bookmark {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Movie [director=" + director
-            + ", nimeke=" + super.getTitle()
-            + ", length=" + length
-            + ", releaseYear=" + releaseYear + "]";
-    }
-
 }

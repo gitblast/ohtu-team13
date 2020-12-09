@@ -84,7 +84,21 @@ public class AddMovieSceneUnitTest extends ApplicationTest {
         );
     }
 
-    public void asetaSyotteet(String nimeke, String director,
+    @Test
+    public void nimenSyottaminenRiittaaLuomaanElokuvan() {
+        when(mockService.addMovie(any())).thenReturn(true);
+        asetaSyotteet("validi nimeke", "", "", "");
+
+        assertTrue(addMovieScene.bookmarkCreation());
+
+        Movie luotuMovie = new Movie("validi nimeke", "",
+            Integer.valueOf("0"), Integer.valueOf("0"));
+        verify(mockService, times(1)).addMovie(
+            argThat(movie -> movie.equals(luotuMovie))
+        );
+    }
+
+    private void asetaSyotteet(String nimeke, String director,
         String julkaisuvuosi, String kesto) {
         addMovieScene.setBookmarkInputFields();
 
@@ -92,6 +106,5 @@ public class AddMovieSceneUnitTest extends ApplicationTest {
         addMovieScene.fields.get(1).setText(director);
         addMovieScene.fields.get(2).setText(julkaisuvuosi);
         addMovieScene.fields.get(3).setText(kesto);
-
     }
 }

@@ -89,7 +89,7 @@ public class SqlDbUrlDao implements UrlDao {
         String query = "UPDATE Url SET otsikko=?, url=? WHERE id=?;";
         try {
             PreparedStatement prepared = connection.prepareStatement(query);
-            prepared.setString(1, url.getOtsikko());
+            prepared.setString(1, url.getTitle());
             prepared.setString(2, url.getUrl());
             prepared.setInt(3, url.getId());
             prepared.executeUpdate();

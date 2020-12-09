@@ -26,22 +26,17 @@ public class SqlDbBookDao implements BookDao {
 
     @Override
     public boolean createBook(Book book) {
-        /*
         if (book == null 
             || book.getKirjoittaja() == null 
-            || book.getNimeke() == null 
+            || book.getTitle() == null 
             || book.getJulkaisuvuosi() == null 
             || book.getSivumaara() == null 
             || book.getISBN() == null) {
             
             return false;
-        }*/
-        if (book == null) {
-            return false; //kun k�li tukee kirjan lis��mist� ISBN:ll� 
-            //voi poistaa t�n ja ottaa k�ytt��n yll�olevan tarkistuksen
         }
         if (book.getKirjoittaja() == null || book.getTitle() == null) {
-            return false; // Cucumber testej� varten
+            return false; // Cucumberia varten
         }
         String query = "INSERT INTO books (kirjoittaja, nimeke, julkaisuvuosi, "
                 + "sivumaara, ISBN) VALUES (?, ?, ?, ?, ?);";

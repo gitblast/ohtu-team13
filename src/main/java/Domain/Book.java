@@ -97,11 +97,4 @@ public class Book extends Bookmark {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Book{" + "kirjoittaja=" + this.author + ", nimeke="
-            + super.getTitle() + ", julkaisuvuosi=" + releaseYear
-            + ", sivumaara=" + pageCount + ", ISBN=" + ISBN + '}';
-    }
 }

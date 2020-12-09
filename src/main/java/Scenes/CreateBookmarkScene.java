@@ -135,6 +135,9 @@ public abstract class CreateBookmarkScene {
     }
 
     protected String checkString(String s) {
+        if (s == null) {
+            return s;
+        }
         s = s.trim();
         if (s.isEmpty()) {
             return null;

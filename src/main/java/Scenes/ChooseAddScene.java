@@ -58,9 +58,9 @@ public class ChooseAddScene {
         int kirjojenmaara = vinkkiService.listBooks().size();
         int urlienmaara = vinkkiService.listURLs().size();
         int elokuvienmaara = vinkkiService.listMovies().size();
-        label.setText("Books in database: " + kirjojenmaara
-            + "\nUrls in database: " + urlienmaara
-            + "\nMovies in database: " + elokuvienmaara);
+        label.setText("Books:  " + kirjojenmaara
+            + "\nURLs:    " + urlienmaara
+            + "\nMovies: " + elokuvienmaara);
 
         label.setId("maara_label");
 
