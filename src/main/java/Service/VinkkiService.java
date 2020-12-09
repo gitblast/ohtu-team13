@@ -26,16 +26,11 @@ public class VinkkiService {
     }
 
     public boolean addURL(Url url) {
-        boolean palautus;
-        palautus = this.urlDao.createURL(url);
-        // System.out.println(palautus);
-        return palautus;
+        return this.urlDao.createURL(url);
     }
 
     public boolean addMovie(Movie movie) {
-        boolean palautus;
-        palautus = this.movieDao.createMovie(movie);
-        return palautus;
+        return this.movieDao.createMovie(movie);
     }
 
     public ArrayList<Book> listBooks() {
@@ -79,11 +74,8 @@ public class VinkkiService {
     }
     
     public boolean deleteAllBookMarks() {
-        if (this.deleteAllBooks()
-            && this.deleteAllURLs() && this.deleteAllMovies()) {
-            return true;
-        }
-        return false;
+        return this.deleteAllBooks()
+                && this.deleteAllURLs() && this.deleteAllMovies();
     }
     
     public Book searchBookByISBN(String ISBN) {
