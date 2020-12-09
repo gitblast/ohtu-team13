@@ -12,7 +12,6 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         Scene defaultScene = new ChooseAddScene(primaryStage).createScene();
-
         primaryStage.setTitle("Vinkit");
         primaryStage.setScene(defaultScene);
         primaryStage.show();

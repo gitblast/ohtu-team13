@@ -24,6 +24,10 @@ public class Movie extends Bookmark {
         this(nimeke, ohjaaja, julkaisuvuosi, kesto);
         this.setId(id);
     }
+    
+    public Movie(String title) {
+        super("Movie", title);
+    }
 
     public Integer getLength() {
         return length;

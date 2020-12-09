@@ -27,11 +27,7 @@ public class SqlDbMovieDao implements MovieDao {
 
     @Override
     public boolean createMovie(Movie movie) {
-        if (movie == null
-            || movie.getTitle() == null
-            || movie.getDirector() == null
-            || movie.getReleaseYear() == null
-            || movie.getLength() == null) {
+        if (movie == null) {
             return false;
         }
         String query = "INSERT INTO Movie(nimeke, ohjaaja, "
