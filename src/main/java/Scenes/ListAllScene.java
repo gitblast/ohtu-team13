@@ -85,6 +85,11 @@ public class ListAllScene extends ListingScene {
                 Number old_val,
                 Number new_val) -> {
 
+                int val = new_val.intValue();
+                if (val < 0) {
+                    val = 0;
+                }
+
                 String type = this.getTypeChoiceBox()
                     .getSelectionModel()
                     .getSelectedItem()
@@ -92,7 +97,7 @@ public class ListAllScene extends ListingScene {
 
                 String searchText = this.getFilterField().getText();
 
-                String textFilterType = this.getFilters()[new_val.intValue()];
+                String textFilterType = this.getFilters(type)[val];
 
                 handleFilterChange(textFilterType, searchText, type);
 
@@ -108,6 +113,9 @@ public class ListAllScene extends ListingScene {
                 Number old_val,
                 Number new_val) -> {
 
+                String newType = this.getTypes()[new_val.intValue()];
+                this.setType(newType);
+
                 String selectedFilter = this.getChoiceBox()
                     .getSelectionModel()
                     .getSelectedItem()
@@ -115,8 +123,7 @@ public class ListAllScene extends ListingScene {
 
                 String searchText = this.getFilterField().getText();
 
-                handleFilterChange(selectedFilter, searchText,
-                    this.getTypes()[new_val.intValue()]);
+                handleFilterChange(selectedFilter, searchText, newType);
                 
                 this.redrawBookmarkNodes();
             }
@@ -145,40 +152,48 @@ public class ListAllScene extends ListingScene {
             return;
         }
 
-        switch (textFilterType) {
-            case "None": {
-                break;
-            }
-            case "Title": {
-                this.setShownBookmarks(
-                    getFilteredByString(this.getShownBookmarks(),
-                        textFilterValue,
-                        "Title")
-                );
-
-                break;
-            }
-        }
-        
-        
+        this.setShownBookmarks(getFilteredByString(
+            this.getShownBookmarks(), textFilterValue, textFilterType
+        ));        
     }
 
     private List<Bookmark> getFilteredByString(
         List<Bookmark> allBookmarks,
         String value,
-        String filterType) {
-        return allBookmarks.stream().filter(bookmark -> {
-            // System.out.println(bookmark.getId());
-            if (filterType.equals("Title")) {
-                return bookmark.getTitle() != null
-                    ? bookmark.getTitle().toLowerCase().contains(
-                        value.toLowerCase())
-                    : false;
-            }
+        String filterType
+    ) {
+        List<Bookmark> bookmarks = allBookmarks;
 
-            return false;
-        })
-            .collect(Collectors.toList());
+        switch (this.getSelectedType()) {
+            case "Book":
+                bookmarks = this.listBooksScene.getFilteredByString(
+                    allBookmarks, value, filterType
+                );
+                break;
+            case "Url":
+                bookmarks = this.listUrlsScene.getFilteredByString(
+                    allBookmarks, value, filterType
+                );
+                break;
+            case "Movie":
+                bookmarks = this.listMoviesScene.getFilteredByString(
+                    allBookmarks, value, filterType
+                );
+                break;
+            default:
+                bookmarks = allBookmarks.stream().filter(bookmark -> {
+                    if (filterType.equals("Title")) {
+                        return bookmark.getTitle() != null
+                            ? bookmark.getTitle().toLowerCase().contains(
+                                value.toLowerCase())
+                            : false;
+                    }
+        
+                    return false;
+                }).collect(Collectors.toList());
+        }
+
+        return bookmarks;
     }
     
 }

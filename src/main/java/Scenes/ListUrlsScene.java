@@ -135,19 +135,19 @@ public class ListUrlsScene extends ListingScene {
     protected List<Node> createBookmarkContent(Bookmark url) {
         List<Node> nodes = new ArrayList<>();
 
-        Label labelOtsikko = new Label(((Url) url).getTitle() + ": ");
+        Label labelOtsikko = new Label(((Url) url).getTitle());
         labelOtsikko.setStyle(cssLayoutBorder01);
         labelOtsikko.setMaxHeight(26);
         labelOtsikko.setMinHeight(26);
-        labelOtsikko.setMaxWidth(150);
-        labelOtsikko.setMinWidth(150);
+        labelOtsikko.setMaxWidth(200);
+        labelOtsikko.setMinWidth(200);
 
         Label labelUrl = new Label(((Url) url).getUrl());
         labelUrl.setStyle(cssLayoutBorder01);
         labelUrl.setMaxHeight(26);
         labelUrl.setMinHeight(26);
-        labelUrl.setMaxWidth(350);
-        labelUrl.setMinWidth(350);
+        labelUrl.setMaxWidth(330);
+        labelUrl.setMinWidth(330);
 
         // Leikepöydälle kopioimisen toiminnallisuus
         Button copyURL = new Button("Copy");
@@ -158,7 +158,7 @@ public class ListUrlsScene extends ListingScene {
             final ClipboardContent content = new ClipboardContent();
             content.putString(copyText);
             clipboard.setContent(content);
-            info.setText("URL copied to clipboard!");
+            super.info.setText("URL copied to clipboard!");
         });
 
         Button editButton = new Button("Edit");

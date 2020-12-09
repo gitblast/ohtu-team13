@@ -43,7 +43,7 @@ public class ListBooksSceneUnitTest extends ApplicationTest {
 
         List<Node> nodes = scene.createBookmarkContent(b);
 
-        assertEquals(6, nodes.size());
+        assertEquals(7, nodes.size());
 
         for (int i = 0; i < 5; i++) {
             assertTrue(nodes.get(i) instanceof Label);
@@ -63,11 +63,11 @@ public class ListBooksSceneUnitTest extends ApplicationTest {
         );
 
         assertEquals("Author",
-            ((Label) otsikot.getChildren().get(0)).getText()
+            ((Label) otsikot.getChildren().get(1)).getText()
         );
 
         assertEquals("Title",
-            ((Label) otsikot.getChildren().get(1)).getText()
+            ((Label) otsikot.getChildren().get(0)).getText()
         );
 
         assertEquals("Published",

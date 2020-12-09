@@ -100,12 +100,8 @@ public abstract class CreateBookmarkScene {
         try {
             if (sceneIndex == 0) {
                 chooseAddScene.returnHere();
-            } else if (sceneIndex == 1) {
-                chooseAddScene.listBooksScene();
-            } else if (sceneIndex == 2) {
-                chooseAddScene.listUrlsScene();
-            } else if (sceneIndex == 3) {
-                chooseAddScene.listMoviesScene();
+            } else {
+                chooseAddScene.listAllScene();
             }
         } catch (Exception e1) {
             e1.printStackTrace();

@@ -122,8 +122,8 @@ public class ChooseAddScene {
 
         elements.getChildren().addAll(label, switchToAddBookScene,
             switchToAddURLScene, switchToAddMovieScene,
-            switchToListBooksScene, switchToListUrlsScene,
-            switchToListMoviesScene, switchToListAllScene, errorMsg);
+            /*switchToListBooksScene, switchToListUrlsScene,
+            switchToListMoviesScene, */switchToListAllScene, errorMsg);
 
         Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;
