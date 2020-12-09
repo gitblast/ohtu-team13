@@ -39,34 +39,32 @@ Jar generointi (kohteeseen build/libs/Vinkkikirjasto-all.jar):
 #### Etusivu
 
 Etusivulla näkyvät seuraavat toiminnot:
-- Tieto sovellukseen tallennettujen kirjojen määrästä
-- Tieto sovellukseen tallennettujen URLien määrästä
+- Tieto sovellukseen tallennettujen kirjojen, URLien ja elokuvien määrästä
 - Linkki kirjojen lisäämisnäkymään
 - Linkki URLien lisäämisnäkymään
-- Linkki tallennettujen kirjojen selausnäkymään
-- Linkki tallennettujen URLien selausnäkymään
+- Linkki elokuvien lisäämisnäkymään
+- Linkki kirjanmerkkien selausnäkymään
 
 #### Kirjan lisääminen
 
-Etusivulla paina Lisää kirja -nappia. Lisäysnäkymässä voit painaa Takaisin-nappia päästäksesi takaisin etusivulle.
-Lisäysnäkymässä voit syöttää kirjan tiedoiksi kirjan kirjailijan nimen, kirjan nimen, kirjan julkaisuvuoden ja kirjan sivumäärän. Yhtäkään kenttää ei saa jättää tyhjäksi, ja julkaisuvuoden ja sivumäärän tulee olla kokonaislukuja. Sivun alaosassa on Lisää uusi kirja -nappi, jota painamalla kirja lisätään tietokantaan ja sinut ohjataan takaisin etusivulle, jos kenttien täyttämisessä ei ollut ongelmia.
+Etusivulla paina Add Book -nappia. Lisäysnäkymässä voit painaa Return-nappia päästäksesi takaisin etusivulle.
+Lisäysnäkymässä voit syöttää kirjan tiedoiksi kirjan kirjailijan nimen, kirjan nimen, kirjan julkaisuvuoden ja kirjan sivumäärän. Yhtäkään kenttää ei saa jättää tyhjäksi, ja julkaisuvuoden ja sivumäärän tulee olla kokonaislukuja. Sivun alaosassa on Add a new book -nappi, jota painamalla kirja lisätään tietokantaan ja sinut ohjataan takaisin etusivulle, jos kenttien täyttämisessä ei ollut ongelmia.
 
 #### URLin lisääminen
 
-Etusivulla paina Lisää URL -nappia. Lisäysnäkymässä voit painaa Takaisin-nappia päästäksesi takaisin etusivulle.
-Lisäysnäkymässä voit syöttää URLin tiedoiksi sen otsikon ja URLin itsensä. Kumpaakaan kenttää ei tule jättää tyhjäksi. Sivun alaosassa on Lisää uusi URL -nappi, jota painamalla URL lisätään tietokantaan ja sinut ohjataan takaisin etusivulle, jos kenttien täyttämisessä ei ollut ongelmia.
+Etusivulla paina Add URL -nappia. Lisäysnäkymässä voit painaa Return-nappia päästäksesi takaisin etusivulle.
+Lisäysnäkymässä voit syöttää URLin tiedoiksi sen otsikon ja URLin itsensä. Kumpaakaan kenttää ei tule jättää tyhjäksi. Sivun alaosassa on Add a new URL -nappi, jota painamalla URL lisätään tietokantaan ja sinut ohjataan takaisin etusivulle, jos kenttien täyttämisessä ei ollut ongelmia.
 
-#### Kirjojen selaaminen
+#### Elokuvan lisääminen
 
-Etusivulla paina Tallennetut kirjat -nappia. Selausnäkymässä voit painaa Takaisin-nappia päästäksesi takaisin etusivulle.
-Kirjojen tiedot on listattuna niin, että yhdellä rivillä on yhden kirjan tiedot, järjestyksessä: Kirjailija, nimi, julkaisuvuosi, sivumäärä ja ISBN.
+Etusivulla paina Add Movie -nappia. Lisäysnäkymässä voit painaa Return-nappia päästäksesi takaisin etusivulle.
+Lisäysnäkymässä voit syöttää elokuvan tiedoiksi sen nimen, ohjaajan nimen, julkaisuvuoden ja keston minuutteina. Julkaisuvuoden ja keston tulee olla kokonaislukuja. Sivun alaosassa on Add a new movie -nappi, jota painamalla elokuva lisätään tietokantaan ja sinut ohjataan takaisin etusivulle, jos kenttien täyttämisessä ei ollut ongelmia.
 
-Hakutuloksia voi suodattaa tietyn kentän perusteella valitsemalla suodatin vetolaatikosta, ja kirjottamalla hakukenttään etsittävä avainsana.
+#### Kirjanmerkkien selailu
 
-#### URLien selaaminen
+Etusivulla paina List all bookmarks -nappia. Selausnäkymässä voit painaa Return-nappia päästäksesi takaisin etusivulle. Sivulla on hakupalkki, jonka avulla voi suodattaa näkemiään kirjanmerkkejä, ja lista kaikista kirjanmerkeistä, joille suodattimet pätevät. Kirjanmerkkejä voi suodattaa ensimmäisestä pudotusvalikosta niiden tyypin perusteella niin, että voi näyttää kaikentyyppiset kirjanmerkit, tai vain kirjat, URLit tai elokuvat. Oikeanpuoleisesta pudotusvalikosta voi rajoittaa hakua eri kirjanmerkkityyppien ominaisuuksien perusteella. Jos on valittu näytettäväksi kaikki kirjanmerkkityypit, hakua voi rajata vain niiden nimekkeen perusteella. Kirjoja voi rajata myös kirjailijan ja ISBN:n perusteella ja elokuvia voi rajata myös ohjaajan perusteella. Kun jokin suodatin on valittu, hakukenttään voi kirjoittaa hakuehdon.
+Selailunäkymässä voi myös kopioida URLeja ja kirjojen ISBN:iä leikepöydälle painamalla URLin tai kirjan Copy-nappia.
 
-Etusivulla paina Tallennetut URLit -nappia. Selausnäkymässä voit painaa Takaisin-nappia päästäksesi takaisin etusivulle.
-URLien tiedot on listattuna niin, että yhdellä rivillä on yhden URLin tiedot, ensiksi otsikko ja toiseksi itse URL. Jokaisen URLin jälkeen on myös Kopioi-nappi, jonka avulla URLin voi kopioida koneen leikepöydälle ja sieltä kätevästi liittää esimerkiksi selaimella osoitekenttään. Kun kopioit URLin onnistuneesti, sivun yläosaan ilmestyy teksti "URL kopioitu leikepöydälle!" varmitukseksi siitä, että kopiointi onnistui.
+#### Kirjanmerkkien muokkaaminen ja poistaminen
 
-Hakutuloksia voi suodattaa tietyn kentän perusteella valitsemalla suodatin vetolaatikosta, ja kirjottamalla hakukenttään etsittävä avainsana.
-
+Selailunäkymässä paina haluamasi kirjanmerkin kohdalta Edit-nappia. Muokkausnäkymässä voit painaa Return-nappia päästäksesi takaisin selailunäkymään. Voit tehdä muutoksia kirjanmerkkin kenttiin. Kun painat Submit changes -nappia, tekemäsi muutokset tallentuvat ja pääset takaisin selausnäkymään. Voit poistaa kirjanmerkin painamalla Delete -nappia kenttien alla. Painaessasi sitä sovellus näyttää sinulle vielä ponnahdusikkunan, jossa voit varmistaa haluatko poistaa kirjanmerkin.

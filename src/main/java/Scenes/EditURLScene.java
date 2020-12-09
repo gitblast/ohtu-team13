@@ -50,7 +50,7 @@ public class EditURLScene extends CreateBookmarkScene {
     
     @Override
     protected Button setDeleteButton() {
-        String text = "Are you sure you want to delete url " + url.getTitle();
+        String text = "Are you sure you want to delete URL " + url.getTitle();
         this.deleteButton.setOnAction(e -> {
             alert.setAlertType(AlertType.CONFIRMATION); 
             alert.setTitle("Delete Movie");
@@ -62,7 +62,7 @@ public class EditURLScene extends CreateBookmarkScene {
                 try {
                     boolean poistettu = vinkkiService.deleteUrl(url.getId());
                     if (poistettu) {
-                        chooseAddScene.listUrlsScene();
+                        destination(destinationIndex());
                     }
                 } catch (Exception error) {
                     System.out.println(error.getMessage());

@@ -72,7 +72,7 @@ public class EditBookScene extends CreateBookmarkScene {
                 try {
                     boolean poistettu = vinkkiService.deleteBook(book.getId());
                     if (poistettu) {
-                        chooseAddScene.listBooksScene();
+                        destination(destinationIndex());
                     }
                 } catch (Exception error) {
                     System.out.println(error.getMessage());
