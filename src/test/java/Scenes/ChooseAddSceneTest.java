@@ -63,5 +63,12 @@ public class ChooseAddSceneTest extends ApplicationTest {
         clickOn("#lisaa_url_btn");
         verifyThat("#elements", hasChild("#otsikko_field"));
         verifyThat("#elements", hasChild("#URL_field"));
+    }    
+
+    @Test
+    public void listAllButtoninKlikkaaminenRenderoiOikeatElementit() {
+        clickOn("#listaa_kaikki_btn");
+        verifyThat("#listing_elements", hasChild("#returnButton_btn"));
+        verifyThat("#listing_elements", hasChild("#filterField"));
     }
 }
