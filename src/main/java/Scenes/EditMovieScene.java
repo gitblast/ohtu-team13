@@ -72,7 +72,7 @@ public class EditMovieScene extends CreateBookmarkScene {
                 try {
                     boolean poisto = vinkkiService.deleteMovie(movie.getId());
                     if (poisto) {
-                        chooseAddScene.listMoviesScene();
+                        destination(destinationIndex());
                     }
                 } catch (Exception error) {
                     System.out.println(error.getMessage());
