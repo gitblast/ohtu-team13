@@ -274,22 +274,22 @@ public class ListBooksScene extends ListingScene {
         vuosiOtsikko.setStyle(cssLayoutBorderTitle01);
         vuosiOtsikko.setMaxHeight(26);
         vuosiOtsikko.setMinHeight(26);
-        vuosiOtsikko.setMaxWidth(60);
-        vuosiOtsikko.setMinWidth(60);
+        vuosiOtsikko.setMaxWidth(40);
+        vuosiOtsikko.setMinWidth(40);
 
         Label sivumaaraOtsikko = new Label("Page count");
         sivumaaraOtsikko.setStyle(cssLayoutBorderTitle01);
         sivumaaraOtsikko.setMaxHeight(26);
         sivumaaraOtsikko.setMinHeight(26);
-        sivumaaraOtsikko.setMaxWidth(50);
-        sivumaaraOtsikko.setMinWidth(50);
+        sivumaaraOtsikko.setMaxWidth(40);
+        sivumaaraOtsikko.setMinWidth(40);
 
         Label ISBNOtsikko = new Label("ISBN");
         ISBNOtsikko.setStyle(cssLayoutBorderTitle01);
         ISBNOtsikko.setMaxHeight(26);
         ISBNOtsikko.setMinHeight(26);
-        ISBNOtsikko.setMaxWidth(90);
-        ISBNOtsikko.setMinWidth(90);
+        ISBNOtsikko.setMaxWidth(50);
+        ISBNOtsikko.setMinWidth(50);
 
         otsikot.getChildren().addAll(nimiOtsikko, kirjailijaOtsikko, 
             vuosiOtsikko, sivumaaraOtsikko, ISBNOtsikko);

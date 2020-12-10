@@ -165,21 +165,28 @@ public class ListMoviesScene extends ListingScene {
         director.setMaxWidth(200);
         director.setMinWidth(200);
 
-        String jvuosi = String.valueOf(((Movie) movie).getReleaseYear());
+        int vuosi = ((Movie) movie).getReleaseYear();
+        String jvuosi = String.valueOf(vuosi);
+        if (jvuosi.equals("-9999")) {
+            jvuosi = "";
+        }
         Label julkaisuvuosi = new Label(jvuosi);
         julkaisuvuosi.setStyle(cssLayoutBorder01);
         julkaisuvuosi.setMaxHeight(26);
         julkaisuvuosi.setMinHeight(26);
-        julkaisuvuosi.setMaxWidth(40);
-        julkaisuvuosi.setMinWidth(40);
+        julkaisuvuosi.setMaxWidth(80);
+        julkaisuvuosi.setMinWidth(80);
 
         String kestoMin = String.valueOf(((Movie) movie).getLength());
+        if (kestoMin.equals("-9999")) {
+            kestoMin = "";
+        }
         Label kesto = new Label(kestoMin);
         kesto.setStyle(cssLayoutBorder01);
         kesto.setMaxHeight(26);
         kesto.setMinHeight(26);
-        kesto.setMaxWidth(40);
-        kesto.setMinWidth(40);
+        kesto.setMaxWidth(50);
+        kesto.setMinWidth(50);
 
         Button editButton = new Button("Edit");
         editButtonFunction(editButton, (Movie) movie);
@@ -229,15 +236,15 @@ public class ListMoviesScene extends ListingScene {
         jvuosi.setStyle(cssLayoutBorderTitle01);
         jvuosi.setMaxHeight(26);
         jvuosi.setMinHeight(26);
-        jvuosi.setMaxWidth(90);
-        jvuosi.setMinWidth(90);
+        jvuosi.setMaxWidth(80);
+        jvuosi.setMinWidth(80);
 
         Label kesto = new Label("Length");
         kesto.setStyle(cssLayoutBorderTitle01);
         kesto.setMaxHeight(26);
         kesto.setMinHeight(26);
-        kesto.setMaxWidth(90);
-        kesto.setMinWidth(90);
+        kesto.setMaxWidth(50);
+        kesto.setMinWidth(50);
 
         otsikot.getChildren().addAll(nimeke, director,
             jvuosi, kesto);

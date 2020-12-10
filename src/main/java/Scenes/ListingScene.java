@@ -21,9 +21,9 @@ import javafx.scene.control.TextField;
 public abstract class ListingScene {
 
     private Button returnButton;
-    private VBox nodes = null;
+    protected VBox nodes = null;
     private List<Bookmark> allBookmarks = null;
-    private List<Bookmark> shownBookmarks = null;
+    protected List<Bookmark> shownBookmarks = null;
     private TextField filterField;
     private ChoiceBox<String> searchChoice = null;
     private ChoiceBox<String> typeChoice = null;
@@ -171,6 +171,8 @@ public abstract class ListingScene {
 
             typeChoice.getSelectionModel().selectFirst();
             setChangeListenerForTypeChoice(typeChoice);
+        } else {
+            typeChoice.getSelectionModel().selectFirst();
         }
 
         if (this.searchChoice == null) {
@@ -180,6 +182,8 @@ public abstract class ListingScene {
 
             this.searchChoice.getSelectionModel().selectFirst();
             setChangeListenerForChoiceBox(this.searchChoice);
+        } else {
+            this.setType(this.types[0]);
         }
 
         VBox scWithLabel = new VBox(filterLabel, this.searchChoice);

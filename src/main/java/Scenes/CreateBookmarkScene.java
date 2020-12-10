@@ -90,7 +90,7 @@ public abstract class CreateBookmarkScene {
             } else {
                 if (errorMessage.getText().equals("")) {
                     errorMessage.setText(
-                        "Error adding bookmark to database");
+                        "Database error");
                 }
             }
         });

@@ -92,7 +92,7 @@ public class AddMovieSceneUnitTest extends ApplicationTest {
         assertTrue(addMovieScene.bookmarkCreation());
 
         Movie luotuMovie = new Movie("validi nimeke", "",
-            Integer.valueOf("0"), Integer.valueOf("0"));
+            Integer.valueOf("-9999"), Integer.valueOf("-9999"));
         verify(mockService, times(1)).addMovie(
             argThat(movie -> movie.equals(luotuMovie))
         );

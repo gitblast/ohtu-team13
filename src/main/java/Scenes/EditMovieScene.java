@@ -11,11 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 
 public class EditMovieScene extends CreateBookmarkScene {
-        
+
     Movie movie;
     Button deleteButton;
     Alert alert;
-    
+
     public EditMovieScene(ChooseAddScene chooseAddScene, Movie movie) {
         super(chooseAddScene);
         this.movie = movie;
@@ -24,7 +24,7 @@ public class EditMovieScene extends CreateBookmarkScene {
         this.submitButton.setText("Submit changes");
         this.alert = new Alert(AlertType.NONE);
     }
-    
+
     @Override
     protected void setBookmarkInputFields() {
         ArrayList<TextField> list = new ArrayList<>();
@@ -46,8 +46,16 @@ public class EditMovieScene extends CreateBookmarkScene {
 
         nimeke.setText(movie.getTitle());
         director.setText(movie.getDirector());
-        julkaisuvuosi.setText("" + movie.getReleaseYear());
-        kesto.setText("" + movie.getLength());
+        String releaseYear = String.valueOf(movie.getReleaseYear());
+        if (releaseYear.equals("-9999")) {
+            releaseYear = "";
+        }
+        julkaisuvuosi.setText(releaseYear);
+        String length = String.valueOf(movie.getLength());
+        if (length.equals("-9999")) {
+            length = "";
+        }
+        kesto.setText(length);
 
         list.add(nimeke);
         list.add(director);
@@ -56,12 +64,12 @@ public class EditMovieScene extends CreateBookmarkScene {
 
         this.fields = list;
     }
-    
+
     @Override
     protected Button setDeleteButton() {
         String h = "Are you sure you want to delete movie " + movie.getTitle();
         this.deleteButton.setOnAction(e -> {
-            alert.setAlertType(AlertType.CONFIRMATION); 
+            alert.setAlertType(AlertType.CONFIRMATION);
             alert.setTitle("Delete Movie");
             alert.setHeaderText(h);
             String text = movie.getTitle() + "\n";
@@ -76,20 +84,22 @@ public class EditMovieScene extends CreateBookmarkScene {
             }
             alert.setContentText(text);
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() ==  ButtonType.OK) {
+            if (result.get() == ButtonType.OK) {
                 try {
                     boolean poisto = vinkkiService.deleteMovie(movie.getId());
                     if (poisto) {
                         destination(destinationIndex());
+                    } else {
+                        errorMessage.setText("Database error");
                     }
                 } catch (Exception error) {
                     System.out.println(error.getMessage());
-                }       
+                }
             }
         });
         return this.deleteButton;
     }
-    
+
     @Override
     protected boolean bookmarkCreation() {
         boolean inputsOK = true;
@@ -100,18 +110,10 @@ public class EditMovieScene extends CreateBookmarkScene {
         String kestoMin = this.fields.get(3).getText();
 
         int jvuosi = convertToInteger(julkaisuvuosi);
-        if (jvuosi == -9999) {
-            movie.setReleaseYear(0);
-        } else {
-            movie.setReleaseYear(jvuosi);
-        }
+        movie.setReleaseYear(jvuosi);
 
         int kesto = convertToInteger(kestoMin);
-        if (kesto == -9999) {
-            movie.setLength(0);
-        } else {
-            movie.setLength(kesto);
-        }
+        movie.setLength(kesto);
 
         director = checkString(director);
         if (director == null) {
@@ -133,7 +135,7 @@ public class EditMovieScene extends CreateBookmarkScene {
             movie.setLength(kesto);
             return vinkkiService.modifyMovie(movie);
         }
-        
+
         return false;
     }
 
