@@ -165,7 +165,11 @@ public class ListMoviesScene extends ListingScene {
         director.setMaxWidth(200);
         director.setMinWidth(200);
 
-        String jvuosi = String.valueOf(((Movie) movie).getReleaseYear());
+        int vuosi = ((Movie) movie).getReleaseYear();
+        String jvuosi = String.valueOf(vuosi);
+        if (jvuosi.equals("-9999")) {
+            jvuosi = "";
+        }
         Label julkaisuvuosi = new Label(jvuosi);
         julkaisuvuosi.setStyle(cssLayoutBorder01);
         julkaisuvuosi.setMaxHeight(26);
@@ -174,6 +178,9 @@ public class ListMoviesScene extends ListingScene {
         julkaisuvuosi.setMinWidth(40);
 
         String kestoMin = String.valueOf(((Movie) movie).getLength());
+        if (kestoMin.equals("-9999")) {
+            kestoMin = "";
+        }
         Label kesto = new Label(kestoMin);
         kesto.setStyle(cssLayoutBorder01);
         kesto.setMaxHeight(26);
