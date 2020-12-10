@@ -51,13 +51,12 @@ public class EditURLScene extends CreateBookmarkScene {
 
     @Override
     protected Button setDeleteButton() {
-        String text = "Are you sure you want to delete URL " + url.getTitle();
+        String text = "Are you sure you want to delete URL ";
         this.deleteButton.setOnAction(e -> {
             alert.setAlertType(AlertType.CONFIRMATION);
             alert.setTitle("Delete Movie");
-            alert.setHeaderText(text);
-            alert.setContentText(url.getUrl() + "\n"
-                + url.getTitle());
+            alert.setHeaderText(url.getTitle());
+            alert.setContentText(text + url.getTitle());
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 try {

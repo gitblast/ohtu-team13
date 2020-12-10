@@ -68,22 +68,12 @@ public class EditMovieScene extends CreateBookmarkScene {
 
     @Override
     protected Button setDeleteButton() {
-        String h = "Are you sure you want to delete movie " + movie.getTitle();
+        String text = "Are you sure you want to delete movie ";
         this.deleteButton.setOnAction(e -> {
             alert.setAlertType(AlertType.CONFIRMATION);
             alert.setTitle("Delete Movie");
-            alert.setHeaderText(h);
-            String text = movie.getTitle() + "\n";
-            if (movie.getDirector() != null) {
-                text += movie.getDirector() + "\n";
-            }
-            if (movie.getReleaseYear() > 0) {
-                text += movie.getReleaseYear() + "\n";
-            }
-            if (movie.getLength() > 0) {
-                text += movie.getLength();
-            }
-            alert.setContentText(text);
+            alert.setHeaderText(movie.getTitle());
+            alert.setContentText(text + movie.getTitle());
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 try {
