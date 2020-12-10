@@ -11,11 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 
 public class EditURLScene extends CreateBookmarkScene {
-       
+
     Url url;
     Button deleteButton;
     Alert alert;
-    
+
     public EditURLScene(ChooseAddScene chooseAddScene, Url url) {
         super(chooseAddScene);
         this.url = url;
@@ -24,7 +24,7 @@ public class EditURLScene extends CreateBookmarkScene {
         this.submitButton.setText("Submit changes");
         this.alert = new Alert(AlertType.NONE);
     }
-    
+
     @Override
     protected void setBookmarkInputFields() {
 
@@ -47,31 +47,33 @@ public class EditURLScene extends CreateBookmarkScene {
 
         this.fields = list;
     }
-    
+
     @Override
     protected Button setDeleteButton() {
         String text = "Are you sure you want to delete URL " + url.getTitle();
         this.deleteButton.setOnAction(e -> {
-            alert.setAlertType(AlertType.CONFIRMATION); 
+            alert.setAlertType(AlertType.CONFIRMATION);
             alert.setTitle("Delete Movie");
             alert.setHeaderText(text);
             alert.setContentText(url.getUrl() + "\n"
-                                + url.getTitle());
+                + url.getTitle());
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 try {
                     boolean poistettu = vinkkiService.deleteUrl(url.getId());
                     if (poistettu) {
                         destination(destinationIndex());
+                    } else {
+                        errorMessage.setText("Database error");
                     }
                 } catch (Exception error) {
                     System.out.println(error.getMessage());
                 }
-            }    
+            }
         });
         return this.deleteButton;
     }
-    
+
     @Override
     protected boolean bookmarkCreation() {
         boolean inputsOK = true;
@@ -92,7 +94,7 @@ public class EditURLScene extends CreateBookmarkScene {
             url.setUrl(urlText);
             return vinkkiService.modifyUrl(url);
         }
-        
+
         return false;
     }
 
