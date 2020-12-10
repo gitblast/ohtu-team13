@@ -21,9 +21,9 @@ import javafx.scene.control.TextField;
 public abstract class ListingScene {
 
     private Button returnButton;
-    private VBox nodes = null;
+    protected VBox nodes = null;
     private List<Bookmark> allBookmarks = null;
-    private List<Bookmark> shownBookmarks = null;
+    protected List<Bookmark> shownBookmarks = null;
     private TextField filterField;
     private ChoiceBox<String> searchChoice = null;
     private ChoiceBox<String> typeChoice = null;
