@@ -194,15 +194,15 @@ public class ListUrlsScene extends ListingScene {
         otsikko.setStyle(cssLayoutBorderTitle01);
         otsikko.setMaxHeight(26);
         otsikko.setMinHeight(26);
-        otsikko.setMaxWidth(150);
-        otsikko.setMinWidth(150);
+        otsikko.setMaxWidth(200);
+        otsikko.setMinWidth(200);
 
         Label url = new Label("URL");
         url.setStyle(cssLayoutBorderTitle01);
         url.setMaxHeight(26);
         url.setMinHeight(26);
-        url.setMaxWidth(350);
-        url.setMinWidth(350);
+        url.setMaxWidth(330);
+        url.setMinWidth(330);
 
         otsikot.getChildren().addAll(otsikko, url);
 

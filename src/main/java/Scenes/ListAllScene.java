@@ -83,17 +83,25 @@ public class ListAllScene extends ListingScene {
                 if (prev == null || prev.getType() != bookmark.getType()) {
                     switch (bookmark.getType()) {
                         case "Book":
-                            nodes.getChildren().add(this.listBooksScene.otsikot());
+                            nodes.getChildren().add(
+                                this.listBooksScene.otsikot()
+                            );
                             break;
                         case "Url":
-                            nodes.getChildren().add(this.listUrlsScene.otsikot());
+                            nodes.getChildren().add(
+                                this.listUrlsScene.otsikot()
+                            );
                             break;
                         case "Movie":
-                            nodes.getChildren().add(this.listMoviesScene.otsikot());
+                            nodes.getChildren().add(
+                                this.listMoviesScene.otsikot()
+                            );
                             break;
                     }
                 }
-                nodes.getChildren().add(createBookmarkNode(createBookmarkContent(bookmark)));
+                nodes.getChildren().add(
+                    createBookmarkNode(createBookmarkContent(bookmark))
+                );
                 prev = bookmark;
             }
         }
