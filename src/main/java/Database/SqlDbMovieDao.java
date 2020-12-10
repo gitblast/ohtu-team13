@@ -75,18 +75,6 @@ public class SqlDbMovieDao implements MovieDao {
     }
 
     @Override
-    public ArrayList<Movie> findByDirector(String director) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public ArrayList<Movie> findByTitle(String title) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public boolean modifyMovie(Movie movie) {
         if (movie.getId() == null) {
             return false;

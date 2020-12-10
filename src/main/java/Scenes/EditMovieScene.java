@@ -64,9 +64,17 @@ public class EditMovieScene extends CreateBookmarkScene {
             alert.setAlertType(AlertType.CONFIRMATION); 
             alert.setTitle("Delete Movie");
             alert.setHeaderText(h);
-            alert.setContentText(movie.getDirector() + "\n"
-                                + movie.getReleaseYear() + "\n"
-                                + movie.getLength());
+            String text = movie.getTitle() + "\n";
+            if (movie.getDirector() != null) {
+                text += movie.getDirector() + "\n";
+            }
+            if (movie.getReleaseYear() > 0) {
+                text += movie.getReleaseYear() + "\n";
+            }
+            if (movie.getLength() > 0) {
+                text += movie.getLength();
+            }
+            alert.setContentText(text);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() ==  ButtonType.OK) {
                 try {
@@ -92,17 +100,29 @@ public class EditMovieScene extends CreateBookmarkScene {
         String kestoMin = this.fields.get(3).getText();
 
         int jvuosi = convertToInteger(julkaisuvuosi);
+        if (jvuosi == -9999) {
+            movie.setReleaseYear(0);
+        } else {
+            movie.setReleaseYear(jvuosi);
+        }
+
         int kesto = convertToInteger(kestoMin);
-        if (jvuosi == -9999 || kesto == -9999) {
-            errorMessage.setText("Enter valid release year "
-                    + "and length");
-            inputsOK = false;
+        if (kesto == -9999) {
+            movie.setLength(0);
+        } else {
+            movie.setLength(kesto);
         }
 
         director = checkString(director);
+        if (director == null) {
+            movie.setDirector("");
+        } else {
+            movie.setDirector(director);
+        }
+
         nimeke = checkString(nimeke);
-        if (director == null || nimeke == null) {
-            errorMessage.setText("Enter title and director");
+        if (nimeke == null) {
+            errorMessage.setText("Enter title");
             inputsOK = false;
         }
 

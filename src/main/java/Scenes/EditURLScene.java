@@ -36,7 +36,7 @@ public class EditURLScene extends CreateBookmarkScene {
         otsikko.setId("otsikko_field");
         URL.setId("URL_field");
 
-        otsikko.setText(url.getOtsikko());
+        otsikko.setText(url.getTitle());
         URL.setText(url.getUrl());
 
         otsikko.setPromptText("Header");
@@ -56,7 +56,7 @@ public class EditURLScene extends CreateBookmarkScene {
             alert.setTitle("Delete Movie");
             alert.setHeaderText(text);
             alert.setContentText(url.getUrl() + "\n"
-                                + url.getOtsikko());
+                                + url.getTitle());
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 try {
@@ -88,7 +88,7 @@ public class EditURLScene extends CreateBookmarkScene {
         }
 
         if (inputsOK) {
-            url.setOtsikko(otsikko);
+            url.setTitle(otsikko);
             url.setUrl(urlText);
             return vinkkiService.modifyUrl(url);
         }

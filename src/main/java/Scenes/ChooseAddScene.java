@@ -58,9 +58,9 @@ public class ChooseAddScene {
         int kirjojenmaara = vinkkiService.listBooks().size();
         int urlienmaara = vinkkiService.listURLs().size();
         int elokuvienmaara = vinkkiService.listMovies().size();
-        label.setText("Books in database: " + kirjojenmaara
-            + "\nUrls in database: " + urlienmaara
-            + "\nMovies in database: " + elokuvienmaara);
+        label.setText("Books:  " + kirjojenmaara
+            + "\nURLs:    " + urlienmaara
+            + "\nMovies: " + elokuvienmaara);
 
         label.setId("maara_label");
 
@@ -104,17 +104,17 @@ public class ChooseAddScene {
             addMovieScene();
         });
 
-        switchToListBooksScene.setOnAction(e -> {
-            listBooksScene();
-        });
+        // switchToListBooksScene.setOnAction(e -> {
+        //     listBooksScene();
+        // });
 
-        switchToListUrlsScene.setOnAction(e -> {
-            listUrlsScene();
-        });
+        // switchToListUrlsScene.setOnAction(e -> {
+        //     listUrlsScene();
+        // });
 
-        switchToListMoviesScene.setOnAction(e -> {
-            listMoviesScene();
-        });
+        // switchToListMoviesScene.setOnAction(e -> {
+        //     listMoviesScene();
+        // });
 
         switchToListAllScene.setOnAction(e -> {
             listAllScene();
@@ -137,26 +137,25 @@ public class ChooseAddScene {
         primaryStage.setScene(addMovieScene.createScene());
     }
     
-    public void listUrlsScene() {
-        primaryStage.setScene(listUrlsScene.createScene(
-                new ArrayList<>(vinkkiService.listURLs())));
-    }
+    // public void listUrlsScene() {
+    //     primaryStage.setScene(listUrlsScene.createScene(
+    //             new ArrayList<>(vinkkiService.listURLs())));
+    // }
     
-    public void listMoviesScene() {
-        primaryStage.setScene(listMoviesScene.createScene(
-                new ArrayList<>(vinkkiService.listMovies())));
-    }
+    // public void listMoviesScene() {
+    //     primaryStage.setScene(listMoviesScene.createScene(
+    //             new ArrayList<>(vinkkiService.listMovies())));
+    // }
     
     public void addBookScene() {
         primaryStage.setScene(addBookScene.createScene());
     }
     
-    public void listBooksScene() {
-        primaryStage.setScene(listBooksScene.createScene(
-                new ArrayList<>(vinkkiService.listBooks())));
-    }
+    // public void listBooksScene() {
+    //     primaryStage.setScene(listBooksScene.createScene(
+    //             new ArrayList<>(vinkkiService.listBooks())));
+    // }
 
-    // TODO
     public void listAllScene() {
         primaryStage.setScene(listAllScene.createScene(
                 new ArrayList<>(vinkkiService.listAllBookmarks())));

@@ -40,9 +40,11 @@ public abstract class ListingScene {
     ) {
         this.chooseAddScene = chooseAddScene;
         this.returnButton = new Button("Return");
+        this.returnButton.setId("returnButton_btn");
         this.info = new Label();
         this.filters = filters;
         this.filterField = createFilterField();
+        this.filterField.setId("filterField");
         this.vinkkiService = chooseAddScene.vinkkiService;
 
         this.types = new String[1];
@@ -118,6 +120,7 @@ public abstract class ListingScene {
 
         ScrollPane scrollPane = new ScrollPane();
         VBox listingVBox = new VBox();
+        listingVBox.setId("listing_elements");
         listingVBox.setPadding(new Insets(30, 20, 20, 20));
         listingVBox.setSpacing(5);
 

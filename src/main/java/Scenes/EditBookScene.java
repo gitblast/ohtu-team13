@@ -20,6 +20,7 @@ public class EditBookScene extends CreateBookmarkScene {
         super(chooseAddScene);
         this.book = book;
         this.deleteButton = new Button("Delete book");
+        this.deleteButton.setId("deleteButton_btn");
         this.title.setText("Editing book");
         this.submitButton.setText("Submit changes");
         this.alert = new Alert(AlertType.NONE);
