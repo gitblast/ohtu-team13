@@ -46,8 +46,16 @@ public class EditMovieScene extends CreateBookmarkScene {
 
         nimeke.setText(movie.getTitle());
         director.setText(movie.getDirector());
-        julkaisuvuosi.setText("" + movie.getReleaseYear());
-        kesto.setText("" + movie.getLength());
+        String releaseYear = String.valueOf(movie.getReleaseYear());
+        if (releaseYear.equals("-9999")) {
+            releaseYear = "";
+        }
+        julkaisuvuosi.setText(releaseYear);
+        String length = String.valueOf(movie.getLength());
+        if (length.equals("-9999")) {
+            length = "";
+        }
+        kesto.setText(length);
 
         list.add(nimeke);
         list.add(director);
@@ -100,18 +108,10 @@ public class EditMovieScene extends CreateBookmarkScene {
         String kestoMin = this.fields.get(3).getText();
 
         int jvuosi = convertToInteger(julkaisuvuosi);
-        if (jvuosi == -9999) {
-            movie.setReleaseYear(0);
-        } else {
-            movie.setReleaseYear(jvuosi);
-        }
+        movie.setReleaseYear(jvuosi);
 
         int kesto = convertToInteger(kestoMin);
-        if (kesto == -9999) {
-            movie.setLength(0);
-        } else {
-            movie.setLength(kesto);
-        }
+        movie.setLength(kesto);
 
         director = checkString(director);
         if (director == null) {

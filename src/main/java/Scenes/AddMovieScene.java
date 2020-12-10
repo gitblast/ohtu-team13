@@ -51,18 +51,10 @@ public class AddMovieScene extends CreateBookmarkScene {
         String kestoMin = this.fields.get(3).getText();
 
         int jvuosi = convertToInteger(julkaisuvuosi);
-        if (jvuosi == -9999) {
-            movie.setReleaseYear(0);
-        } else {
-            movie.setReleaseYear(jvuosi);
-        }
+        movie.setReleaseYear(jvuosi);
 
         int kesto = convertToInteger(kestoMin);
-        if (kesto == -9999) {
-            movie.setLength(0);
-        } else {
-            movie.setLength(kesto);
-        }
+        movie.setLength(kesto);
         
         director = checkString(director);
         if (director == null) {
