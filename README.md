@@ -48,7 +48,7 @@ Etusivulla näkyvät seuraavat toiminnot:
 #### Kirjan lisääminen
 
 Etusivulla paina Add Book -nappia. Lisäysnäkymässä voit painaa Return-nappia päästäksesi takaisin etusivulle.
-Lisäysnäkymässä voit syöttää kirjan tiedoiksi kirjan kirjailijan nimen, kirjan nimen, kirjan julkaisuvuoden ja kirjan sivumäärän. Yhtäkään kenttää ei saa jättää tyhjäksi, ja julkaisuvuoden ja sivumäärän tulee olla kokonaislukuja. Sivun alaosassa on Add a new book -nappi, jota painamalla kirja lisätään tietokantaan ja sinut ohjataan takaisin etusivulle, jos kenttien täyttämisessä ei ollut ongelmia.
+Lisäysnäkymässä voit syöttää kirjan tiedoiksi kirjan kirjailijan nimen, kirjan nimen, kirjan julkaisuvuoden ja kirjan sivumäärän. Riittää, että syötät kirjan nimen. Jos julkaisuvuosi ja sivumäärä eivät ole kokonaislukuja, ne jätetään huomiotta. Sivun alaosassa on Add a new book -nappi, jota painamalla kirja lisätään tietokantaan ja sinut ohjataan takaisin etusivulle, jos kenttien täyttämisessä ei ollut ongelmia.
 
 #### URLin lisääminen
 
