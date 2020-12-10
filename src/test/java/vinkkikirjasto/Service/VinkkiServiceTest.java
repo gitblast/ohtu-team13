@@ -124,7 +124,9 @@ public class VinkkiServiceTest {
     
     @Test
     public void bookCanBeAddedWithObject() {
-        Book book = new Book("Aleksis kivi", "Seitsemän veljestä", 1870, 427, "isbn");
+        Book book = new Book(
+            "Aleksis kivi", "Seitsemän veljestä", 1870, 427, "isbn"
+        );
         assertTrue(vinkkiService.addBook(book));
         assertTrue(vinkkiService.listBooks().contains(book));
     }
