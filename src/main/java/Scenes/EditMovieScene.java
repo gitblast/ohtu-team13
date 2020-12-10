@@ -16,13 +16,14 @@ public class EditMovieScene extends CreateBookmarkScene {
     Button deleteButton;
     Alert alert;
 
-    public EditMovieScene(ChooseAddScene chooseAddScene, Movie movie) {
+    public EditMovieScene(ChooseAddScene chooseAddScene,
+        Movie movie, Alert alert) {
         super(chooseAddScene);
         this.movie = movie;
         this.deleteButton = new Button("Delete movie");
         this.title.setText("Editing movie");
         this.submitButton.setText("Submit changes");
-        this.alert = new Alert(AlertType.NONE);
+        this.alert = alert;
     }
 
     @Override

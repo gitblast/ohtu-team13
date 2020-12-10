@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.scene.control.Alert;
 
 public class ListUrlsScene extends ListingScene {
 
@@ -177,7 +178,8 @@ public class ListUrlsScene extends ListingScene {
     ) {
         button.setOnAction(e -> {
             try {
-                editURLScene = new EditURLScene(chooseAddScene, url);
+                editURLScene = new EditURLScene(chooseAddScene,
+                    url, new Alert(Alert.AlertType.NONE));
                 chooseAddScene.setScene(editURLScene.createScene());
             } catch (Exception error) {
                 System.out.println(error.getMessage());

@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -243,7 +244,8 @@ public class ListBooksScene extends ListingScene {
     ) {
         button.setOnAction(e -> {
             try {
-                editBookScene = new EditBookScene(chooseAddScene, book);
+                editBookScene = new EditBookScene(chooseAddScene, book,
+                    new Alert(Alert.AlertType.NONE));
                 chooseAddScene.setScene(editBookScene.createScene());
             } catch (Exception error) {
                 System.out.println(error.getMessage());
@@ -291,7 +293,7 @@ public class ListBooksScene extends ListingScene {
         ISBNOtsikko.setMaxWidth(50);
         ISBNOtsikko.setMinWidth(50);
 
-        otsikot.getChildren().addAll(nimiOtsikko, kirjailijaOtsikko, 
+        otsikot.getChildren().addAll(nimiOtsikko, kirjailijaOtsikko,
             vuosiOtsikko, sivumaaraOtsikko, ISBNOtsikko);
 
         return otsikot;
