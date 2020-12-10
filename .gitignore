@@ -7,6 +7,7 @@ build
 .vscode
 bin
 *.db
+*.log
 .DS_Store
 :test:
 /.nb-gradle/
