@@ -256,7 +256,7 @@ public class ListBooksScene extends ListingScene {
         HBox otsikot = new HBox();
         otsikot.setSpacing(0);
 
-        Label nimiOtsikko = new Label("Title");
+        Label nimiOtsikko = new Label("Book Title");
         nimiOtsikko.setStyle(cssLayoutBorderTitle01);
         nimiOtsikko.setMaxHeight(26);
         nimiOtsikko.setMinHeight(26);

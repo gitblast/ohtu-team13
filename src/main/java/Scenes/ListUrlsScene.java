@@ -190,7 +190,7 @@ public class ListUrlsScene extends ListingScene {
         HBox otsikot = new HBox();
         otsikot.setSpacing(0);
 
-        Label otsikko = new Label("Header");
+        Label otsikko = new Label("URL Title");
         otsikko.setStyle(cssLayoutBorderTitle01);
         otsikko.setMaxHeight(26);
         otsikko.setMinHeight(26);

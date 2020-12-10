@@ -59,7 +59,7 @@ public class ListUrlsSceneUnitTest extends ApplicationTest {
             otsikko -> assertTrue(otsikko instanceof Label)
         );
 
-        assertEquals("Header",
+        assertEquals("URL Title",
             ((Label) otsikot.getChildren().get(0)).getText()
         );
 

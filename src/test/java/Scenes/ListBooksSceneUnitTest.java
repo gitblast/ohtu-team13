@@ -66,7 +66,7 @@ public class ListBooksSceneUnitTest extends ApplicationTest {
             ((Label) otsikot.getChildren().get(1)).getText()
         );
 
-        assertEquals("Title",
+        assertEquals("Book Title",
             ((Label) otsikot.getChildren().get(0)).getText()
         );
 

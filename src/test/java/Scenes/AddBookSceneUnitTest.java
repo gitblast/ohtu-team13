@@ -37,9 +37,9 @@ public class AddBookSceneUnitTest extends ApplicationTest {
 
         assertEquals(5, addBookScene.fields.size());
 
-        assertEquals("Author", addBookScene.fields.get(0).getPromptText());
+        assertEquals("Author", addBookScene.fields.get(1).getPromptText());
 
-        assertEquals("Title", addBookScene.fields.get(1).getPromptText());
+        assertEquals("Title", addBookScene.fields.get(0).getPromptText());
 
         assertEquals("Published", addBookScene.fields.get(2).getPromptText());
 
@@ -52,7 +52,7 @@ public class AddBookSceneUnitTest extends ApplicationTest {
     public void kirjaaEiLuodaInvalideillaSyotteilla() {
 
         // tyhjä nimeke
-        asetaSyotteet("validi kirjoittaja", "", "111", "222", "valid isbn");
+        asetaSyotteet("", "validi kirjoittaja", "111", "222", "valid isbn");
 
         assertFalse(addBookScene.bookmarkCreation());
 
@@ -71,7 +71,7 @@ public class AddBookSceneUnitTest extends ApplicationTest {
         String sivut = "222";
         String ISBN = "valid isbn";
 
-        asetaSyotteet(kirjoittaja, nimeke, vuosi, sivut, ISBN);
+        asetaSyotteet(nimeke, kirjoittaja, vuosi, sivut, ISBN);
 
         assertTrue(addBookScene.bookmarkCreation());
 
@@ -87,12 +87,12 @@ public class AddBookSceneUnitTest extends ApplicationTest {
         );
     }
 
-    public void asetaSyotteet(String kirjoittaja, String nimeke,
+    public void asetaSyotteet(String nimeke, String kirjoittaja, 
         String julkaisuvuosi, String sivumaara, String ISBN) {
         addBookScene.setBookmarkInputFields();
 
-        addBookScene.fields.get(0).setText(kirjoittaja);
-        addBookScene.fields.get(1).setText(nimeke);
+        addBookScene.fields.get(1).setText(kirjoittaja);
+        addBookScene.fields.get(0).setText(nimeke);
         addBookScene.fields.get(2).setText(julkaisuvuosi);
         addBookScene.fields.get(3).setText(sivumaara);
         addBookScene.fields.get(4).setText(ISBN);
