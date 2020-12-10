@@ -74,6 +74,32 @@ public class ListAllScene extends ListingScene {
     }
 
     @Override
+    protected void redrawBookmarkNodes() {
+        this.nodes.getChildren().clear();
+
+        if (this.shownBookmarks != null) {
+            Bookmark prev = null;
+            for (Bookmark bookmark : this.shownBookmarks) {
+                if (prev == null || prev.getType() != bookmark.getType()) {
+                    switch (bookmark.getType()) {
+                        case "Book":
+                            nodes.getChildren().add(this.listBooksScene.otsikot());
+                            break;
+                        case "Url":
+                            nodes.getChildren().add(this.listUrlsScene.otsikot());
+                            break;
+                        case "Movie":
+                            nodes.getChildren().add(this.listMoviesScene.otsikot());
+                            break;
+                    }
+                }
+                nodes.getChildren().add(createBookmarkNode(createBookmarkContent(bookmark)));
+                prev = bookmark;
+            }
+        }
+    }
+
+    @Override
     protected HBox otsikot() {
         return new HBox();
     }
