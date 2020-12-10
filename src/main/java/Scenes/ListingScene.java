@@ -171,6 +171,8 @@ public abstract class ListingScene {
 
             typeChoice.getSelectionModel().selectFirst();
             setChangeListenerForTypeChoice(typeChoice);
+        } else {
+            typeChoice.getSelectionModel().selectFirst();
         }
 
         if (this.searchChoice == null) {
@@ -180,6 +182,8 @@ public abstract class ListingScene {
 
             this.searchChoice.getSelectionModel().selectFirst();
             setChangeListenerForChoiceBox(this.searchChoice);
+        } else {
+            this.setType(this.types[0]);
         }
 
         VBox scWithLabel = new VBox(filterLabel, this.searchChoice);
