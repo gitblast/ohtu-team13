@@ -62,7 +62,7 @@ public class ListMovieSceneUnitTest extends ApplicationTest {
             otsikko -> assertTrue(otsikko instanceof Label)
         );
 
-        assertEquals("Title",
+        assertEquals("Movie Title",
             ((Label) otsikot.getChildren().get(0)).getText()
         );
 

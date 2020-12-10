@@ -220,7 +220,7 @@ public class ListMoviesScene extends ListingScene {
         HBox otsikot = new HBox();
         otsikot.setSpacing(0);
 
-        Label nimeke = new Label("Title");
+        Label nimeke = new Label("Movie Title");
         nimeke.setStyle(cssLayoutBorderTitle01);
         nimeke.setMaxHeight(26);
         nimeke.setMinHeight(26);

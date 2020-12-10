@@ -63,8 +63,8 @@ public class EditBookScene extends CreateBookmarkScene {
         sivumaara.setText(sivut);
         ISBN.setText(book.getISBN());
 
-        list.add(kirjoittaja);
         list.add(nimeke);
+        list.add(kirjoittaja);
         list.add(julkaisuvuosi);
         list.add(sivumaara);
         list.add(ISBN);
@@ -102,8 +102,8 @@ public class EditBookScene extends CreateBookmarkScene {
     protected boolean bookmarkCreation() {
         boolean inputsOK = true;
 
-        String kirjoittaja = this.fields.get(0).getText();
-        String nimeke = this.fields.get(1).getText();
+        String kirjoittaja = this.fields.get(1).getText();
+        String nimeke = this.fields.get(0).getText();
         String julkaisuvuosi = this.fields.get(2).getText();
         String sivumaara = this.fields.get(3).getText();
         String ISBN = this.fields.get(4).getText();
