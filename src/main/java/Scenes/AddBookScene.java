@@ -51,8 +51,9 @@ public class AddBookScene extends CreateBookmarkScene {
 
     @Override
     protected boolean bookmarkCreation() {
-        boolean inputsOK = true;
-
+        boolean titleIsOk = true;
+        Book book = new Book("");
+        
         String kirjoittaja = this.fields.get(0).getText();
         String nimeke = this.fields.get(1).getText();
         String julkaisuvuosi = this.fields.get(2).getText();
@@ -60,24 +61,34 @@ public class AddBookScene extends CreateBookmarkScene {
         String ISBN = this.fields.get(4).getText();
 
         int jvuosi = convertToInteger(julkaisuvuosi);
+        book.setJulkaisuvuosi(jvuosi);
+        
         int smaara = convertToInteger(sivumaara);
-        if (jvuosi == -9999 || smaara == -9999) {
-            errorMessage.setText("Enter valid release year "
-                    + "and number of pages");
-            inputsOK = false;
-        }
+        book.setSivumaara(smaara);
 
         kirjoittaja = checkString(kirjoittaja);
+        if (kirjoittaja == null) {
+            book.setKirjoittaja("");
+        } else {
+            book.setKirjoittaja(kirjoittaja);
+        }
+        
         nimeke = checkString(nimeke);
+        if (nimeke == null) {
+            titleIsOk = false;
+            errorMessage.setText("Enter title");
+        }
+        
         ISBN = checkString(ISBN);
-        if (kirjoittaja == null || nimeke == null || ISBN == null) {
-            errorMessage.setText("Enter author, title and ISBN");
-            inputsOK = false;
+        if (ISBN == null) {
+            book.setISBN("");
+        } else {
+            book.setISBN(ISBN);
         }
 
-        if (inputsOK) {
-            Book kirja = new Book(kirjoittaja, nimeke, jvuosi, smaara, ISBN);
-            boolean added = vinkkiService.addBook(kirja);
+        if (titleIsOk) {
+            book.setTitle(nimeke);
+            boolean added = vinkkiService.addBook(book);
             return added;
         }
         return false;

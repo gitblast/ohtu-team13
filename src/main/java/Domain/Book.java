@@ -39,6 +39,10 @@ public class Book extends Bookmark {
         this.setId(id);
     }   
     
+    public Book(String title) {
+        super("Book", title);
+    }
+    
     public String getKirjoittaja() {
         return this.author;
     }

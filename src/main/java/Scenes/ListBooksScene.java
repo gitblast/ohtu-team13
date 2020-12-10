@@ -182,7 +182,11 @@ public class ListBooksScene extends ListingScene {
         labelKirjoittaja.setMaxWidth(200);
         labelKirjoittaja.setMinWidth(200);
 
-        String julkaisuvuosi = String.valueOf(((Book) book).getJulkaisuvuosi());
+        int jvuosi = ((Book) book).getJulkaisuvuosi();
+        String julkaisuvuosi = String.valueOf(jvuosi);
+        if (julkaisuvuosi.equals("-9999")) {
+            julkaisuvuosi = "";
+        }
         Label labelJulkaisuvuosi = new Label(julkaisuvuosi);
         labelJulkaisuvuosi.setStyle(cssLayoutBorder01);
         labelJulkaisuvuosi.setMaxHeight(26);
@@ -190,7 +194,11 @@ public class ListBooksScene extends ListingScene {
         labelJulkaisuvuosi.setMaxWidth(40);
         labelJulkaisuvuosi.setMinWidth(40);
 
-        String sivumaara = String.valueOf(((Book) book).getSivumaara());
+        int sivut = ((Book) book).getSivumaara();
+        String sivumaara = String.valueOf(sivut);
+        if (sivumaara.equals("-9999")) {
+            sivumaara = "";
+        }
         Label labelSivumaara = new Label(sivumaara);
         labelSivumaara.setStyle(cssLayoutBorder01);
         labelSivumaara.setMaxHeight(26);
