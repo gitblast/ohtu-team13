@@ -50,25 +50,4 @@ public class CreateBookmarkSceneTest extends ApplicationTest{
         clickOn("#submitButton_btn");
         verifyThat("#elements", hasChild("#kirjoittaja_field"));
     }
-
-    @Test
-    public void kokonaislukuTarkistetaan() {
-        clickOn("#kirjoittaja_field");
-        write("A");
-
-        clickOn("#nimeke_field");
-        write("A");
-
-        clickOn("#julkaisuvuosi_field");
-        write("a");
-
-        clickOn("#sivumaara_field");
-        write("1");
-
-        clickOn("#ISBN_field");
-        write("a");
-
-        clickOn("#submitButton_btn");
-        verifyThat("#elements", hasChild("#kirjoittaja_field"));
-    }
 }

@@ -50,30 +50,9 @@ public class AddBookSceneUnitTest extends ApplicationTest {
 
     @Test
     public void kirjaaEiLuodaInvalideillaSyotteilla() {
-        // tyhjä kirjoittaja
-        asetaSyotteet("", "valid nimeke", "111", "222", "valid isbn");
-
-        assertFalse(addBookScene.bookmarkCreation());
 
         // tyhjä nimeke
         asetaSyotteet("validi kirjoittaja", "", "111", "222", "valid isbn");
-
-        assertFalse(addBookScene.bookmarkCreation());
-
-        // vuosi ei numero
-        asetaSyotteet("validi kirjoittaja",
-            "valid nimeke", "ei numero", "222", "valid isbn");
-
-        assertFalse(addBookScene.bookmarkCreation());
-
-        // sivum ei numero
-        asetaSyotteet("validi kirjoittaja",
-            "valid nimeke", "111", "ei numero", "valid isbn");
-
-        assertFalse(addBookScene.bookmarkCreation());
-
-        // tyhjä isbn
-        asetaSyotteet("validi kirjoittaja", "valid nimeke", "111", "222", "");
 
         assertFalse(addBookScene.bookmarkCreation());
 
