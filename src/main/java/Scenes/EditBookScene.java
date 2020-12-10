@@ -42,10 +42,24 @@ public class EditBookScene extends CreateBookmarkScene {
         sivumaara.setId("sivumaara_field");
         ISBN.setId("ISBN_field");
 
+        kirjoittaja.setPromptText("Author");
+        nimeke.setPromptText("Title");
+        julkaisuvuosi.setPromptText("Published");
+        sivumaara.setPromptText("Page count");
+        ISBN.setPromptText("ISBN");
+
         kirjoittaja.setText(book.getKirjoittaja());
         nimeke.setText(book.getTitle());
-        julkaisuvuosi.setText("" + book.getJulkaisuvuosi());
-        sivumaara.setText("" + book.getSivumaara());
+        String vuosi = String.valueOf(book.getJulkaisuvuosi());
+        if (vuosi.equals("-9999")) {
+            vuosi = "";
+        }
+        julkaisuvuosi.setText(vuosi);
+        String sivut = String.valueOf(book.getSivumaara());
+        if (sivut.equals("-9999")) {
+            sivut = "";
+        }
+        sivumaara.setText(sivut);
         ISBN.setText(book.getISBN());
 
         list.add(kirjoittaja);
@@ -98,17 +112,12 @@ public class EditBookScene extends CreateBookmarkScene {
 
         int jvuosi = convertToInteger(julkaisuvuosi);
         int smaara = convertToInteger(sivumaara);
-        if (jvuosi == -9999 || smaara == -9999) {
-            errorMessage.setText("Enter valid release year "
-                + "and number of pages");
-            inputsOK = false;
-        }
 
         kirjoittaja = checkString(kirjoittaja);
         nimeke = checkString(nimeke);
         ISBN = checkString(ISBN);
-        if (kirjoittaja == null || nimeke == null || ISBN == null) {
-            errorMessage.setText("Enter author, title and ISBN");
+        if (nimeke == null) {
+            errorMessage.setText("Enter title");
             inputsOK = false;
         }
 
