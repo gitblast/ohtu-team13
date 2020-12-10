@@ -12,7 +12,7 @@ import Domain.Book;
 import static org.testfx.matcher.base.NodeMatchers.hasChild;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
-public class EditBookmarkSceneTest extends ApplicationTest{
+public class EditBookmarkSceneTest extends ApplicationTest {
     
     private ChooseAddScene cas;
     private Scene scene;

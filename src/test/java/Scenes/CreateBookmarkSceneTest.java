@@ -8,7 +8,7 @@ import static org.testfx.api.FxAssert.verifyThat;
 import org.testfx.framework.junit.ApplicationTest;
 import static org.testfx.matcher.base.NodeMatchers.hasChild;
 
-public class CreateBookmarkSceneTest extends ApplicationTest{
+public class CreateBookmarkSceneTest extends ApplicationTest {
     
     private ChooseAddScene cas;
     private Scene scene;
