@@ -50,7 +50,6 @@ public class ChooseAddScene {
         listAllScene = new ListAllScene(this);
 
         errorMsg = new Label();
-
     }
 
     public Scene createScene() {
@@ -104,26 +103,13 @@ public class ChooseAddScene {
             addMovieScene();
         });
 
-        // switchToListBooksScene.setOnAction(e -> {
-        //     listBooksScene();
-        // });
-
-        // switchToListUrlsScene.setOnAction(e -> {
-        //     listUrlsScene();
-        // });
-
-        // switchToListMoviesScene.setOnAction(e -> {
-        //     listMoviesScene();
-        // });
-
         switchToListAllScene.setOnAction(e -> {
             listAllScene();
         });
 
         elements.getChildren().addAll(label, switchToAddBookScene,
             switchToAddURLScene, switchToAddMovieScene,
-            /*switchToListBooksScene, switchToListUrlsScene,
-            switchToListMoviesScene, */switchToListAllScene, errorMsg);
+            switchToListAllScene, errorMsg);
 
         Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;
@@ -137,24 +123,9 @@ public class ChooseAddScene {
         primaryStage.setScene(addMovieScene.createScene());
     }
     
-    // public void listUrlsScene() {
-    //     primaryStage.setScene(listUrlsScene.createScene(
-    //             new ArrayList<>(vinkkiService.listURLs())));
-    // }
-    
-    // public void listMoviesScene() {
-    //     primaryStage.setScene(listMoviesScene.createScene(
-    //             new ArrayList<>(vinkkiService.listMovies())));
-    // }
-    
     public void addBookScene() {
         primaryStage.setScene(addBookScene.createScene());
     }
-    
-    // public void listBooksScene() {
-    //     primaryStage.setScene(listBooksScene.createScene(
-    //             new ArrayList<>(vinkkiService.listBooks())));
-    // }
 
     public void listAllScene() {
         primaryStage.setScene(listAllScene.createScene(
