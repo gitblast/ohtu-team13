@@ -10,12 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 
 public class EditBookScene extends CreateBookmarkScene {
-    
+
     Book book;
     Button deleteButton;
     Button confirmationButton;
     Alert alert;
-    
+
     public EditBookScene(ChooseAddScene chooseAddScene, Book book) {
         super(chooseAddScene);
         this.book = book;
@@ -25,11 +25,11 @@ public class EditBookScene extends CreateBookmarkScene {
         this.submitButton.setText("Submit changes");
         this.alert = new Alert(AlertType.NONE);
     }
-    
+
     @Override
     protected void setBookmarkInputFields() {
         ArrayList<TextField> list = new ArrayList<>();
-        
+
         TextField kirjoittaja = new TextField();
         TextField nimeke = new TextField();
         TextField julkaisuvuosi = new TextField();
@@ -56,38 +56,40 @@ public class EditBookScene extends CreateBookmarkScene {
 
         this.fields = list;
     }
-    
+
     @Override
     protected Button setDeleteButton() {
         String text = "Are you sure you want to delete book " + book.getTitle();
         this.deleteButton.setOnAction(e -> {
-            alert.setAlertType(AlertType.CONFIRMATION); 
+            alert.setAlertType(AlertType.CONFIRMATION);
             alert.setTitle("Delete book");
             alert.setHeaderText(text);
             alert.setContentText(book.getKirjoittaja() + "\n"
-                                + book.getSivumaara() + "\n"
-                                + book.getJulkaisuvuosi() + "\n"
-                                + book.getISBN());
+                + book.getSivumaara() + "\n"
+                + book.getJulkaisuvuosi() + "\n"
+                + book.getISBN());
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() ==  ButtonType.OK) {
+            if (result.get() == ButtonType.OK) {
                 try {
                     boolean poistettu = vinkkiService.deleteBook(book.getId());
                     if (poistettu) {
                         destination(destinationIndex());
+                    } else {
+                        errorMessage.setText("Database error");
                     }
                 } catch (Exception error) {
                     System.out.println(error.getMessage());
                 }
             }
-            
+
         });
         return this.deleteButton;
     }
-    
+
     @Override
     protected boolean bookmarkCreation() {
         boolean inputsOK = true;
-        
+
         String kirjoittaja = this.fields.get(0).getText();
         String nimeke = this.fields.get(1).getText();
         String julkaisuvuosi = this.fields.get(2).getText();
@@ -98,7 +100,7 @@ public class EditBookScene extends CreateBookmarkScene {
         int smaara = convertToInteger(sivumaara);
         if (jvuosi == -9999 || smaara == -9999) {
             errorMessage.setText("Enter valid release year "
-                    + "and number of pages");
+                + "and number of pages");
             inputsOK = false;
         }
 
@@ -118,7 +120,7 @@ public class EditBookScene extends CreateBookmarkScene {
             book.setISBN(ISBN);
             return vinkkiService.modifyBook(book);
         }
-        
+
         return false;
     }
 
