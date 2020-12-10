@@ -77,11 +77,8 @@ public class EditBookScene extends CreateBookmarkScene {
         this.deleteButton.setOnAction(e -> {
             alert.setAlertType(AlertType.CONFIRMATION);
             alert.setTitle("Delete book");
-            alert.setHeaderText(text);
-            alert.setContentText(book.getKirjoittaja() + "\n"
-                + book.getSivumaara() + "\n"
-                + book.getJulkaisuvuosi() + "\n"
-                + book.getISBN());
+            alert.setHeaderText(book.getTitle());
+            alert.setContentText(text);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 try {
