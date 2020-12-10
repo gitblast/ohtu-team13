@@ -11,6 +11,7 @@ import javafx.beans.value.ObservableValue;
 import Domain.Bookmark;
 import Domain.Movie;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -205,7 +206,8 @@ public class ListMoviesScene extends ListingScene {
     ) {
         button.setOnAction(e -> {
             try {
-                editMovieScene = new EditMovieScene(chooseAddScene, movie);
+                editMovieScene = new EditMovieScene(chooseAddScene,
+                    movie, new Alert(Alert.AlertType.NONE));
                 chooseAddScene.setScene(editMovieScene.createScene());
             } catch (Exception error) {
                 System.out.println(error.getMessage());

@@ -8,12 +8,13 @@ import static org.testfx.api.FxAssert.verifyThat;
 import org.testfx.framework.junit.ApplicationTest;
 
 import Domain.Book;
+import javafx.scene.control.Alert;
 
 import static org.testfx.matcher.base.NodeMatchers.hasChild;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 public class EditBookmarkSceneTest extends ApplicationTest {
-    
+
     private ChooseAddScene cas;
     private Scene scene;
 
@@ -21,8 +22,9 @@ public class EditBookmarkSceneTest extends ApplicationTest {
     public void start(Stage stage) throws Exception {
         cas = new ChooseAddScene(stage);
         Book book = new Book(999, "Kirjailija", "KirjanNimi", 2000,
-                200, "12345");
-        EditBookScene editBook = new EditBookScene(cas, book);
+            200, "12345");
+        EditBookScene editBook = new EditBookScene(
+            cas, book, new Alert(Alert.AlertType.NONE));
 
         scene = editBook.createScene();
 
@@ -41,7 +43,6 @@ public class EditBookmarkSceneTest extends ApplicationTest {
     //     clickOn("#deleteButton_btn");
     //     TODO
     // }
-
     @Test
     public void renderoiOikeatElementit() {
         verifyThat("#elements", hasChild("#deleteButton_btn"));

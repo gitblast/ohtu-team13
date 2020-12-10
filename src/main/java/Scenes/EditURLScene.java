@@ -16,13 +16,14 @@ public class EditURLScene extends CreateBookmarkScene {
     Button deleteButton;
     Alert alert;
 
-    public EditURLScene(ChooseAddScene chooseAddScene, Url url) {
+    public EditURLScene(ChooseAddScene chooseAddScene,
+        Url url, Alert alert) {
         super(chooseAddScene);
         this.url = url;
         this.deleteButton = new Button("Delete URL");
         this.title.setText("Editing URL");
         this.submitButton.setText("Submit changes");
-        this.alert = new Alert(AlertType.NONE);
+        this.alert = alert;
     }
 
     @Override

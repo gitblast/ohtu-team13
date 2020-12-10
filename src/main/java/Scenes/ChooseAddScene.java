@@ -13,6 +13,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.sql.SQLException;
+import javafx.scene.control.Alert;
 
 public class ChooseAddScene {
 
@@ -45,7 +46,8 @@ public class ChooseAddScene {
         addMovieScene = new AddMovieScene(this);
         listBooksScene = new ListBooksScene(this);
         listUrlsScene = new ListUrlsScene(this);
-        editBookScene = new EditBookScene(this, null);
+        editBookScene = new EditBookScene(this, null,
+            new Alert(Alert.AlertType.NONE));
         listMoviesScene = new ListMoviesScene(this);
         listAllScene = new ListAllScene(this);
 
@@ -114,22 +116,22 @@ public class ChooseAddScene {
         Scene chooseAddScene = new Scene(elements, 600, 400);
         return chooseAddScene;
     }
-    
+
     public void addUrlScene() {
         primaryStage.setScene(addURLScene.createScene());
     }
-    
+
     public void addMovieScene() {
         primaryStage.setScene(addMovieScene.createScene());
     }
-    
+
     public void addBookScene() {
         primaryStage.setScene(addBookScene.createScene());
     }
 
     public void listAllScene() {
         primaryStage.setScene(listAllScene.createScene(
-                new ArrayList<>(vinkkiService.listAllBookmarks())));
+            new ArrayList<>(vinkkiService.listAllBookmarks())));
     }
 
     public void returnHere() throws Exception {
