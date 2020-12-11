@@ -58,7 +58,7 @@ Lisäysnäkymässä voit syöttää URLin tiedoiksi sen otsikon ja URLin itsens�
 #### Elokuvan lisääminen
 
 Etusivulla paina Add Movie -nappia. Lisäysnäkymässä voit painaa Return-nappia päästäksesi takaisin etusivulle.
-Lisäysnäkymässä voit syöttää elokuvan tiedoiksi sen nimen, ohjaajan nimen, julkaisuvuoden ja keston minuutteina. Julkaisuvuoden ja keston tulee olla kokonaislukuja. Sivun alaosassa on Add a new movie -nappi, jota painamalla elokuva lisätään tietokantaan ja sinut ohjataan takaisin etusivulle, jos kenttien täyttämisessä ei ollut ongelmia.
+Lisäysnäkymässä voit syöttää elokuvan tiedoiksi sen nimen, ohjaajan nimen, julkaisuvuoden ja keston minuutteina. Julkaisuvuoden ja keston tulee olla kokonaislukuja, tai ne jätetään huomiotta. Pelkän otsikon lisääminen riittää elokuvan tallentamiseen. Sivun alaosassa on Add a new movie -nappi, jota painamalla elokuva lisätään tietokantaan ja sinut ohjataan takaisin etusivulle, jos kenttien täyttämisessä ei ollut ongelmia.
 
 #### Kirjanmerkkien selailu
 
