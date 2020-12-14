@@ -8,6 +8,7 @@
 - [Backlog](https://github.com/gitblast/ohtu-team13/projects/1)
 - [Definition of Done](docs/DOD.md)
 - [Testikattavuusraportti](https://codecov.io/gh/gitblast/ohtu-team13)
+- [Loppuraportti](docs/loppuraportti.md)
 
 ## Käyttöohje
 
