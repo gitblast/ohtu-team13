@@ -67,4 +67,4 @@ Selailunäkymässä voi myös kopioida URLeja ja kirjojen ISBN:iä leikepöydäl
 
 #### Kirjanmerkkien muokkaaminen ja poistaminen
 
-Selailunäkymässä paina haluamasi kirjanmerkin kohdalta Edit-nappia. Muokkausnäkymässä voit painaa Return-nappia päästäksesi takaisin selailunäkymään. Voit tehdä muutoksia kirjanmerkkin kenttiin. Kun painat Submit changes -nappia, tekemäsi muutokset tallentuvat ja pääset takaisin selausnäkymään. Voit poistaa kirjanmerkin painamalla Delete -nappia kenttien alla. Painaessasi sitä sovellus näyttää sinulle vielä ponnahdusikkunan, jossa voit varmistaa haluatko poistaa kirjanmerkin.
+Selailunäkymässä paina haluamasi kirjanmerkin kohdalta Edit-nappia. Muokkausnäkymässä voit painaa Return-nappia päästäksesi takaisin selailunäkymään. Voit tehdä muutoksia kirjanmerkin kenttiin. Kun painat Submit changes -nappia, tekemäsi muutokset tallentuvat ja pääset takaisin selausnäkymään. Voit poistaa kirjanmerkin painamalla Delete -nappia kenttien alla. Painaessasi sitä sovellus näyttää sinulle vielä ponnahdusikkunan, jossa voit varmistaa haluatko poistaa kirjanmerkin.
